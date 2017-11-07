@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Irmaos Martinho e as profissoes</string>
+    <string name="app_name">Irmãos Martinho e as profissoes</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
