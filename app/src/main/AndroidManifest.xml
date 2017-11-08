@@ -20,7 +20,9 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme ="@style/AppTheme.NoActionBar">
+         >
             <action android:name="com.example.pc.irmaosmartinhoeasprofissoes.MainActivity" />
         </activity>
     </application>
