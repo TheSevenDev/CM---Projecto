@@ -1,26 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/mainBlue"
+    android:theme="@style/SplashTheme"
+    >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tableLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="75dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnMale"
+                android:layout_width="100dp"
+                android:layout_height="232dp"
+                android:layout_centerVertical="true"
+                android:layout_column="0"
+                android:layout_row="0"
+                android:onClick="chooseMale"
+                android:background="@drawable/gender_male"
+                />
+
+            <Button
+                android:id="@+id/btnFemale"
+                android:layout_width="100dp"
+                android:layout_height="220dp"
+                android:layout_alignBottom="@+id/btnMale"
+                android:layout_alignParentEnd="true"
+                android:layout_column="2"
+                android:layout_marginLeft="90dp"
+                android:layout_marginTop="10dp"
+                android:layout_row="0"
+                android:onClick="chooseFemale"
+                android:background="@drawable/gender_female"
+                />
+        </TableRow>
+    </TableLayout>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:text="CHOOSE GENDER:"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/btnMale"
-        android:layout_width="match_parent"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="chooseMale"
-        android:text="Male" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:textSize="30dp"
+        android:textColor="@color/titleColor"
+        android:text="@string/choosegender_title"
 
-    <Button
-        android:id="@+id/btnFemale"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="chooseFemale"
-        android:text="Female" />
-</LinearLayout>
+ />
+
+</RelativeLayout>
