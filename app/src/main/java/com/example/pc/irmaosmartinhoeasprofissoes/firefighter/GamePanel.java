@@ -53,7 +53,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void surfaceCreated(SurfaceHolder holder)
     {
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.);
+        background = BitmapFactory.decodeResource(getResources(), R.drawable.firefighterbg);
 
         thread = new MainThread(getHolder(), this);
 
@@ -76,7 +76,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         if(canvas!=null) {
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
-            canvas.drawBitmap(background, , y, null);
+            canvas.drawBitmap(background, WIDTH, HEIGHT, null);
 
             canvas.restoreToCount(savedState);
         }
