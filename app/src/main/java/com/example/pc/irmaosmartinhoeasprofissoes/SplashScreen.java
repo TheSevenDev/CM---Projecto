@@ -1,8 +1,9 @@
 package com.example.pc.irmaosmartinhoeasprofissoes;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -34,14 +35,25 @@ public class SplashScreen extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 finally{
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    SharedPreferences sharedPref = SplashScreen.this.
+                            getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+
+                    Intent intent = null;
+
+                    if(sharedPref.contains("gender"))
+                    {
+                        intent = new Intent(getApplicationContext(), MainMenu.class);
+                    }
+                    else
+                    {
+                        intent = new Intent(getApplicationContext(), ChooseGender.class);
+                    }
+
                     startActivity(intent);
                     finish();
                 }
             }
         };
         myThread.start();
-
-
     }
 }
