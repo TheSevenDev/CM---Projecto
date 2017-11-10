@@ -12,16 +12,19 @@
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="landscape"
-            android:theme ="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChooseGender"
+            android:name=".Menus.ChooseGender"
             android:screenOrientation="landscape">
-            <action android:name="com.example.pc.irmaosmartinhoeasprofissoes.ChooseGender" />
+            <action android:name="com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseGender" />
         </activity>
+        <activity android:name=".firefighter.FirefighterActivity"></activity>
     </application>
+
 </manifest>
