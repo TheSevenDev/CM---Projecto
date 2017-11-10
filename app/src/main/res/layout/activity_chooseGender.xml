@@ -3,4 +3,23 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:text="CHOOSE GENDER:"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnMale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Male"
+        android:onClick="chooseMale"/>
+
+    <Button
+        android:id="@+id/btnFemale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Female"
+        android:onClick="chooseFemale"/>
 </LinearLayout>

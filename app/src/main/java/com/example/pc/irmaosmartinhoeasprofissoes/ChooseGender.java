@@ -1,10 +1,13 @@
 package com.example.pc.irmaosmartinhoeasprofissoes;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 public class ChooseGender extends AppCompatActivity {
 
@@ -22,5 +25,21 @@ public class ChooseGender extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
 
         setContentView(R.layout.activity_chooseGender);
+    }
+
+    public void chooseMale()
+    {
+        SharedPreferences sharedPref = ChooseGender.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("gender", 0);
+        editor.commit();
+    }
+
+    public void chooseFemale()
+    {
+        SharedPreferences sharedPref = ChooseGender.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("gender", 1);
+        editor.commit();
     }
 }
