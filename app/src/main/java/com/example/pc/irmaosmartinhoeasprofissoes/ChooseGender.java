@@ -42,7 +42,7 @@ public class ChooseGender extends AppCompatActivity {
                 getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
 
         if (sharedPref.contains("gender")) {
-            startActivity(new Intent(getApplicationContext(), com.example.pc.irmaosmartinhoeasprofissoes.MainMenu.class));
+            startActivity(new Intent(getApplicationContext(), com.example.pc.irmaosmartinhoeasprofissoes.Menus.MainMenu.class));
         } else {
             setContentView(R.layout.activity_choose_gender);
         }

@@ -34,16 +34,15 @@
             <Button
                 android:id="@+id/btnFemale"
                 android:layout_width="100dp"
-                android:layout_height="220dp"
+                android:layout_height="232dp"
                 android:layout_alignBottom="@+id/btnMale"
                 android:layout_alignParentEnd="true"
                 android:layout_column="2"
                 android:layout_marginLeft="90dp"
                 android:layout_marginTop="10dp"
                 android:layout_row="0"
-                android:onClick="chooseFemale"
                 android:background="@drawable/gender_female"
-                />
+                android:onClick="chooseFemale" />
         </TableRow>
     </TableLayout>
 

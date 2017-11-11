@@ -1,10 +1,13 @@
-package com.example.pc.irmaosmartinhoeasprofissoes;
+package com.example.pc.irmaosmartinhoeasprofissoes.Menus;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 /**
  * Created by Diogo on 10/11/2017.
@@ -26,6 +29,11 @@ public class MainMenu extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
 
         setContentView(R.layout.activity_mainmenu);
+    }
+
+    public void chooseMinigameScreen()
+    {
+        startActivity(new Intent(getApplicationContext(), com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseMinigame.class));
     }
 }
 
