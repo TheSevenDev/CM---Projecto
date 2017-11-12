@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ChooseGender"
+            android:name=".Menus.ChooseGender"
             android:screenOrientation="landscape"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <action android:name="com.example.pc.irmaosmartinhoeasprofissoes.ChooseGender" />
+            <action android:name="com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseGender" />
         </activity>
         <activity android:name=".Menus.ChooseMinigame"
             android:screenOrientation="landscape"></activity>

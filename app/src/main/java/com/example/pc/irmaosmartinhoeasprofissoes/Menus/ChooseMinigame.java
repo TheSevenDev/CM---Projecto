@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
+import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.FirefighterActivity;
 
 public class ChooseMinigame extends GeneralActivity {
 
@@ -16,8 +17,14 @@ public class ChooseMinigame extends GeneralActivity {
         setContentView(R.layout.activity_choose_minigame);
     }
 
+    public void backToMainMenu(View view){
+        startActivity(new Intent(getApplicationContext(), MainMenu.class));
+    }
+
     public void fireFighterGame(View view)
     {
-        startActivity(new Intent(getApplicationContext(), com.example.pc.irmaosmartinhoeasprofissoes.firefighter.FirefighterActivity.class));
+        startActivity(new Intent(getApplicationContext(), FirefighterActivity.class));
     }
+
+
 }

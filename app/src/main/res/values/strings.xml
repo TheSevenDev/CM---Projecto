@@ -27,5 +27,6 @@
     <string name="fire_spawn_y4">0.51</string>
     <string name="fire_spawn_y5">0.635</string>
     <string name="fire_spawn_y6">0.76</string>
+    <string name="back_to_menu">Voltar ao Menu</string>
 
 </resources>

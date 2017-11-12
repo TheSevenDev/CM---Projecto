@@ -78,6 +78,19 @@
         android:text="@string/choose_minigame_title"
         />
 
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="445dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/mainYellow"
+        android:textSize="15dp"
+        android:text="@string/back_to_menu"
+        />
+    
+    
     <Switch
         android:id="@+id/switch1"
         android:layout_width="wrap_content"

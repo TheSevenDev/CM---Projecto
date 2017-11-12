@@ -1,6 +1,7 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.Menus;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 
@@ -13,9 +14,17 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 public class MainMenu extends GeneralActivity {
 
+    private MediaPlayer mp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mp = MediaPlayer.create(MainMenu.this,R.raw.mainmenu);
+        mp.setLooping(true);
+        mp.start();
+
+
         setContentView(R.layout.activity_mainmenu);
     }
 
