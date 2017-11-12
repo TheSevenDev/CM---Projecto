@@ -87,14 +87,20 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         {
             System.out.println("wululu");
 
-            float x = event.getX();
-            float y = event.getY();
+            float x = event.getX() - 270;
+            float y = event.getY() - 180;
 
             for(Fire f : fires)
             {
+                boolean a = (x >= f.getX());
+                boolean b = (x < (f.getX() + f.getWidth()));
+                boolean c = (y >= f.getY());
+                boolean d = (y < (f.getY() + f.getHeight()));
+
+
                 if (x >= f.getX() && x < (f.getX() + f.getWidth())
                         && y >= f.getY() && y < (f.getY() + f.getHeight())) {
-                    System.out.println("welele");
+                    fires.remove(f);
                     return true;
                 }
             }
