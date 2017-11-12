@@ -25,6 +25,4 @@ public class ChooseMinigame extends GeneralActivity {
     {
         startActivity(new Intent(getApplicationContext(), FirefighterActivity.class));
     }
-
-
 }

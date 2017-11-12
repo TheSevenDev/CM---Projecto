@@ -20,9 +20,4 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@drawable/mainmenu</item>
     </style>
-
-    <style name="GenderSwitchTheme" parent="Theme.AppCompat.Light">
-        <item name="android:colorControlActivated" tools:targetApi="lollipop">@color/mainYellow</item>
-    </style>
-
 </resources>

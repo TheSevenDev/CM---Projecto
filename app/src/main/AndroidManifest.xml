@@ -32,7 +32,6 @@
 
         <activity android:name=".firefighter.FirefighterActivity"
             android:screenOrientation="landscape">
-
         </activity>
     </application>
 
