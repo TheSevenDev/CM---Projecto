@@ -10,11 +10,13 @@ import android.graphics.Canvas;
 public class Background
 {
     private Bitmap image;
-    private int x, y, dx;
+    private int x, y, width, height, dx;
 
-    public Background(Bitmap res)
+    public Background(Bitmap res, int w, int h)
     {
-        image = res;
+        image = Bitmap.createScaledBitmap(res, w, h, false);
+        width = w;
+        height = h;
     }
 
     public void update()

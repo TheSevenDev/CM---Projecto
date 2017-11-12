@@ -25,7 +25,7 @@ public class Fire extends GameObject
         this.height = h;
         this.width = w;
 
-        spritesheet = Bitmap.createBitmap(res, 0, 0, width, height);
+        spritesheet = Bitmap.createScaledBitmap(res, w, h, false);
     }
 
     public void draw(Canvas canvas)

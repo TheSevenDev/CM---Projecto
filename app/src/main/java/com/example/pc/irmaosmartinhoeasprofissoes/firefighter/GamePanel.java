@@ -1,9 +1,13 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.firefighter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -20,8 +24,15 @@ import java.util.Random;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
-    public static final int WIDTH = 640;
-    public static final int HEIGHT = 360;
+    //PROCURAR MELHOR SOLUÇAO, NET DIZ QUE TEM CONFLITOS SE A NAV BAR ESTIVER VISIVEL
+    public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
+    public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
+
+    //PODE SER MELHOR
+    //DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+    //int a = displayMetrics.widthPixels;
+    //int b = displayMetrics.heightPixels;
+
     private MainThread thread;
     private Background background;
 
@@ -64,7 +75,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.firefighterbg));
+        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.firefighterbg), WIDTH, HEIGHT);
         fires = new ArrayList<>();
         fireX = new ArrayList<>();
         fireY = new ArrayList<>();
@@ -73,6 +84,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         rand = new Random();
 
         fireStart = System.nanoTime();
+
+        /*
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire),
+                (int)(Double.parseDouble(getResources().getString(R.string.fire_sprite_width))*WIDTH),
+                (int)(Double.parseDouble(getResources().getString(R.string.fire_sprite_height))*HEIGHT),
+                (int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_x1))*WIDTH),
+                (int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y1))*HEIGHT)));
+
+                */
 
         thread = new MainThread(getHolder(), this);
 
@@ -87,8 +107,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         {
             System.out.println("wululu");
 
-            float x = event.getX() - 270;
-            float y = event.getY() - 180;
+            //float x = event.getX() - 270;
+            //float y = event.getY() - 180;
+            float x = event.getX();
+            float y = event.getY();
+
+            float x1 = fires.get(0).getX();
+            float x2 = fires.get(0).getX() + fires.get(0).getWidth();
+            float x3 = fires.get(0).getY();
+            float x4 = fires.get(0).getY() + fires.get(0).getHeight();
+
 
             for(Fire f : fires)
             {
@@ -109,7 +137,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
 
         return true;
-        //return true;
+        //return onTouchEvent(event);
     }
 
     public void update()
@@ -121,10 +149,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         if(elapsed > 3000)
         {
-            int x = fireX.remove(rand.nextInt(4));
-            int y = fireY.remove(rand.nextInt(4));
+            int i = rand.nextInt(17);
 
-            fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, x, y));
+            fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire),
+                    (int)(Double.parseDouble(getResources().getString(R.string.fire_sprite_width))*WIDTH),
+                    (int)(Double.parseDouble(getResources().getString(R.string.fire_sprite_height))*HEIGHT),
+                    fireX.get(i), fireY.get(i)));
 
             fireStart = System.nanoTime();
         }
@@ -136,9 +166,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     {
         super.draw(canvas);
 
-        final float scaleFactorX = getWidth()/(WIDTH*2.f);
-        final float scaleFactorY = getHeight()/(HEIGHT*2.f);
-
+        final float scaleFactorX = getWidth()/(WIDTH*1.f);
+        final float scaleFactorY = getHeight()/(HEIGHT*1.f);
 
         if(canvas!=null) {
             final int savedState = canvas.save();
@@ -157,20 +186,28 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void populateFireCoords()
     {
+
         for(int i = 0; i < 5; i++)
         {
-            fireX.add(470);
-            fireX.add(575);
-            fireX.add(680);
+            fireX.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_x1))*WIDTH));
+            fireX.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_x2))*WIDTH));
+            fireX.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_x3))*WIDTH));
         }
+
+        fireX.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_x1))*WIDTH));
+        fireX.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_x3))*WIDTH));
 
         for(int i = 0; i < 3; i++)
         {
-            fireY.add(82);
-            fireY.add(168);
-            fireY.add(254);
-            fireY.add(340);
-            fireY.add(426);
+            fireY.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y1))*HEIGHT));
+            fireY.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y2))*HEIGHT));
+            fireY.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y3))*HEIGHT));
+            fireY.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y4))*HEIGHT));
+            fireY.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y5))*HEIGHT));;
         }
+
+        fireY.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y6))*HEIGHT));
+        fireY.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y6))*HEIGHT));
+
     }
 }
