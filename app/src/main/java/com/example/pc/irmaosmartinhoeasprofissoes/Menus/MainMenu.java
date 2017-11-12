@@ -31,7 +31,7 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_mainmenu);
     }
 
-    public void chooseMinigameScreen()
+    public void chooseMinigameScreen(View view)
     {
         startActivity(new Intent(getApplicationContext(), com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseMinigame.class));
     }

@@ -48,19 +48,26 @@ public class ChooseGender extends AppCompatActivity {
         }
     }
 
-    public void chooseMale()
+    public void chooseMale(View view)
     {
-        /*SharedPreferences sharedPref = ChooseGender.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = ChooseGender.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("gender", 0);
-        editor.apply();*/
+        editor.apply();
+        //goToMainMenu();
     }
 
-    public void chooseFemale()
+    public void chooseFemale(View view)
     {
-        /*SharedPreferences sharedPref = ChooseGender.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = ChooseGender.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("gender", 1);
-        editor.apply();*/
+        editor.apply();
+        //goToMainMenu();
+    }
+
+    public void goToMainMenu()
+    {
+        startActivity(new Intent(getApplicationContext(), com.example.pc.irmaosmartinhoeasprofissoes.Menus.MainMenu.class));
     }
 }

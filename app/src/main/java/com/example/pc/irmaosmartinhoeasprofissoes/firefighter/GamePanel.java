@@ -9,16 +9,19 @@ import android.view.SurfaceView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by Diogo on 10/11/2017.
  */
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
-    public static final int WIDTH = 856;
-    public static final int HEIGHT = 480;
+    public static final int WIDTH = 640;
+    public static final int HEIGHT = 360;
     private MainThread thread;
-    private Bitmap background;
+    private Background background;
+    private ArrayList<Fire> fires;
 
     public GamePanel(Context context)
     {
@@ -53,7 +56,27 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void surfaceCreated(SurfaceHolder holder)
     {
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.firefighterbg);
+        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.firefighterbg));
+        fires = new ArrayList<>();
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 470, 82));
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 575, 82)); //+105x
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 680, 82));
+
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 470, 168)); //+86y
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 575, 168));
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 680, 168));
+
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 470, 254));
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 575, 254));
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 680, 254));
+
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 470, 340));
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 575, 340));
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 680, 340));
+
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 470, 426));
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 575, 426));
+        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire), 100, 100, 680, 426));
 
         thread = new MainThread(getHolder(), this);
 
@@ -63,20 +86,28 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void update()
     {
+
     }
 
     @Override
     public void draw(Canvas canvas)
     {
-        //super.draw(canvas);
+        super.draw(canvas);
 
-        final float scaleFactorX = getWidth()/(WIDTH*1.f);
-        final float scaleFactorY = getHeight()/(HEIGHT*1.f);
+        final float scaleFactorX = getWidth()/(WIDTH*2.f);
+        final float scaleFactorY = getHeight()/(HEIGHT*2.f);
+
 
         if(canvas!=null) {
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
-            canvas.drawBitmap(background, WIDTH, HEIGHT, null);
+            background.draw(canvas);
+
+            //draw fires
+            for(Fire fire: fires)
+            {
+                fire.draw(canvas);
+            }
 
             canvas.restoreToCount(savedState);
         }

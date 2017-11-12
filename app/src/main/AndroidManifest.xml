@@ -21,7 +21,14 @@
 
             <action android:name="com.example.pc.irmaosmartinhoeasprofissoes.ChooseGender" />
         </activity>
-        <activity android:name=".Menus.ChooseMinigame"></activity>
+        <activity android:name=".Menus.ChooseMinigame"
+            android:screenOrientation="landscape"></activity>
+
+        <activity android:name=".Menus.MainMenu"
+                  android:screenOrientation="landscape"></activity>
+
+        <activity android:name=".firefighter.FirefighterActivity"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
