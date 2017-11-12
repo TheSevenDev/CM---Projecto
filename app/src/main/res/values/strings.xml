@@ -2,4 +2,11 @@
     <string name="app_name">Irmãos Martinho e as profissoes</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="choosegender_title">Escolhe com quem queres jogar!</string>
+    <string name="mainmenu_play"><![CDATA[Jogar >]]></string>
+    <string name="professor">Professor</string>
+    <string name="aviador">Aviador</string>
+    <string name="bombeiro">Bombeiro</string>
+    <string name="pintor">Pintor</string>
+    <string name="pasteleiro">Pasteleiro</string>
+    <string name="choose_minigame_title">Escolhe a Profissão!</string>
 </resources>

@@ -1,50 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseMinigame">
+    android:orientation="horizontal"
+    android:background="@color/mainBlue"
+    >
 
-    <LinearLayout
-        android:layout_width="552dp"
-        android:layout_height="368dp"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="53dp">
+    <TableLayout
+        android:layout_width="520dp"
+        android:layout_height="match_parent"
+        android:id="@+id/tableLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="65dp"
+        android:layout_centerHorizontal="true">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:layout_weight="1"
-            android:text="Bombeiro"
-            android:onClick="fireFighterGame"/>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:layout_weight="1"
-            android:text="Button" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:layout_weight="1"
-            android:text="Button" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:layout_weight="1"
+                android:background="@color/mainYellow"
+                android:onClick="fireFighterGame"
+                android:src="@drawable/martinhobombeiro"
+                android:text="@string/bombeiro"
+                />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:layout_weight="1"
-            android:text="Button" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:layout_weight="1"
+                android:background="@color/mainYellow"
+                android:src="@drawable/martinhopasteleiro"
+                android:text="@string/pasteleiro" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:layout_weight="1"
-            android:text="Button" />
 
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:layout_weight="1"
+                android:background="@color/mainYellow"
+                android:src="@drawable/martinhoprofessor"
+                android:text="@string/professor" />
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:layout_weight="1"
+                android:background="@color/mainYellow"
+                android:src="@drawable/martinhopintor"
+                android:text="@string/pintor" />
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:layout_weight="1"
+                android:background="@color/mainYellow"
+                android:src="@drawable/martinhopiloto"
+                android:text="@string/aviador" />
+
+        </TableRow>
+
+    </TableLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textColor="@color/titleColor"
+        android:text="@string/choose_minigame_title"
+        />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="55dp"
+        />
+</RelativeLayout>

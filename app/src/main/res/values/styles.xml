@@ -13,4 +13,16 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@drawable/splashscreen</item>
     </style>
+
+    <style name="MainMenuTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/mainmenu</item>
+    </style>
+
+    <style name="GenderSwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlActivated" tools:targetApi="lollipop">@color/mainYellow</item>
+    </style>
+
 </resources>
