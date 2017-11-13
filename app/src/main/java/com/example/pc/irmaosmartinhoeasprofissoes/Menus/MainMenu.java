@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
-import com.example.pc.irmaosmartinhoeasprofissoes.SFX.BackgroundSoundService;
 
 import java.io.IOException;
 
