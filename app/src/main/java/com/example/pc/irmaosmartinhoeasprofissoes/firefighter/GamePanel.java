@@ -180,7 +180,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire),
                     (int)(Double.parseDouble(getResources().getString(R.string.fire_sprite_width))*WIDTH),
                     (int)(Double.parseDouble(getResources().getString(R.string.fire_sprite_height))*HEIGHT),
-                    fireX.get(i), fireY.get(i)));
+                    fireX.get(i), fireY.get(i), getContext()));
 
             fireStart = System.nanoTime();
         }
@@ -210,10 +210,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             waterDrops.add(new Waterdrop(BitmapFactory.decodeResource(getResources(), R.drawable.gota),
                     (int)(Double.parseDouble(getResources().getString(R.string.waterdrop_sprite_width))*WIDTH),
                     (int)(Double.parseDouble(getResources().getString(R.string.waterdrop_sprite_height))*HEIGHT),
-                    x, y));
+                    x, y, getContext()));
 
             waterStart = System.nanoTime();
         }
+
+        checkDespawns();
     }
 
     @Override
@@ -300,11 +302,28 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         waterMeter -= waterDecrease;
     }
 
-        public void increaseWater()
+    public void increaseWater()
     {
         waterMeter += waterGain;
 
         if(waterMeter > 100)
             waterMeter = 100;
+    }
+
+    public void checkDespawns()
+    {
+        for(Waterdrop w : waterDrops)
+        {
+            w.update();
+            if(w.isDespawn())
+                waterDrops.remove(w);
+        }
+
+        for(Fire f : fires)
+        {
+            f.update();
+            if(f.isDespawn())
+                fires.remove(f);
+        }
     }
 }

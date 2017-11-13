@@ -1,5 +1,6 @@
 package com.example.pc.irmaosmartinhoeasprofissoes;
 
+import android.content.Context;
 import android.graphics.Rect;
 
 /**
@@ -12,6 +13,7 @@ public class GameObject
     protected int y;
     protected int width;
     protected int height;
+    protected Context context;
 
     public void setX(int x)
     {
@@ -41,4 +43,5 @@ public class GameObject
     {
         return new Rect(x, y, x+width, y+height);
     }
+    public Context getContext() {return context;}
 }

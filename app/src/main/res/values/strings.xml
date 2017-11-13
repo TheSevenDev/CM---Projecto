@@ -32,5 +32,7 @@
     <string name="cat_score">20</string>
     <string name="water_decrease">15</string>
     <string name="water_gain">20</string>
+    <string name="water_disappear_time">2</string>
+    <string name="fire_disappear_time">8</string>
 
 </resources>
