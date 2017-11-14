@@ -20,4 +20,4 @@ public class FirefighterActivity extends Activity {
 
         setContentView(new GamePanel(this));
     }
-}
+            }

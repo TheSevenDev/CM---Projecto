@@ -51,6 +51,13 @@ public class MainMenu extends GeneralActivity {
         startActivity(new Intent(getApplicationContext(), com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseMinigame.class));
     }
 
+    //NO ACTION FOR BACK BUTTON
+    @Override
+    public void onBackPressed() {
+
+
+    }
+
 
 }
 

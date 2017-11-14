@@ -7,18 +7,18 @@
 
     <!-- Caixa Bombeiro   -->
     <ImageButton
-        android:id="@+id/imgbtn_bombeiro"
+        android:id="@+id/imgbtn_firefighter"
         android:layout_width="100dp"
         android:layout_height="250dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="85dp"
         android:background="@color/mainYellow"
         android:onClick="fireFighterGame"
-        android:src="@drawable/martinhobombeiro"
+        android:src="@drawable/martinho_bombeiro"
         android:text="@string/bombeiro" />
 
     <Button
-        android:id="@+id/desc_bombeiro"
+        android:id="@+id/desc_firefighter"
         android:layout_width="80dp"
         android:layout_height="25dp"
         android:layout_marginLeft="70dp"
@@ -30,17 +30,17 @@
 
     <!-- Caixa Pasteleiro   -->
     <ImageButton
-        android:id="@+id/imgbtn_pasteleiro"
+        android:id="@+id/imgbtn_baker"
         android:layout_width="100dp"
         android:layout_height="250dp"
         android:layout_marginLeft="165dp"
         android:layout_marginTop="85dp"
         android:background="@color/mainYellow"
-        android:src="@drawable/martinhopasteleiro"
+        android:src="@drawable/martinho_pasteleiro"
         android:text="@string/pasteleiro" />
 
     <Button
-        android:id="@+id/desc_pasteleiro"
+        android:id="@+id/desc_baker"
         android:layout_width="89dp"
         android:layout_height="25dp"
         android:layout_marginLeft="170dp"
@@ -53,17 +53,17 @@
 
     <!-- Caixa Professor   -->
     <ImageButton
-        android:id="@+id/imgbtn_professor"
+        android:id="@+id/imgbtn_teacher"
         android:layout_width="100dp"
         android:layout_height="250dp"
         android:layout_marginLeft="270dp"
         android:layout_marginTop="85dp"
         android:background="@color/mainYellow"
-        android:src="@drawable/martinhoprofessor"
+        android:src="@drawable/martinho_professor"
         android:text="@string/professor" />
 
     <Button
-        android:id="@+id/desc_professor"
+        android:id="@+id/desc_teacher"
         android:layout_width="89dp"
         android:layout_height="25dp"
         android:layout_marginLeft="275dp"
@@ -75,17 +75,17 @@
 
     <!-- Caixa Pintor   -->
     <ImageButton
-        android:id="@+id/imgbtn_pintor"
+        android:id="@+id/imgbtn_painter"
         android:layout_width="100dp"
         android:layout_height="250dp"
         android:layout_marginLeft="375dp"
         android:layout_marginTop="85dp"
         android:background="@color/mainYellow"
-        android:src="@drawable/martinhopintor"
+        android:src="@drawable/martinho_pintor"
         android:text="@string/pintor" />
 
     <Button
-        android:id="@+id/desc_pintor"
+        android:id="@+id/desc_painter"
         android:layout_width="89dp"
         android:layout_height="25dp"
         android:layout_marginLeft="380dp"
@@ -97,17 +97,17 @@
 
     <!-- Caixa Aviador   -->
     <ImageButton
-        android:id="@+id/imgbtn_aviador"
+        android:id="@+id/imgbtn_pilot"
         android:layout_width="100dp"
         android:layout_height="250dp"
         android:layout_marginLeft="480dp"
         android:layout_marginTop="85dp"
         android:background="@color/mainYellow"
-        android:src="@drawable/martinhopiloto"
+        android:src="@drawable/martinho_piloto"
         android:text="@string/aviador" />
 
     <Button
-        android:id="@+id/desc_aviador"
+        android:id="@+id/desc_pilot"
         android:layout_width="89dp"
         android:layout_height="25dp"
         android:layout_marginLeft="485dp"
@@ -140,6 +140,26 @@
         android:textColor="@color/titleColor"
         android:textSize="15dp" />
 
+
+    <ImageButton
+        android:id="@+id/imgbtn_chooseMale"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="65dp"
+        android:layout_marginTop="20dp"
+        android:onClick="changeToMale"
+        />
+
+    <ImageButton
+        android:id="@+id/imgbtn_chooseFemale"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:onClick="changeToFemale"
+        />
 
 
 
