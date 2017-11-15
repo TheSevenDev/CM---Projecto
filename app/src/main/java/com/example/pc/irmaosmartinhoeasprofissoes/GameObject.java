@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Rect;
 
 /**
- * Created by Diogo on 10/11/217.
+ * Created by Diogo on 10/11/2017.
  */
 
 public class GameObject
