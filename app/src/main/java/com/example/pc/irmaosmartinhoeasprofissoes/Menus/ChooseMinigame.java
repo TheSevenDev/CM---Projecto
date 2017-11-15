@@ -32,8 +32,9 @@ public class ChooseMinigame extends GeneralActivity {
         painter = (ImageButton)v.findViewById(R.id.imgbtn_painter);
         pilot = (ImageButton)v.findViewById(R.id.imgbtn_pilot);
 
-        chooseMale = (ImageView)v.findViewById(R.id.imgbtn_chooseMale);
-        chooseFemale = (ImageView)v.findViewById(R.id.imgbtn_chooseFemale);
+        chooseMale = (ImageView)v.findViewById(R.id.img_chooseMale);
+        chooseFemale = (ImageView)v.findViewById(R.id.img_chooseFemale);
+        chooseFemale.setImageAlpha(50);
 
         SharedPreferences sharedPref = ChooseMinigame.this.
                 getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
@@ -41,7 +42,6 @@ public class ChooseMinigame extends GeneralActivity {
             changeToMale(v);
         else
             changeToFemale(v);
-
     }
 
 
@@ -55,27 +55,23 @@ public class ChooseMinigame extends GeneralActivity {
     }
 
     public void changeToMale(View view){
-        chooseFemale.setAlpha(0.5f);
+        chooseFemale.setImageAlpha(50);
 
         firefighter.setImageResource(R.drawable.jose_bombeiro);
         baker.setImageResource(R.drawable.jose_pasteleiro);
         teacher.setImageResource(R.drawable.jose_professor);
         painter.setImageResource(R.drawable.jose_pintor);
         pilot.setImageResource(R.drawable.jose_piloto);
-
         System.out.println("CHANGE TO MALE");
 
     }
 
     public void changeToFemale(View view){
-        chooseMale.setAlpha(0.5f);
+        chooseMale.setImageAlpha(50);
 
         baker.setImageResource(R.drawable.maria_martinho_pasteleira);
         painter.setImageResource(R.drawable.maria_martinho_pintora);
         pilot.setImageResource(R.drawable.maria_martinho_piloto);
-
         System.out.println("CHANGE TO FEMALE");
     }
-
-
 }

@@ -146,25 +146,23 @@
 
 
     <ImageView
-        android:id="@+id/imgbtn_chooseMale"
+        android:id="@+id/img_chooseMale"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="55dp"
         android:layout_marginTop="15dp"
         android:onClick="changeToMale"
-        android:src="@drawable/jose_face"
-        />
+        android:src="@drawable/jose_face" />
 
     <ImageView
-        android:id="@+id/imgbtn_chooseFemale"
+        android:id="@+id/img_chooseFemale"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="20dp"
         android:onClick="changeToFemale"
-        android:src="@drawable/maria_face"
-        />
+        android:src="@drawable/maria_face" />
 
 </RelativeLayout>
