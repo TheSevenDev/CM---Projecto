@@ -54,10 +54,18 @@ public class MainMenu extends GeneralActivity {
     //NO ACTION FOR BACK BUTTON
     @Override
     public void onBackPressed() {
-
-
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mp != null){
+            mp.stop();
+            if (isFinishing()){
+                mp.stop();
+                mp.release();
+            }
+        }
+    }
 }
 

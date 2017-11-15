@@ -69,7 +69,6 @@ public class ChooseMinigame extends GeneralActivity {
         baker.setImageResource(R.drawable.maria_martinho_pasteleira);
         painter.setImageResource(R.drawable.maria_martinho_pintora);
         pilot.setImageResource(R.drawable.maria_martinho_piloto);
-
     }
 
 
