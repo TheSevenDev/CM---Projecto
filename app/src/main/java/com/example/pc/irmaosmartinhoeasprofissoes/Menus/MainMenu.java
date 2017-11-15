@@ -51,21 +51,28 @@ public class MainMenu extends GeneralActivity {
         startActivity(new Intent(getApplicationContext(), com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseMinigame.class));
     }
 
+
+    /*@Override
+    protected void onUserLeaveHint() {
+        stopMenuMusic();
+        super.onUserLeaveHint();
+    }
+
+    @Override
+    protected void onResume() {
+        if(mp != null && !mp.isPlaying())
+            mp.start();
+        super.onResume();
+    }*/
+
+    /*@Override
+    protected void onPause() {
+        stopMenuMusic();
+        super.onPause();
+    }*/
+
     //NO ACTION FOR BACK BUTTON
     @Override
     public void onBackPressed() {
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (mp != null){
-            mp.stop();
-            if (isFinishing()){
-                mp.stop();
-                mp.release();
-            }
-        }
-    }
 }
-
