@@ -63,7 +63,6 @@ public class ChooseMinigame extends GeneralActivity {
         teacher.setImageResource(R.drawable.jose_professor);
         painter.setImageResource(R.drawable.jose_pintor);
         pilot.setImageResource(R.drawable.jose_piloto);
-
     }
 
     public void changeToFemale(View view){
@@ -74,5 +73,6 @@ public class ChooseMinigame extends GeneralActivity {
         painter.setImageResource(R.drawable.maria_pintora);
         pilot.setImageResource(R.drawable.maria_aviadora);
         firefighter.setImageResource(R.drawable.maria_bombeira);
+        teacher.setImageResource(R.drawable.maria_professora);
     }
 }
