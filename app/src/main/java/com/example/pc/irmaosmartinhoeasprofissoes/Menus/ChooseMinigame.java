@@ -70,8 +70,9 @@ public class ChooseMinigame extends GeneralActivity {
         chooseFemale.setImageAlpha(255);
         chooseMale.setImageAlpha(127);
 
-        baker.setImageResource(R.drawable.maria_martinho_pasteleira);
-        painter.setImageResource(R.drawable.maria_martinho_pintora);
-        pilot.setImageResource(R.drawable.maria_martinho_piloto);
+        baker.setImageResource(R.drawable.maria_pasteleira);
+        painter.setImageResource(R.drawable.maria_pintora);
+        pilot.setImageResource(R.drawable.maria_aviadora);
+        firefighter.setImageResource(R.drawable.maria_bombeira);
     }
 }
