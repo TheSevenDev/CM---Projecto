@@ -15,7 +15,7 @@
                 android:layout_height="55dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="231dp"
+                android:layout_marginLeft="253dp"
                 android:layout_marginTop="190dp"
                 android:backgroundTint="@color/mainBlue"
                 android:onClick="chooseMinigameScreen"
@@ -32,7 +32,7 @@
                 android:layout_gravity="right|bottom"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="200dp"
+                android:layout_marginLeft="225dp"
                 android:layout_marginTop="80dp"
                 android:src="@drawable/settings" />
         </TableRow>
