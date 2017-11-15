@@ -13,7 +13,7 @@
         android:layout_marginLeft="60dp"
         android:layout_marginTop="85dp"
         android:onClick="fireFighterGame"
-        android:src="@drawable/martinho_bombeiro"
+        android:src="@drawable/jose_bombeiro"
         android:background="@drawable/round_corner"
         android:text="@string/bombeiro"
         />
@@ -37,7 +37,7 @@
         android:layout_marginLeft="165dp"
         android:layout_marginTop="85dp"
         android:background="@drawable/round_corner"
-        android:src="@drawable/martinho_pasteleiro"
+        android:src="@drawable/jose_pasteleiro"
         android:text="@string/pasteleiro" />
 
     <Button
@@ -60,7 +60,7 @@
         android:layout_marginLeft="270dp"
         android:layout_marginTop="85dp"
         android:background="@drawable/round_corner"
-        android:src="@drawable/martinho_professor"
+        android:src="@drawable/jose_professor"
         android:text="@string/professor"
         />
 
@@ -83,7 +83,7 @@
         android:layout_marginLeft="375dp"
         android:layout_marginTop="85dp"
         android:background="@drawable/round_corner"
-        android:src="@drawable/martinho_pintor"
+        android:src="@drawable/jose_pintor"
         android:text="@string/pintor"
         />
 
@@ -106,7 +106,7 @@
         android:layout_marginLeft="480dp"
         android:layout_marginTop="85dp"
         android:background="@drawable/round_corner"
-        android:src="@drawable/martinho_piloto"
+        android:src="@drawable/jose_piloto"
         android:text="@string/aviador"
         />
 
@@ -145,40 +145,26 @@
         android:textSize="15dp" />
 
 
-    <ImageButton
+    <ImageView
         android:id="@+id/imgbtn_chooseMale"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="65dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginTop="15dp"
         android:onClick="changeToMale"
-        android:src="@drawable/imagem4"
+        android:src="@drawable/jose_face"
         />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/imgbtn_chooseFemale"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="20dp"
         android:onClick="changeToFemale"
-
-        android:src="@drawable/imagem3"
+        android:src="@drawable/maria_face"
         />
-
-
-
-    <!--
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="20dp"
-        />-->
-
 
 </RelativeLayout>

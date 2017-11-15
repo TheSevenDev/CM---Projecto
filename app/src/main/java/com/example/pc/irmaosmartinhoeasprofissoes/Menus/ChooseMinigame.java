@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
@@ -14,7 +15,7 @@ import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.FirefighterActivit
 
 public class ChooseMinigame extends GeneralActivity {
     private ImageButton firefighter, baker, teacher, painter, pilot;
-    private ImageButton chooseMale, chooseFemale;
+    private ImageView chooseMale, chooseFemale;
 
 
     @Override
@@ -31,8 +32,8 @@ public class ChooseMinigame extends GeneralActivity {
         painter = (ImageButton)v.findViewById(R.id.imgbtn_painter);
         pilot = (ImageButton)v.findViewById(R.id.imgbtn_pilot);
 
-        chooseMale = (ImageButton)v.findViewById(R.id.imgbtn_chooseMale);
-        chooseFemale = (ImageButton)v.findViewById(R.id.imgbtn_chooseFemale);
+        chooseMale = (ImageView)v.findViewById(R.id.imgbtn_chooseMale);
+        chooseFemale = (ImageView)v.findViewById(R.id.imgbtn_chooseFemale);
 
         SharedPreferences sharedPref = ChooseMinigame.this.
                 getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
@@ -56,11 +57,14 @@ public class ChooseMinigame extends GeneralActivity {
     public void changeToMale(View view){
         chooseFemale.setAlpha(0.5f);
 
-        firefighter.setImageResource(R.drawable.martinho_bombeiro);
-        baker.setImageResource(R.drawable.martinho_pasteleiro);
-        teacher.setImageResource(R.drawable.martinho_professor);
-        painter.setImageResource(R.drawable.martinho_pintor);
-        pilot.setImageResource(R.drawable.martinho_piloto);
+        firefighter.setImageResource(R.drawable.jose_bombeiro);
+        baker.setImageResource(R.drawable.jose_pasteleiro);
+        teacher.setImageResource(R.drawable.jose_professor);
+        painter.setImageResource(R.drawable.jose_pintor);
+        pilot.setImageResource(R.drawable.jose_piloto);
+
+        System.out.println("CHANGE TO MALE");
+
     }
 
     public void changeToFemale(View view){
@@ -69,6 +73,8 @@ public class ChooseMinigame extends GeneralActivity {
         baker.setImageResource(R.drawable.maria_martinho_pasteleira);
         painter.setImageResource(R.drawable.maria_martinho_pintora);
         pilot.setImageResource(R.drawable.maria_martinho_piloto);
+
+        System.out.println("CHANGE TO FEMALE");
     }
 
 
