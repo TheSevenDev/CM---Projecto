@@ -3,8 +3,10 @@ package com.example.pc.irmaosmartinhoeasprofissoes.firefighter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
@@ -16,6 +18,7 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
 public class WaterMeter extends GameObject
 {
     private Bitmap spritesheet;
+    private boolean noWater;
     private boolean noWaterWarning;
     private long warningStart;
     private Paint transparentPaint;
@@ -29,12 +32,13 @@ public class WaterMeter extends GameObject
 
         spritesheet = Bitmap.createScaledBitmap(res, w, h, false);
         transparentPaint = new Paint();
-        transparentPaint.setAlpha(50);
+        transparentPaint.setColor(Color.TRANSPARENT);
+
+        spritesheet.setHasAlpha(true);
     }
 
     public void draw(Canvas canvas)
     {
-
         if(noWaterWarning)
         {
             canvas.drawBitmap(spritesheet, x, y, transparentPaint);
@@ -46,6 +50,7 @@ public class WaterMeter extends GameObject
     public void outOfWater()
     {
         warningStart = System.nanoTime();
+        noWater = true;
         noWaterWarning = true;
     }
 
@@ -53,9 +58,43 @@ public class WaterMeter extends GameObject
     {
         long timeElapsed = (System.nanoTime() - warningStart)/1000000;
 
-        if(timeElapsed > 1000 && noWaterWarning)
+        if(noWater)
         {
-            noWaterWarning = false;
+            if (timeElapsed > 100) {
+                noWaterWarning = false;
+            }
+
+            if (timeElapsed > 200) {
+                noWaterWarning = true;
+            }
+
+            if (timeElapsed > 300) {
+                noWaterWarning = false;
+            }
+
+            if (timeElapsed > 400) {
+                noWaterWarning = true;
+            }
+
+            if (timeElapsed > 500) {
+                noWaterWarning = false;
+                noWater = false;
+            }
+
+            if (timeElapsed > 600) {
+                noWaterWarning = false;
+                noWater = false;
+            }
+
+            if (timeElapsed > 700) {
+                noWaterWarning = false;
+                noWater = false;
+            }
         }
+    }
+
+    public boolean isNoWaterWarning()
+    {
+        return noWaterWarning;
     }
 }
