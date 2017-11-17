@@ -8,8 +8,6 @@ import android.view.View;
 import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
-import java.io.IOException;
-
 /**
  * Created by Diogo on 10/11/2017.
  */

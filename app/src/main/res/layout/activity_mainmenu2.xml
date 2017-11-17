@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/mainmenu"
+    android:stretchColumns="2"
+    >
+
+    <TableRow
+        android:layout_width="fill_parent">
+        <Button
+            android:id="@+id/button_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="253dp"
+            android:layout_marginTop="190dp"
+            android:backgroundTint="@color/mainBlue"
+            android:onClick="chooseMinigameScreen"
+            android:text="@string/mainmenu_play"
+            android:textAlignment="center"
+            android:textColor="@color/mainYellow"
+            android:textSize="20dp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        >
+        <ImageView
+            android:layout_gravity="right|bottom"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="225dp"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/settings" />
+    </TableRow>
+
+</TableLayout>
