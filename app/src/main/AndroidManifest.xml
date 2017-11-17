@@ -31,7 +31,10 @@
         <activity
             android:name=".firefighter.FirefighterActivity"
             android:screenOrientation="landscape"></activity>
-        <activity android:name=".pilot.PilotActivity"></activity>
+
+        <activity android:name=".pilot.PilotActivity"
+            android:screenOrientation="landscape"
+            ></activity>
         <service android:name=".MusicService"/>
 </application>
 
