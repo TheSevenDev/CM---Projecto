@@ -107,6 +107,7 @@
         android:layout_marginTop="85dp"
         android:background="@drawable/round_corner"
         android:src="@drawable/jose_piloto"
+        android:onClick="pilotGame"
         android:text="@string/aviador"
         />
 

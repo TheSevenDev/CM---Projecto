@@ -10,8 +10,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
+import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.FirefighterActivity;
+import com.example.pc.irmaosmartinhoeasprofissoes.pilot.PilotActivity;
 
 public class ChooseMinigame extends GeneralActivity {
     private ImageButton firefighter, baker, teacher, painter, pilot;
@@ -22,6 +24,7 @@ public class ChooseMinigame extends GeneralActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_minigame);
+
         firefighter = (ImageButton)findViewById(R.id.imgbtn_firefighter);
         baker = (ImageButton)findViewById(R.id.imgbtn_baker);
         teacher = (ImageButton)findViewById(R.id.imgbtn_teacher);
@@ -52,6 +55,11 @@ public class ChooseMinigame extends GeneralActivity {
     public void fireFighterGame(View view)
     {
         startActivity(new Intent(getApplicationContext(), FirefighterActivity.class));
+    }
+
+    public void pilotGame(View view)
+    {
+        startActivity(new Intent(getApplicationContext(), PilotActivity.class));
     }
 
     public void changeToMale(View view){

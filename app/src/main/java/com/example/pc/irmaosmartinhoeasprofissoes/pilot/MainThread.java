@@ -1,12 +1,12 @@
-package com.example.pc.irmaosmartinhoeasprofissoes.firefighter;
+package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GamePanel;
+import com.example.pc.irmaosmartinhoeasprofissoes.pilot.GamePanel;
 
 /**
- * Created by Diogo on 10/11/2017.
+ * Created by Bruno on 17/11/2017.
  */
 
 public class MainThread extends Thread

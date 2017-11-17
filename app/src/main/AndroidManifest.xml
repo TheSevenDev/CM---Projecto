@@ -21,18 +21,18 @@
 
             <action android:name="com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseGender" />
         </activity>
-        <activity android:name=".Menus.ChooseMinigame"
-            android:screenOrientation="landscape"></activity>
-
-        <activity android:name=".Menus.MainMenu"
+        <activity
+            android:name=".Menus.ChooseMinigame"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Menus.MainMenu"
             android:screenOrientation="landscape"
-            android:theme="@style/MainMenuTheme">
-
-        </activity>
-
-        <activity android:name=".firefighter.FirefighterActivity"
-            android:screenOrientation="landscape">
-        </activity>
-    </application>
+            android:theme="@style/MainMenuTheme"></activity>
+        <activity
+            android:name=".firefighter.FirefighterActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".pilot.PilotActivity"></activity>
+        <service android:name=".MusicService"/>
+</application>
 
 </manifest>
