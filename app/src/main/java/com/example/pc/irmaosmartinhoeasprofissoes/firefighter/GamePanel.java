@@ -110,7 +110,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         rand = new Random();
         score = 0;
         timeRemaining = 60;
-        waterMeterValue = 100;
+        waterMeterValue = 10;
         waterDecrease = Integer.parseInt(getResources().getString(R.string.water_decrease));
         waterGain = Integer.parseInt(getResources().getString(R.string.water_gain));
 
@@ -150,6 +150,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                         fires.remove(f);
                         addScore(Integer.parseInt(getResources().getString(R.string.fire_score)));
                         decreaseWater();
+                    }
+                    else
+                    {
+                        waterMeter.outOfWater();
                     }
                     return true;
                 }
@@ -224,6 +228,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
 
         checkDespawns();
+
+        waterMeter.update();
     }
 
     @Override
@@ -239,8 +245,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
             background.draw(canvas);
+
             waterMeter.draw(canvas);
-            drawWaterLevel(canvas);
+
+            if(!waterMeter.isNoWaterWarning())
+                drawWaterLevel(canvas);
 
             //draw fires
             for(Fire fire: fires)
