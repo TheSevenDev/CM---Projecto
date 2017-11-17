@@ -1,62 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/mainBlue"
-    android:theme="@style/SplashTheme"
-    >
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/tableLayout"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="75dp">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnMale"
-                android:layout_width="100dp"
-                android:layout_height="232dp"
-                android:layout_centerVertical="true"
-                android:layout_column="0"
-                android:layout_row="0"
-                android:onClick="chooseMale"
-                android:background="@drawable/gender_male"
-                />
-
-            <Button
-                android:id="@+id/btnFemale"
-                android:layout_width="100dp"
-                android:layout_height="232dp"
-                android:layout_alignBottom="@+id/btnMale"
-                android:layout_alignParentEnd="true"
-                android:layout_column="2"
-                android:layout_marginLeft="90dp"
-                android:layout_marginTop="10dp"
-                android:layout_row="0"
-                android:background="@drawable/gender_female"
-                android:onClick="chooseFemale" />
-        </TableRow>
-    </TableLayout>
+    android:background="@color/mainBlue">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
-        android:textSize="30dp"
-        android:textColor="@color/titleColor"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+
+        android:layout_marginTop="16dp"
+        android:autoSizeMaxTextSize="54sp"
+        android:autoSizeMinTextSize="30sp"
+        android:autoSizeStepGranularity="5sp"
         android:text="@string/choosegender_title"
+        android:textColor="@color/titleColor"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
- />
+    <Button
+        android:id="@+id/btnMale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/gender_male_"
+        android:onClick="chooseMale"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.289"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.901" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btnFemale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="124dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/gender_female_"
+        android:onClick="chooseFemale"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.915"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.901" />
+
+</android.support.constraint.ConstraintLayout>
