@@ -28,6 +28,6 @@ public class FirefighterActivity extends Activity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-        setContentView(new GamePanel(this));
+        setContentView(new GamePanel(this, this));
     }
 }

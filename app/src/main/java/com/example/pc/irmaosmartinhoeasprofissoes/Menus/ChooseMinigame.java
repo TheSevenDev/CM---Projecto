@@ -79,7 +79,7 @@ public class ChooseMinigame extends GeneralActivity {
 
         baker.setImageResource(R.drawable.maria_pasteleira);
         painter.setImageResource(R.drawable.maria_pintora);
-        pilot.setImageResource(R.drawable.maria_aviadora);
+        pilot.setImageResource(R.drawable.maria_pilota);
         firefighter.setImageResource(R.drawable.maria_bombeira);
         teacher.setImageResource(R.drawable.maria_professora);
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -37,11 +38,15 @@ public class WaterMeter extends GameObject
         spritesheet.setHasAlpha(true);
     }
 
-    public void draw(Canvas canvas)
+    public void draw(Canvas canvas, boolean paused)
     {
         if(noWaterWarning)
-        {
             canvas.drawBitmap(spritesheet, x, y, transparentPaint);
+        else if(paused)
+        {
+            Paint paint = new Paint();
+            paint.setColorFilter(new LightingColorFilter(Color.rgb(123, 123, 123), 0));
+            canvas.drawBitmap(spritesheet, x, y,paint);
         }
         else
             canvas.drawBitmap(spritesheet, x, y, null);
@@ -87,6 +92,16 @@ public class WaterMeter extends GameObject
             }
 
             if (timeElapsed > 700) {
+                noWaterWarning = false;
+                noWater = false;
+            }
+
+            if (timeElapsed > 800) {
+                noWaterWarning = false;
+                noWater = false;
+            }
+
+            if (timeElapsed > 900) {
                 noWaterWarning = false;
                 noWater = false;
             }

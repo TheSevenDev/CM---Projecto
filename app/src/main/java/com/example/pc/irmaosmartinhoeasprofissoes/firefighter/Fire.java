@@ -39,9 +39,9 @@ public class Fire extends GameObject
         canvas.drawBitmap(spritesheet, x, y, null);
     }
 
-    public void update()
+    public void update(long pausedTime)
     {
-        long timeElapsed = (System.nanoTime()-fireSpawnTime)/1000000;
+        long timeElapsed = (System.nanoTime()-fireSpawnTime - pausedTime)/1000000;
 
         if(timeElapsed > Integer.parseInt(getContext().getString(R.string.fire_disappear_time)) * 1000)
         {

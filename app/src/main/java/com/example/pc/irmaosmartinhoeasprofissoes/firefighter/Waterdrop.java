@@ -35,9 +35,9 @@ public class Waterdrop extends GameObject
         canvas.drawBitmap(spritesheet, x, y, null);
     }
 
-    public void update()
+    public void update(long pausedTime)
     {
-        long timeElapsed = (System.nanoTime()-waterSpawnTime)/1000000;
+        long timeElapsed = (System.nanoTime() - waterSpawnTime - pausedTime)/1000000;
 
         if(timeElapsed > Integer.parseInt(getContext().getString(R.string.water_disappear_time)) * 1000)
         {
