@@ -22,17 +22,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
-    private final float MAX_DAYLIGHT = 70.0f;
+
+    private final float MIN_DAYLIGHT = 57.0f; //VERIFICAR QUAL O VALOR ESTIMADO À LUZ DO DIA
 
     private MainThread thread;
-    private Background background;
+    private Background backgroundDay;
+    private Background backgroundNight;
 
     private Player player;
     private Point playerPoint;
 
     private OrientationData orientationData;
     private LightData lightData;
-
 
     private long frameTime;//time elapsed between frames
     private long initTime;
@@ -55,6 +56,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         lightData = new LightData(context);
         lightData.register();
+
 
         frameTime = System.currentTimeMillis();
         initTime = System.currentTimeMillis();
@@ -88,8 +90,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_day), WIDTH, HEIGHT);
-        background.setVector(-5);
+        backgroundDay = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_day) ,WIDTH, HEIGHT);
+        backgroundDay.setVector(-5);
+
+        backgroundNight = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_night) ,WIDTH, HEIGHT);
+        backgroundNight.setVector(-5);
 
         thread = new MainThread(getHolder(), this);
 
@@ -116,14 +121,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             playerPoint.y -= Math.abs(xSpeed* elapsedTime) > 3 ? xSpeed* elapsedTime : 0;
         }
 
-
-        //if(lightData.getLightValue() >= MAX_DAYLIGHT){
-        //    background.setImage(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_night));
-        //}
-        //else{
-        //    background.setImage(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_day));
-        //}
-
         //BOUNDS
         if(playerPoint.x < 0)
             playerPoint.x = 0;
@@ -135,9 +132,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         else if(playerPoint.y > HEIGHT)
             playerPoint.y = HEIGHT;
 
-        background.update();
+        backgroundDay.update();
+        backgroundNight.update();
+
         player.update(playerPoint);
-        //System.out.println(" " + lightData.getLightValue());
     }
 
     @Override
@@ -152,7 +150,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         {
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
-            background.draw(canvas);
+
+            if(lightData.getLightValue() >= MIN_DAYLIGHT)
+                backgroundDay.draw(canvas);
+            else
+                backgroundNight.draw(canvas);
+
+
             player.draw(canvas);
             canvas.restoreToCount(savedState);
         }
