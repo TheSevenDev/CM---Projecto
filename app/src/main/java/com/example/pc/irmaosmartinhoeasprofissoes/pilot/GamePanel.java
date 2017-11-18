@@ -33,6 +33,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private Point playerPoint;
 
     private OrientationData orientationData;
+    private LightData lightData;
+
 
     private long frameTime;//time elapsed between frames
     private long initTime;
@@ -52,6 +54,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         orientationData = new OrientationData(context);
         orientationData.register();
+
+        lightData = new LightData(context);
+        lightData.register();
 
         frameTime = System.currentTimeMillis();
         initTime = System.currentTimeMillis();
@@ -126,7 +131,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         background.update();
         player.update(playerPoint);
-        //System.out.println(playerPoint.x + " , " + playerPoint.y);
+        //System.out.println(" " + lightData.getLightValue());
     }
 
     @Override

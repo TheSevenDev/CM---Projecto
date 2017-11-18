@@ -1,5 +1,6 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
 
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,17 +12,36 @@ import android.hardware.SensorManager;
 
 public class LightData implements SensorEventListener {
     private SensorManager manager;
-    private Sensor accelerometer;
-    private Sensor magnometer;
+    private Sensor light;
+    private Context context;
+    private float lightValue;
+
+
+    public LightData(Context context){
+        manager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
+        light = manager.getDefaultSensor(Sensor.TYPE_LIGHT);
+    }
+
+    public void register(){
+        manager.registerListener(this, light, SensorManager.SENSOR_DELAY_GAME);
+    }
+
 
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-
+        if(event.sensor.getType() == Sensor.TYPE_LIGHT){
+            lightValue = event.values[0];
+            System.out.println("" + event.values[0]);
+        }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    public float getLightValue(){
+        return lightValue;
     }
 }
