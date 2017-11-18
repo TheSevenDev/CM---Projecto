@@ -6,13 +6,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.provider.SyncStateContract;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
-import com.example.pc.irmaosmartinhoeasprofissoes.pilot.Background;
-import com.example.pc.irmaosmartinhoeasprofissoes.pilot.MainThread;
 
 /**
  * Created by Bruno on 17/11/2017.
@@ -25,6 +22,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
+    private final float MAX_DAYLIGHT = 70.0f;
 
     private MainThread thread;
     private Background background;
@@ -90,7 +88,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg), WIDTH, HEIGHT);
+        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_day), WIDTH, HEIGHT);
         background.setVector(-5);
 
         thread = new MainThread(getHolder(), this);
@@ -117,6 +115,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             playerPoint.y -= Math.abs(xSpeed* elapsedTime) > 3 ? xSpeed* elapsedTime : 0;
         }
+
+
+        //if(lightData.getLightValue() >= MAX_DAYLIGHT){
+        //    background.setImage(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_night));
+        //}
+        //else{
+        //    background.setImage(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_day));
+        //}
 
         //BOUNDS
         if(playerPoint.x < 0)

@@ -23,7 +23,7 @@ public class LightData implements SensorEventListener {
     }
 
     public void register(){
-        manager.registerListener(this, light, SensorManager.SENSOR_DELAY_GAME);
+        manager.registerListener(this, light, SensorManager.SENSOR_STATUS_ACCURACY_HIGH);
     }
 
 
