@@ -37,4 +37,5 @@ public class Background
     public void setVector(int dx){
         this.dx = dx;
     }
+    public void setImage(Bitmap image){this.image = image;}
 }

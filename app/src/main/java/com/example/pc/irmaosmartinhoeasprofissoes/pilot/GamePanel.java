@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.provider.SyncStateContract;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -20,21 +23,45 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     //public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     //public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-    public static final int WIDTH = 856;
-    public static final int HEIGHT = 428;
+    public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
+    public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
 
     private MainThread thread;
     private Background background;
 
+    private Player player;
+    private Point playerPoint;
+
+    private OrientationData orientationData;
+
+    private long frameTime;//time elapsed between frames
+    private long initTime;
+
+    private Context context;
+
     public GamePanel(Context context)
     {
         super(context);
+        this.context = context;
 
         //add the callback to the surfaceholder to intercept events
         getHolder().addCallback(this);
 
         //make gamePanel focusable so it can handle events
         setFocusable(true);
+
+        orientationData = new OrientationData(context);
+        orientationData.register();
+
+        frameTime = System.currentTimeMillis();
+        initTime = System.currentTimeMillis();
+
+        Rect playerRect = new Rect(150,150,300,275);
+        player = new Player(playerRect, BitmapFactory.decodeResource(getResources(), R.drawable.martinhopiloto),50, 50, context);
+
+        playerPoint = new Point(170, HEIGHT/3);
+        player.update(playerPoint);
+        player.update(new Point(500, HEIGHT/3));
     }
 
     @Override
@@ -71,7 +98,35 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void update()
     {
+        if(frameTime < initTime)
+        frameTime = initTime;
+
+        int elapsedTime = (int)(System.currentTimeMillis() - frameTime);
+        frameTime = System.currentTimeMillis();
+        if(orientationData.getOrientation() != null && orientationData.getStartOrientation() != null) {
+            float pitch = orientationData.getOrientation()[1] - orientationData.getStartOrientation()[1];    //Y DIRECTION
+            float roll = orientationData.getOrientation()[2] - orientationData.getStartOrientation()[2];     //X DIRECTION
+
+            float xSpeed = 2* roll * WIDTH/800f;
+            float ySpeed = 2* pitch * HEIGHT/800f; //1SECOND TO FULLFILL THE SCREEN
+
+            playerPoint.y -= Math.abs(xSpeed* elapsedTime) > 3 ? xSpeed* elapsedTime : 0;
+        }
+
+        //BOUNDS
+        if(playerPoint.x < 0)
+            playerPoint.x = 0;
+        else if(playerPoint.x > WIDTH)
+            playerPoint.x = WIDTH;
+
+        if(playerPoint.y < 0)
+            playerPoint.y = 0;
+        else if(playerPoint.y > HEIGHT)
+            playerPoint.y = HEIGHT;
+
         background.update();
+        player.update(playerPoint);
+        //System.out.println(playerPoint.x + " , " + playerPoint.y);
     }
 
     @Override
@@ -87,6 +142,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
             background.draw(canvas);
+            player.draw(canvas);
             canvas.restoreToCount(savedState);
         }
     }
