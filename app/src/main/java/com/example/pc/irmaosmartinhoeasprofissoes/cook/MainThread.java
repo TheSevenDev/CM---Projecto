@@ -1,4 +1,4 @@
-package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
+package com.example.pc.irmaosmartinhoeasprofissoes.cook;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;

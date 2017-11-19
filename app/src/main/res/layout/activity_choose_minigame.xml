@@ -59,7 +59,7 @@
         android:layout_height="250dp"
         android:layout_marginLeft="270dp"
         android:layout_marginTop="85dp"
-        android:background="@drawable/round_corner"
+        android:background="@drawable/round_corner_unavailable"
         android:src="@drawable/jose_professor"
         android:text="@string/professor"
         />
@@ -70,7 +70,7 @@
         android:layout_height="25dp"
         android:layout_marginLeft="275dp"
         android:layout_marginTop="320dp"
-        android:background="@color/mainYellow"
+        android:background="@color/unavailableColor"
         android:text="@string/professor"
         android:textColor="@color/titleColor"
         android:textSize="15dp" />

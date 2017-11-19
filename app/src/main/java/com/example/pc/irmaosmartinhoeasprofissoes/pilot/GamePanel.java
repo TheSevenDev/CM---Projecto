@@ -26,8 +26,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private final float MIN_DAYLIGHT = 57.0f; //VERIFICAR QUAL O VALOR ESTIMADO À LUZ DO DIA
 
     private MainThread thread;
-    private Background backgroundDay;
-    private Background backgroundNight;
+    private ScrollingBackground backgroundDay;
+    private ScrollingBackground backgroundNight;
 
     private Player player;
     private Point playerPoint;
@@ -90,10 +90,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        backgroundDay = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_day) ,WIDTH, HEIGHT);
+        backgroundDay = new ScrollingBackground(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_day) ,WIDTH, HEIGHT);
         backgroundDay.setVector(-5);
 
-        backgroundNight = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_night) ,WIDTH, HEIGHT);
+        backgroundNight = new ScrollingBackground(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_night) ,WIDTH, HEIGHT);
         backgroundNight.setVector(-5);
 
         thread = new MainThread(getHolder(), this);

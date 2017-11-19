@@ -4,22 +4,19 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
+import com.example.pc.irmaosmartinhoeasprofissoes.Background;
+
 /**
  * Created by TheSeven on 11/11/2017.
  */
 
-public class Background
+public class ScrollingBackground extends Background
 {
-    private Bitmap image;
+    private int dx;
 
-    private int x, y, width, height, dx;
-
-    public Background(Bitmap res, int w, int h)
+    public ScrollingBackground(Bitmap res, int w, int h)
     {
-        image = Bitmap.createScaledBitmap(res, w, h, false);
-
-        width = w;
-        height = h;
+        super(res, w, h);
     }
 
     public void update()
@@ -38,7 +35,7 @@ public class Background
 
     public void draw(Canvas canvas)
     {
-        canvas.drawBitmap(image, x, y,null);
+        canvas.drawBitmap(super.image, x, y,null);
         if(x < 0){
             canvas.drawBitmap(image,x+GamePanel.WIDTH, y,null);
         }

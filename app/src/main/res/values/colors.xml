@@ -6,4 +6,5 @@
     <color name="titleColor">#3c4143</color>
     <color name="mainBlue">#7ab5c7</color>
     <color name="mainYellow">#FFFECF</color>
+    <color name="unavailableColor">#5D5D4C</color>
 </resources>

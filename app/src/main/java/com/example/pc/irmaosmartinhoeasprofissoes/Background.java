@@ -1,4 +1,4 @@
-package com.example.pc.irmaosmartinhoeasprofissoes.firefighter;
+package com.example.pc.irmaosmartinhoeasprofissoes;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,8 +12,8 @@ import android.graphics.Paint;
 
 public class Background
 {
-    private Bitmap image;
-    private int x, y, width, height, dx;
+    protected Bitmap image;
+    protected int x, y, width, height, dx;
 
     public Background(Bitmap res, int w, int h)
     {
