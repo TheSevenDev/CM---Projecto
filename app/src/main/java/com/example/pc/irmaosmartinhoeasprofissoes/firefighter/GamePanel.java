@@ -66,6 +66,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private double waterMeterValue;
 
     private Pause pause;
+    private GameOver gameOver;
 
     private Activity gameActivity;
 
@@ -119,7 +120,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         populateFireCoords();
         rand = new Random();
         score = 0;
-        timeRemaining = 60;
+        timeRemaining = 3;
         waterMeterValue = 100;
         waterDecrease = Integer.parseInt(getResources().getString(R.string.water_decrease));
         waterGain = Integer.parseInt(getResources().getString(R.string.water_gain));
@@ -137,6 +138,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 */
 
         pause = new Pause(getContext());
+        gameOver = new GameOver(getContext());
 
         thread = new MainThread(getHolder(), this);
 
@@ -152,7 +154,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             float x = event.getX();
             float y = event.getY();
 
-            if(!pause.isPaused())
+            if(!pause.isPaused() && !gameOver.isGameOver())
             {
                 for (Fire f : fires) {
                     if (x >= f.getX() && x < (f.getX() + f.getWidth())
@@ -181,9 +183,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
                 pause.onTouchPauseButton((int)x, (int)y);
             }
-            else
+            else if(pause.isPaused())
             {
                 if(pause.onTouchPauseScreen((int) x, (int) y))
+                    gameActivity.onBackPressed();
+            }
+            else if(gameOver.isGameOver())
+            {
+                int option = gameOver.onTouchPauseScreen((int) x, (int) y);
+
+                if(option == 1)
+                    restartGame();
+                else if(option == 2)
                     gameActivity.onBackPressed();
             }
 
@@ -196,7 +207,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void update()
     {
-        if(!pause.isPaused())
+        if(!pause.isPaused() && !gameOver.isGameOver())
         {
             if(pausedTimeStart != 0)
             {
@@ -258,8 +269,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             checkDespawns();
 
             waterMeter.update();
+
+            if(timeRemaining == 0)
+            {
+                gameOver.setScore(score);
+                gameOver.setGameOver(true);
+            }
         }
-        else
+        else if(pause.isPaused())
         {
             if(pausedTimeStart == 0)
                 pausedTimeStart = System.nanoTime();
@@ -278,9 +295,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         {
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
-            background.draw(canvas, pause.isPaused());
 
-            waterMeter.draw(canvas, pause.isPaused());
+            if(pause.isPaused() || gameOver.isGameOver())
+            {
+                background.draw(canvas, true);
+                waterMeter.draw(canvas, true);
+            }
+            else
+            {
+                background.draw(canvas, false);
+                waterMeter.draw(canvas, false);
+            }
 
             if(!waterMeter.isNoWaterWarning())
                 drawWaterLevel(canvas);
@@ -306,6 +331,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             drawText(canvas);
 
             pause.draw(canvas);
+            gameOver.draw(canvas);
 
             canvas.restoreToCount(savedState);
         }
@@ -396,9 +422,22 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.parseColor("#77B6E4"));
 
-        if(pause.isPaused())
+        if(pause.isPaused() || gameOver.isGameOver())
             paint.setColorFilter(new LightingColorFilter(Color.rgb(123, 123, 123), 0));
 
         canvas.drawRect(r, paint);
+    }
+
+    public void restartGame()
+    {
+        fires = new ArrayList<>();
+        waterDrops = new ArrayList<>();
+        cats = new ArrayList<>();
+        waterMeterValue = 100;
+        timeRemaining = 60;
+        score = 0;
+        timerStart = System.nanoTime();
+        fireStart = System.nanoTime();
+        waterStart = System.nanoTime();
     }
 }
