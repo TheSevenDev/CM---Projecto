@@ -11,6 +11,8 @@ import android.view.SurfaceView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by Bruno on 17/11/2017.
  */
@@ -31,6 +33,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     private Player player;
     private Point playerPoint;
+
+    private ArrayList<Obstacle> obstacles;
+    private long obstacleStartTime;
+    private long ostacleElapsedTime;
 
     private OrientationData orientationData;
     private LightData lightData;
@@ -96,6 +102,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         backgroundNight = new ScrollingBackground(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_night) ,WIDTH, HEIGHT);
         backgroundNight.setVector(-5);
 
+        obstacles = new ArrayList<>();
+        obstacleStartTime = System.nanoTime();
+
+
         thread = new MainThread(getHolder(), this);
 
 
@@ -111,6 +121,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         int elapsedTime = (int)(System.currentTimeMillis() - frameTime);
         frameTime = System.currentTimeMillis();
+
+        long obstaclesElapsed = (System.nanoTime() - obstacleStartTime) / 1000000;
+        if(obstacles.isEmpty()){
+
+            obstacles.add(new Obstacle(BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day),WIDTH + 10, HEIGHT/2,))
+        }
+
         if(orientationData.getOrientation() != null && orientationData.getStartOrientation() != null) {
             float pitch = orientationData.getOrientation()[1] - orientationData.getStartOrientation()[1];    //Y DIRECTION
             float roll = orientationData.getOrientation()[2] - orientationData.getStartOrientation()[2];     //X DIRECTION

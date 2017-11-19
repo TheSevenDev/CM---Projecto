@@ -71,7 +71,4 @@ public class Animation {
         else
             desRect.top = desRect.bottom - (int)(desRect.width()*(1/ whRatio));
     }
-
-
-
 }
