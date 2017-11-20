@@ -71,4 +71,20 @@
     <string name="game_over_restart_option">1</string>
     <string name="game_over_exit_option">2</string>
 
+    <string name="game_over_screen_width_mod">0.65</string>
+    <string name="game_over_screen_height_mod">0.65</string>
+    <string name="game_over_screen_x_mod">0.175</string>
+    <string name="game_over_screen_y_mod">0.175</string>
+
+    <string name="game_over_restart_width_mod">0.25</string>
+    <string name="game_over_restart_height_mod">0.15</string>
+    <string name="game_over_restart_x_mod">0.375</string>
+    <string name="game_over_restart_y_mod">0.40</string>
+
+    <string name="game_over_exit_width_mod">0.25</string>
+    <string name="game_over_exit_height_mod">0.15</string>
+    <string name="game_over_exit_x_mod">0.375</string>
+    <string name="game_over_exit_y_mod">0.60</string>
+
+
 </resources>

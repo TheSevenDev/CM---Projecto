@@ -61,21 +61,21 @@ public class Pause
         {
             canvas.drawBitmap(pauseScreen,
                     (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_screen_x_mod))),
-                    (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_screen_y_mod))), null);
+                    (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.pause_screen_y_mod))), null);
 
             canvas.drawBitmap(resumeButton,
                     (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_resume_x_mod))),
-                    (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_resume_y_mod))), null);
+                    (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.pause_resume_y_mod))), null);
 
             canvas.drawBitmap(exitButton,
                     (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_exit_x_mod))),
-                    (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_exit_y_mod))), null);
+                    (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.pause_exit_y_mod))), null);
         }
         else
         {
             canvas.drawBitmap(pauseButton,
                     (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_button_x_mod))),
-                    (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_button_y_mod))), null);
+                    (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.pause_button_y_mod))), null);
         }
     }
 
@@ -83,9 +83,11 @@ public class Pause
     {
         //resume
         if (x >= (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_resume_x_mod)))
-                && x < ((int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_resume_x_mod))) + pauseButton.getWidth())
+                && x < ((int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_resume_x_mod)))
+                + (int)(GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.pause_resume_width_mod))))
                 && y >= (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.pause_resume_y_mod)))
-                && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.pause_resume_y_mod))) + pauseButton.getHeight()))
+                && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.pause_resume_y_mod)))
+                + (int)(GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.pause_resume_height_mod)))))
         {
             paused = false;
             return false;
@@ -93,9 +95,11 @@ public class Pause
 
         //exit
         if (x >= (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_exit_x_mod)))
-                && x < ((int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_exit_x_mod))) + exitButton.getWidth())
+                && x < ((int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_exit_x_mod)))
+                + (int)(GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.pause_exit_width_mod))))
                 && y >= (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.pause_exit_y_mod)))
-                && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.pause_exit_y_mod))) + exitButton.getHeight()))
+                && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.pause_exit_y_mod)))
+                + (int)(GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.pause_exit_height_mod)))))
         {
             return true;
         }

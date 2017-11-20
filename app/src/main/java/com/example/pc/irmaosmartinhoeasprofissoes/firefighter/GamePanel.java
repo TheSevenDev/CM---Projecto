@@ -2,6 +2,7 @@ package com.example.pc.irmaosmartinhoeasprofissoes.firefighter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -115,11 +116,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         fireX = new ArrayList<>();
         fireY = new ArrayList<>();
-        populateFireCoords();
 
+        populateFireCoords();
         rand = new Random();
         waterDecrease = Integer.parseInt(getResources().getString(R.string.water_decrease));
         waterGain = Integer.parseInt(getResources().getString(R.string.water_gain));
+
 
         /*
         fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire),
@@ -217,7 +219,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             if (fireElapsed > 3000)
             {
                 //put here chance of cat
-                int i = rand.nextInt(fires.size());
+                int i = rand.nextInt(fireX.size());
 
                 fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fogo),
                         (int) (Double.parseDouble(getResources().getString(R.string.fire_sprite_width)) * WIDTH),
@@ -429,7 +431,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         waterMeterValue = 100;
         timeRemaining = 60;
         score = 0;
-        timerStart = System.nanoTime();
+        //timerStart = System.nanoTime();
         fireStart = System.nanoTime();
         waterStart = System.nanoTime();
     }
