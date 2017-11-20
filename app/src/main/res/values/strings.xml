@@ -1,4 +1,5 @@
 <resources>
+    //+++++++++++++++++++ MENUS ++++++++++++++++++++++++++++++++++++++
     <string name="app_name">Irmãos Martinho e as profissoes</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="choosegender_title">Escolhe com quem queres jogar!</string>
@@ -11,7 +12,28 @@
     <string name="choose_minigame_title">Escolhe a Profissão!</string>
     <string name="back_to_menu">Voltar ao Menu</string>
 
-    //+++++++++++++++++++ BOMBEIRO ++++++++++++++++++++++++++++++++++++++
+    //+++++++++++++++++++ PAUSE SCEEN ++++++++++++++++++++++++++++++++++++++
+    <string name="pause_button_width_mod">0.07</string>
+    <string name="pause_button_height_mod">0.09</string>
+    <string name="pause_button_x_mod">0.92</string>
+    <string name="pause_button_y_mod">0.05</string>
+
+    <string name="pause_screen_width_mod">0.7</string>
+    <string name="pause_screen_height_mod">0.7</string>
+    <string name="pause_screen_x_mod">0.15</string>
+    <string name="pause_screen_y_mod">0.15</string>
+
+    <string name="pause_resume_width_mod">0.25</string>
+    <string name="pause_resume_height_mod">0.15</string>
+    <string name="pause_resume_x_mod">0.375</string>
+    <string name="pause_resume_y_mod">0.40</string>
+
+    <string name="pause_exit_width_mod">0.25</string>
+    <string name="pause_exit_height_mod">0.15</string>
+    <string name="pause_exit_x_mod">0.375</string>
+    <string name="pause_exit_y_mod">0.60</string>
+
+    //+++++++++++++++++++ FIREFIGHTER ++++++++++++++++++++++++++++++++++++++
     <string name="fire_sprite_width">0.072</string>
     <string name="fire_sprite_height">0.1</string>
     <string name="waterdrop_sprite_width">0.032</string>
@@ -39,5 +61,14 @@
     <string name="water_gain">20</string>
     <string name="water_disappear_time">2</string>
     <string name="fire_disappear_time">8</string>
+
+    <string name="water_bar_height_mod">0.2675</string>
+    <string name="water_bar_bottom_mod">0.8674</string>
+    <string name="water_bar_left_mod">0.052</string>
+    <string name="water_bar_right_mod">0.078</string>
+
+
+    <string name="game_over_restart_option">1</string>
+    <string name="game_over_exit_option">2</string>
 
 </resources>
