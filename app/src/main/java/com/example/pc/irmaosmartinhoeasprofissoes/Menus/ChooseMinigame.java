@@ -63,6 +63,11 @@ public class ChooseMinigame extends GeneralActivity {
     }
 
     public void changeToMale(View view){
+        SharedPreferences sharedPref = ChooseMinigame.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("gender", 0);
+        editor.apply();
+
         chooseMale.setImageAlpha(255);
         chooseFemale.setImageAlpha(127);
 
@@ -74,6 +79,11 @@ public class ChooseMinigame extends GeneralActivity {
     }
 
     public void changeToFemale(View view){
+        SharedPreferences sharedPref = ChooseMinigame.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("gender", 1);
+        editor.apply();
+
         chooseFemale.setImageAlpha(255);
         chooseMale.setImageAlpha(127);
 

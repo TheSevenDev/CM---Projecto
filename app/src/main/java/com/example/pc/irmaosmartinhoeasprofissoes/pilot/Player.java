@@ -23,6 +23,9 @@ public class Player extends GameObject {
     private Animation idle, walkUp, walkDown;
     private AnimationManager animationManager;
 
+    public int score;
+
+    private long startTime;
 
     public Player(Rect rectangle, Bitmap res, int x, int y, Context context) {
         this.rectangle = rectangle;
@@ -45,6 +48,9 @@ public class Player extends GameObject {
         //walkUp = walkDown = idle;
 
         animationManager =  new AnimationManager(new Animation[]{idle});
+
+        score = 0;
+        startTime = System.nanoTime();
     }
 
 
@@ -55,6 +61,12 @@ public class Player extends GameObject {
     }
 
     public void update(Point point) {
+        long elapsed = (System.nanoTime() - startTime) / 1000000;
+        if(elapsed > 100) {
+            score++;
+            startTime = System.nanoTime();
+        }
+
         float oldLeft = rectangle.left;
 
         rectangle.set(point.x - rectangle.width() / 2, point.y - rectangle.height() / 2, point.x + rectangle.width() / 2, point.y + rectangle.height() / 2);
@@ -72,5 +84,12 @@ public class Player extends GameObject {
 
         animationManager.playAnim(state);
         animationManager.update();
+    }
+    public int getScore(){
+        return score;
+    }
+
+    public void resetScore(){
+        score = 0;
     }
 }

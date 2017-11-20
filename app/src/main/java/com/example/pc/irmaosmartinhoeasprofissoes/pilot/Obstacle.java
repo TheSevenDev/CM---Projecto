@@ -25,8 +25,9 @@ public class Obstacle extends GameObject{
     private Animation animation = new Animation();
 
     private Bitmap spritesheet;
+    private Bitmap image[];
 
-    public Obstacle(Bitmap res, int x, int y,int w, int h, int s,int numFrames, Context context) {
+    public Obstacle(Bitmap res, int x, int y,int w, int h, int s,int numFrames) {
         this.x = x;
         this.y = y;
         this.width = w;
@@ -38,12 +39,12 @@ public class Obstacle extends GameObject{
         if(speed >= SPEED_CAP)
             speed = SPEED_CAP;
 
-        Bitmap[] image = new Bitmap[numFrames];
+        image = new Bitmap[numFrames];
 
         spritesheet = res;
 
         for(int i= 0 ;i < image.length; i++){
-            image[i] = Bitmap.createBitmap(spritesheet, 0, i*height, width,height);
+            image[i] = Bitmap.createBitmap(spritesheet, 0, i, width,height);
         }
 
         animation.setFrames(image);
