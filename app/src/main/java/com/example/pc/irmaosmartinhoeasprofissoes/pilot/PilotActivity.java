@@ -1,14 +1,18 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.*;
 
 public class PilotActivity extends AppCompatActivity {
+
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +34,22 @@ public class PilotActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
         setContentView(new GamePanel(this));
+
+        mp = MediaPlayer.create(this, R.raw.pilot);
+        mp.setLooping(true);
+        mp.setVolume(100, 100);
+        mp.start();
+    }
+
+    @Override
+    protected void onPause() {
+        mp.stop();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        mp.start();
+        super.onResume();
     }
 }

@@ -2,10 +2,12 @@ package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.os.Vibrator;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -28,12 +30,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
 
+    private final int GRAVITY = 9;
     public final int MIN_HEIGHT_BOUND = 20;
     public final int MAX_HEIGHT_BOUND = (HEIGHT - 150);
 
 
     private final float MIN_DAYLIGHT = 57.0f; //VERIFICAR QUAL O VALOR ESTIMADO À LUZ DO DIA
-
     private MainThread thread;
     private ScrollingBackground backgroundDay;
     private ScrollingBackground backgroundNight;
@@ -141,6 +143,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             playerPoint.y -= Math.abs(xSpeed* elapsedTime) > 3 ? xSpeed* elapsedTime : 0;
         }
 
+        playerPoint.y+=GRAVITY;
         //BOUNDS
         if(playerPoint.x < 0)
             playerPoint.x = 0;
@@ -161,21 +164,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         long obstaclesElapsed = (System.nanoTime() - obstacleStartTime) / 1000000;
         if(obstaclesElapsed > 1000) {
             int randomY = (int)(rand.nextInt(MAX_HEIGHT_BOUND - 90) + 90);
+            Bitmap bird = BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day);
+            Bitmap madBird = BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day_mad);
+
             if (obstacles.isEmpty()) {
-                obstacles.add(new Obstacle(BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day), WIDTH + 10, randomY, 90, 85, player.getScore(), 7));
+                obstacles.add(new Obstacle(bird,madBird, WIDTH + 10, randomY, 68, 70, player.getScore(), 7));
             } else {
-                obstacles.add(new Obstacle(BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day),WIDTH + 10, randomY,90,85, player.getScore(), 7));
+                obstacles.add(new Obstacle(bird,madBird,WIDTH + 10, randomY,68,70, player.getScore(), 7));
             }
             //reset timer
             obstacleStartTime = System.nanoTime();
-        }
-
-        for(Obstacle ob : obstacles){
-            ob.update();
-            if(collision(ob,player)){
-                //obstacles.remove()
-                System.out.println("REBENTOU");
-            }
         }
 
         Iterator<Obstacle> it = obstacles.iterator();
