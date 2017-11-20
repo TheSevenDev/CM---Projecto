@@ -111,22 +111,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 (int)(Double.parseDouble(getResources().getString(R.string.water_meter_x)) * WIDTH),
                 (int)(Double.parseDouble(getResources().getString(R.string.water_meter_y)) * HEIGHT));
 
-        fires = new ArrayList<>();
-        cats = new ArrayList<>();
-        waterDrops = new ArrayList<>();
+        restartGame();
+
         fireX = new ArrayList<>();
         fireY = new ArrayList<>();
-
         populateFireCoords();
+
         rand = new Random();
-        score = 0;
-        timeRemaining = 3;
-        waterMeterValue = 100;
         waterDecrease = Integer.parseInt(getResources().getString(R.string.water_decrease));
         waterGain = Integer.parseInt(getResources().getString(R.string.water_gain));
-
-        fireStart = System.nanoTime();
-        waterStart = System.nanoTime();
 
         /*
         fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fire),
@@ -192,9 +185,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             {
                 int option = gameOver.onTouchPauseScreen((int) x, (int) y);
 
-                if(option == 1)
+                if(option == Integer.parseInt(getResources().getString(R.string.game_over_restart_option)))
                     restartGame();
-                else if(option == 2)
+                else if(option == Integer.parseInt(getResources().getString(R.string.game_over_exit_option)))
                     gameActivity.onBackPressed();
             }
 
@@ -224,7 +217,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             if (fireElapsed > 3000)
             {
                 //put here chance of cat
-                int i = rand.nextInt(17);
+                int i = rand.nextInt(fires.size());
 
                 fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fogo),
                         (int) (Double.parseDouble(getResources().getString(R.string.fire_sprite_width)) * WIDTH),
@@ -409,14 +402,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void drawWaterLevel(Canvas canvas)
     {
-        int barHeight = (int)(0.2675*HEIGHT);
-        int barBottom = (int)(0.8674*HEIGHT);
+        int barHeight = (int)(Double.parseDouble(getResources().getString(R.string.water_bar_height_mod))*HEIGHT);
+        int barBottom = (int)(Double.parseDouble(getResources().getString(R.string.water_bar_bottom_mod))*HEIGHT);
         int barDifference = (int)((barBottom - barHeight)*(1-(waterMeterValue/100)));
 
         Paint paint = new Paint();
-        Rect r = new Rect((int)(0.052*WIDTH),
+        Rect r = new Rect((int)(Double.parseDouble(getResources().getString(R.string.water_bar_left_mod))*WIDTH),
                 barHeight + barDifference,
-                (int)(0.078*WIDTH),
+                (int)(Double.parseDouble(getResources().getString(R.string.water_bar_right_mod))*WIDTH),
                 barBottom);
 
         paint.setStyle(Paint.Style.FILL);
