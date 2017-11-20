@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBlue"
+    android:orientation="horizontal">
+
+    <!-- Caixa Bombeiro   -->
+    <ImageButton
+        android:id="@+id/imgbtn_firefighter"
+        android:layout_width="100dp"
+        android:layout_height="250dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="85dp"
+        android:onClick="fireFighterGame"
+        android:src="@drawable/jose_bombeiro"
+        android:background="@drawable/round_corner"
+        android:text="@string/bombeiro"
+        />
+
+    <Button
+        android:id="@+id/desc_firefighter"
+        android:layout_width="80dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="320dp"
+        android:background="@color/mainYellow"
+        android:text="@string/bombeiro"
+        android:textColor="@color/titleColor"
+        android:textSize="15dp" />
+
+    <!-- Caixa Pasteleiro   -->
+    <ImageButton
+        android:id="@+id/imgbtn_baker"
+        android:layout_width="100dp"
+        android:layout_height="250dp"
+        android:layout_marginLeft="165dp"
+        android:layout_marginTop="85dp"
+        android:background="@drawable/round_corner"
+        android:src="@drawable/jose_pasteleiro"
+        android:text="@string/pasteleiro" />
+
+    <Button
+        android:id="@+id/desc_baker"
+        android:layout_width="89dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="320dp"
+        android:background="@color/mainYellow"
+        android:text="@string/pasteleiro"
+        android:textColor="@color/titleColor"
+        android:textSize="15dp" />
+
+
+    <!-- Caixa Professor   -->
+    <ImageButton
+        android:id="@+id/imgbtn_teacher"
+        android:layout_width="100dp"
+        android:layout_height="250dp"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="85dp"
+        android:background="@drawable/round_corner_unavailable"
+        android:src="@drawable/jose_professor"
+        android:text="@string/professor"
+        />
+
+    <Button
+        android:id="@+id/desc_teacher"
+        android:layout_width="89dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="275dp"
+        android:layout_marginTop="320dp"
+        android:background="@color/unavailableColor"
+        android:text="@string/professor"
+        android:textColor="@color/titleColor"
+        android:textSize="15dp" />
+
+    <!-- Caixa Pintor   -->
+    <ImageButton
+        android:id="@+id/imgbtn_painter"
+        android:layout_width="100dp"
+        android:layout_height="250dp"
+        android:layout_marginLeft="375dp"
+        android:layout_marginTop="85dp"
+        android:background="@drawable/round_corner"
+        android:src="@drawable/jose_pintor"
+        android:text="@string/pintor"
+        />
+
+    <Button
+        android:id="@+id/desc_painter"
+        android:layout_width="89dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="380dp"
+        android:layout_marginTop="320dp"
+        android:background="@color/mainYellow"
+        android:text="@string/pintor"
+        android:textColor="@color/titleColor"
+        android:textSize="15dp" />
+
+    <!-- Caixa Aviador   -->
+    <ImageButton
+        android:id="@+id/imgbtn_pilot"
+        android:layout_width="100dp"
+        android:layout_height="250dp"
+        android:layout_marginLeft="480dp"
+        android:layout_marginTop="85dp"
+        android:background="@drawable/round_corner"
+        android:src="@drawable/jose_piloto"
+        android:onClick="pilotGame"
+        android:text="@string/aviador"
+        />
+
+    <Button
+        android:id="@+id/desc_pilot"
+        android:layout_width="89dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="485dp"
+        android:layout_marginTop="320dp"
+        android:background="@color/mainYellow"
+        android:text="@string/aviador"
+        android:textColor="@color/titleColor"
+        android:textSize="15dp" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/choose_minigame_title"
+        android:textColor="@color/titleColor"
+        android:textSize="20dp" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="445dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/mainYellow"
+        android:onClick="backToMainMenu"
+        android:text="@string/back_to_menu"
+        android:textColor="@color/titleColor"
+        android:textSize="15dp" />
+
+
+    <ImageView
+        android:id="@+id/img_chooseMale"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="15dp"
+        android:onClick="changeToMale"
+        android:src="@drawable/jose_face" />
+
+    <ImageView
+        android:id="@+id/img_chooseFemale"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        android:onClick="changeToFemale"
+        android:src="@drawable/maria_face" />
+
+</RelativeLayout>

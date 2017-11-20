@@ -3,6 +3,8 @@ package com.example.pc.irmaosmartinhoeasprofissoes.firefighter;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
+import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GamePanel;
+
 /**
  * Created by Diogo on 10/11/2017.
  */
@@ -56,8 +58,6 @@ public class MainThread extends Thread
             }
 
 
-
-
             timeMillis = (System.nanoTime() - startTime) / 1000000;
             waitTime = targetTime-timeMillis;
 
@@ -72,7 +72,6 @@ public class MainThread extends Thread
                 averageFPS = 1000/((totalTime/frameCount)/1000000);
                 frameCount =0;
                 totalTime = 0;
-                System.out.println(averageFPS);
             }
         }
     }
