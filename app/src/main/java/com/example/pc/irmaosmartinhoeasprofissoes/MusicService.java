@@ -1,8 +1,10 @@
 package com.example.pc.irmaosmartinhoeasprofissoes;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
@@ -19,6 +21,7 @@ public class MusicService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
 
     @Override
     public void onCreate() {
@@ -39,5 +42,11 @@ public class MusicService extends Service {
     public void onDestroy() {
         mp.stop();
         super.onDestroy();
+    }
+
+    public static void playSound(Context context, int uri)
+    {
+        MediaPlayer mp = MediaPlayer.create(context, uri);
+        mp.start();
     }
 }

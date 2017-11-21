@@ -11,14 +11,17 @@ import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.Background;
+import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.Pause;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -71,6 +74,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     private Activity gameActivity;
 
+    private MediaPlayer musicBackground;
+    private MediaPlayer fireSound;
+
     public GamePanel(Context context, Activity activity)
     {
         super(context);
@@ -101,6 +107,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             }catch(InterruptedException e){e.printStackTrace();}
         }
+
+        musicBackground.stop();
+        fireSound.stop();
     }
 
     @Override
@@ -111,6 +120,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 (int)(Double.parseDouble(getResources().getString(R.string.water_meter_sprite_height)) * HEIGHT),
                 (int)(Double.parseDouble(getResources().getString(R.string.water_meter_x)) * WIDTH),
                 (int)(Double.parseDouble(getResources().getString(R.string.water_meter_y)) * HEIGHT));
+
+        musicBackground = MediaPlayer.create(getContext(), R.raw.firefighter);
+        musicBackground.start();
+        musicBackground.setLooping(true);
+
+        fireSound = MediaPlayer.create(getContext(), R.raw.fire);
+        fireSound.setLooping(true);
 
         restartGame();
 
@@ -170,6 +186,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                     if (x >= w.getX() && x < (w.getX() + w.getWidth())
                             && y >= w.getY() && y < (w.getY() + w.getHeight())) {
                         waterDrops.remove(w);
+                        MusicService.playSound(getContext(), R.raw.waterdrop);
                         increaseWater();
 
                         return true;
@@ -204,6 +221,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     {
         if(!pause.isPaused() && !gameOver.isGameOver())
         {
+            if(!musicBackground.isPlaying())
+            {
+                musicBackground.start();
+            }
+
+            if(!fireSound.isPlaying() && fires.size() > 0)
+            {
+                fireSound.start();
+            }
+
             if(pausedTimeStart != 0)
             {
                 pausedTimeFire = System.nanoTime() - pausedTimeStart;
@@ -228,6 +255,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
                 fireStart = System.nanoTime();
                 pausedTimeFire = 0;
+
+                if(fires.size() == 1)
+                    fireSound.start();
             }
 
             if (timerElapsed > 1000) {
@@ -269,10 +299,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             {
                 gameOver.setScore(score);
                 gameOver.setGameOver(true);
+                musicBackground.pause();
+                fireSound.pause();
             }
         }
         else if(pause.isPaused())
         {
+            if(musicBackground.isPlaying())
+                musicBackground.pause();
+
+            if(fireSound.isPlaying())
+                fireSound.pause();
+
             if(pausedTimeStart == 0)
                 pausedTimeStart = System.nanoTime();
         }
@@ -400,6 +438,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             if(f.isDespawn())
                 fires.remove(f);
         }
+
+        if(fires.size() == 0)
+            fireSound.pause();
     }
 
     public void drawWaterLevel(Canvas canvas)
@@ -434,5 +475,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         //timerStart = System.nanoTime();
         fireStart = System.nanoTime();
         waterStart = System.nanoTime();
+
+
+
+
     }
 }
