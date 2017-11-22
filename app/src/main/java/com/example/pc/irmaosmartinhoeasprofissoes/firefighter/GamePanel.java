@@ -43,19 +43,27 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private MainThread thread;
     private Background background;
     private WaterMeter waterMeter;
+    private Pause pause;
+    private GameOver gameOver;
+    private Activity gameActivity;
+    private MediaPlayer musicBackground;
 
     private ArrayList<Fire> fires;
-    private ArrayList<Cat> cats;
-    private ArrayList<Waterdrop> waterDrops;
-
     private ArrayList<Integer> fireX;
     private ArrayList<Integer> fireY;
+
+    private ArrayList<Cat> cats;
+    private ArrayList<Integer> catX;
+    private ArrayList<Integer> catY;
+
+    private ArrayList<Waterdrop> waterDrops;
 
     private Random rand;
 
     private int score;
     private int waterDecrease;
     private int waterGain;
+    private double waterMeterValue;
 
     private int timeRemaining;
     private long timerStart;
@@ -66,15 +74,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private long pausedTimeFire;
     private long pausedTimeWater;
     private long pausedTimeTimer;
-
-    private double waterMeterValue;
-
-    private Pause pause;
-    private GameOver gameOver;
-
-    private Activity gameActivity;
-
-    private MediaPlayer musicBackground;
 
     public GamePanel(Context context, Activity activity)
     {
@@ -127,29 +126,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         fireX = new ArrayList<>();
         fireY = new ArrayList<>();
+        catX = new ArrayList<>();
+        catY = new ArrayList<>();
 
         populateFireCoords();
+        populateCatCoords();
         rand = new Random();
         waterDecrease = Integer.parseInt(getResources().getString(R.string.water_decrease));
         waterGain = Integer.parseInt(getResources().getString(R.string.water_gain));
-
-        cats.add(new Cat(BitmapFactory.decodeResource(getResources(), R.drawable.gato),
-                (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_width)) * WIDTH),
-                (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_height)) * HEIGHT),
-                (int) (Double.parseDouble(getResources().getString(R.string.cat_spawn_x1)) * WIDTH),
-                (int) (Double.parseDouble(getResources().getString(R.string.cat_spawn_y1)) * HEIGHT), getContext()));
-
-        cats.add(new Cat(BitmapFactory.decodeResource(getResources(), R.drawable.gato),
-                (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_width)) * WIDTH),
-                (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_height)) * HEIGHT),
-                (int) (Double.parseDouble(getResources().getString(R.string.cat_spawn_x2)) * WIDTH),
-                (int) (Double.parseDouble(getResources().getString(R.string.cat_spawn_y2)) * HEIGHT), getContext()));
-
-        cats.add(new Cat(BitmapFactory.decodeResource(getResources(), R.drawable.gato),
-                (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_width)) * WIDTH),
-                (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_height)) * HEIGHT),
-                (int) (Double.parseDouble(getResources().getString(R.string.cat_spawn_x3)) * WIDTH),
-                (int) (Double.parseDouble(getResources().getString(R.string.cat_spawn_y3)) * HEIGHT), getContext()));
 
         pause = new Pause(getContext());
         gameOver = new GameOver(getContext());
@@ -170,7 +154,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             if(!pause.isPaused() && !gameOver.isGameOver())
             {
-                for (Fire f : fires) {
+                for (Fire f : fires)
+                {
                     if (x >= f.getX() && x < (f.getX() + f.getWidth())
                             && y >= f.getY() && y < (f.getY() + f.getHeight())) {
                         if (waterMeterValue >= waterDecrease) {
@@ -186,12 +171,26 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                     }
                 }
 
-                for (Waterdrop w : waterDrops) {
+                for (Waterdrop w : waterDrops)
+                {
                     if (x >= w.getX() && x < (w.getX() + w.getWidth())
                             && y >= w.getY() && y < (w.getY() + w.getHeight())) {
                         waterDrops.remove(w);
                         MusicService.playSound(getContext(), R.raw.waterdrop);
                         increaseWater();
+
+                        return true;
+                    }
+                }
+
+                for (Cat c : cats)
+                {
+                    if (x >= c.getX() && x < (c.getX() + c.getWidth())
+                            && y >= c.getY() && y < (c.getY() + c.getHeight()))
+                    {
+                            cats.remove(c);
+                            addScore(Integer.parseInt(getResources().getString(R.string.cat_score)));
+                            MusicService.playSound(getContext(), R.raw.cat);
 
                         return true;
                     }
@@ -208,9 +207,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             {
                 int option = gameOver.onTouchPauseScreen((int) x, (int) y);
 
-                //if(option == Integer.parseInt(getResources().getString(R.string.game_over_restart_option)))
-                //restartGame();
-                if(option == Integer.parseInt(getResources().getString(R.string.game_over_exit_option)))
+                if(option == Integer.parseInt(getResources().getString(R.string.game_over_restart_option)))
+                    restartGame();
+                else if(option == Integer.parseInt(getResources().getString(R.string.game_over_exit_option)))
                     gameActivity.onBackPressed();
             }
 
@@ -244,13 +243,29 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             if (fireElapsed > 3000)
             {
-                //put here chance of cat
-                int i = rand.nextInt(fireX.size());
+                int chance = rand.nextInt(100);
+                int i;
 
-                fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fogo),
-                        (int) (Double.parseDouble(getResources().getString(R.string.fire_sprite_width)) * WIDTH),
-                        (int) (Double.parseDouble(getResources().getString(R.string.fire_sprite_height)) * HEIGHT),
-                        fireX.get(i), fireY.get(i), getContext()));
+                if(chance > 25)
+                {
+                    i = rand.nextInt(fireX.size());
+
+                    fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fogo),
+                             (int) (Double.parseDouble(getResources().getString(R.string.fire_sprite_width)) * WIDTH),
+                             (int) (Double.parseDouble(getResources().getString(R.string.fire_sprite_height)) * HEIGHT),
+                             fireX.get(i), fireY.get(i), getContext()));
+
+                }
+                else
+                {
+                    i = rand.nextInt(catX.size());
+
+                    cats.add(new Cat(BitmapFactory.decodeResource(getResources(), R.drawable.gato),
+                            (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_width)) * WIDTH),
+                            (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_height)) * HEIGHT),
+                            catX.get(i), catY.get(i), getContext()));
+
+                }
 
                 fireStart = System.nanoTime();
                 pausedTimeFire = 0;
@@ -295,11 +310,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             if(timeRemaining == 0)
             {
+                fires.clear();
+                cats.clear();
+                waterDrops.clear();
                 gameOver.setScore(score);
                 gameOver.setGameOver(true);
                 musicBackground.pause();
                 MusicService.playSound(getContext(), R.raw.victory);
-                restartGame();
             }
         }
         else if(pause.isPaused())
@@ -338,6 +355,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             if(!waterMeter.isNoWaterWarning())
                 drawWaterLevel(canvas);
+
+            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.clock),
+                    (int)(0.05*WIDTH), (int)(0.1*HEIGHT),null);
 
             //draw fires
             for(Fire fire: fires)
@@ -384,6 +404,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+    public void populateCatCoords()
+    {
+        catX.add((int)(Double.parseDouble(getResources().getString(R.string.cat_spawn_x1))*WIDTH));
+        catX.add((int)(Double.parseDouble(getResources().getString(R.string.cat_spawn_x2))*WIDTH));
+        catX.add((int)(Double.parseDouble(getResources().getString(R.string.cat_spawn_x3))*WIDTH));
+
+        catY.add((int)(Double.parseDouble(getResources().getString(R.string.cat_spawn_y1))*HEIGHT));
+        catY.add((int)(Double.parseDouble(getResources().getString(R.string.cat_spawn_y2))*HEIGHT));
+        catY.add((int)(Double.parseDouble(getResources().getString(R.string.cat_spawn_y3))*HEIGHT));
+    }
+
     public void addScore(int score)
     {
         this.score += score;
@@ -396,7 +427,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         paint.setTextSize(30);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         canvas.drawText("SCORE: " + score, 0.02f*WIDTH, 0.05f*HEIGHT, paint);
-        canvas.drawText("TIME: " + timeRemaining, 0.02f*WIDTH, 0.10f*HEIGHT, paint);
+        canvas.drawText("" + timeRemaining, 0.10f*WIDTH, 0.10f*HEIGHT, paint);
     }
 
     public void decreaseWater()
@@ -428,6 +459,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 fires.remove(f);
         }
 
+        for(Cat c : cats)
+        {
+            c.update(pausedTimeFire);
+            if(c.isDespawn())
+                cats.remove(c);
+        }
+
     }
 
     public void drawWaterLevel(Canvas canvas)
@@ -457,14 +495,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         waterDrops = new ArrayList<>();
         cats = new ArrayList<>();
         waterMeterValue = 100;
-        timeRemaining = 60;
+        timeRemaining = 5;
         score = 0;
         //timerStart = System.nanoTime();
         fireStart = System.nanoTime();
         waterStart = System.nanoTime();
-
-
-
 
     }
 }

@@ -13,25 +13,25 @@
     <string name="back_to_menu">Voltar ao Menu</string>
 
     //+++++++++++++++++++ PAUSE SCEEN ++++++++++++++++++++++++++++++++++++++
-    <string name="pause_button_width_mod">0.07</string>
+    <string name="pause_button_width_mod">0.09</string>
     <string name="pause_button_height_mod">0.09</string>
-    <string name="pause_button_x_mod">0.92</string>
-    <string name="pause_button_y_mod">0.05</string>
+    <string name="pause_button_x_mod">0.85</string>
+    <string name="pause_button_y_mod">0.1</string>
 
     <string name="pause_screen_width_mod">0.7</string>
     <string name="pause_screen_height_mod">0.7</string>
     <string name="pause_screen_x_mod">0.15</string>
     <string name="pause_screen_y_mod">0.15</string>
 
-    <string name="pause_resume_width_mod">0.25</string>
-    <string name="pause_resume_height_mod">0.15</string>
-    <string name="pause_resume_x_mod">0.375</string>
-    <string name="pause_resume_y_mod">0.40</string>
+    <string name="pause_resume_width_mod">0.1</string>
+    <string name="pause_resume_height_mod">0.1</string>
+    <string name="pause_resume_x_mod">0.45</string>
+    <string name="pause_resume_y_mod">0.45</string>
 
-    <string name="pause_exit_width_mod">0.25</string>
-    <string name="pause_exit_height_mod">0.15</string>
-    <string name="pause_exit_x_mod">0.375</string>
-    <string name="pause_exit_y_mod">0.60</string>
+    <string name="pause_exit_width_mod">0.1</string>
+    <string name="pause_exit_height_mod">0.1</string>
+    <string name="pause_exit_x_mod">0.45</string>
+    <string name="pause_exit_y_mod">0.58</string>
 
     //+++++++++++++++++++ FIREFIGHTER ++++++++++++++++++++++++++++++++++++++
     <string name="fire_sprite_width">0.072</string>
@@ -70,6 +70,7 @@
     <string name="water_gain">20</string>
     <string name="water_disappear_time">2</string>
     <string name="fire_disappear_time">8</string>
+    <string name="cat_disappear_time">3</string>
 
     <string name="water_bar_height_mod">0.2675</string>
     <string name="water_bar_bottom_mod">0.8674</string>
@@ -85,13 +86,13 @@
     <string name="game_over_screen_x_mod">0.175</string>
     <string name="game_over_screen_y_mod">0.175</string>
 
-    <string name="game_over_restart_width_mod">0.25</string>
-    <string name="game_over_restart_height_mod">0.15</string>
+    <string name="game_over_restart_width_mod">0.1</string>
+    <string name="game_over_restart_height_mod">0.1</string>
     <string name="game_over_restart_x_mod">0.375</string>
     <string name="game_over_restart_y_mod">0.40</string>
 
-    <string name="game_over_exit_width_mod">0.25</string>
-    <string name="game_over_exit_height_mod">0.15</string>
+    <string name="game_over_exit_width_mod">0.1</string>
+    <string name="game_over_exit_height_mod">0.1</string>
     <string name="game_over_exit_x_mod">0.375</string>
     <string name="game_over_exit_y_mod">0.60</string>
 

@@ -32,11 +32,11 @@ public class GameOver
                 (int)(GamePanel.WIDTH*Double.parseDouble(context.getResources().getString(R.string.game_over_screen_width_mod))),
                 (int)(GamePanel.HEIGHT*Double.parseDouble(context.getResources().getString(R.string.game_over_screen_height_mod))), false);
 
-        restartButton = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.play),
+        restartButton = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.restart),
                 (int)(GamePanel.WIDTH*Double.parseDouble(context.getResources().getString(R.string.game_over_restart_width_mod))),
                 (int)(GamePanel.HEIGHT*Double.parseDouble(context.getResources().getString(R.string.game_over_restart_height_mod))), false);
 
-        exitButton = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.play),
+        exitButton = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.exit),
                 (int)(GamePanel.WIDTH*Double.parseDouble(context.getResources().getString(R.string.game_over_exit_width_mod))),
                 (int)(GamePanel.HEIGHT*Double.parseDouble(context.getResources().getString(R.string.game_over_exit_height_mod))), false);
 

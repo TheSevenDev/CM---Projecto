@@ -25,7 +25,7 @@ public class Pause
     {
         this.context = context;
 
-        pauseButton = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.pause_sign),
+        pauseButton = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.pause),
                 (int)(GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.pause_button_width_mod))),
                 (int)(GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.pause_button_height_mod))), false);
 
@@ -39,7 +39,7 @@ public class Pause
                 (int)(GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.pause_resume_width_mod))),
                 (int)(GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.pause_resume_height_mod))), false);
 
-        exitButton = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.play),
+        exitButton = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.exit),
                 (int)(GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.pause_exit_width_mod))),
                 (int)(GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.pause_exit_height_mod))), false);
 
