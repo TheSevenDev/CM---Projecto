@@ -133,16 +133,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         waterDecrease = Integer.parseInt(getResources().getString(R.string.water_decrease));
         waterGain = Integer.parseInt(getResources().getString(R.string.water_gain));
 
-
-
-        fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fogo),
-                (int)(Double.parseDouble(getResources().getString(R.string.fire_sprite_width))*WIDTH),
-                (int)(Double.parseDouble(getResources().getString(R.string.fire_sprite_height))*HEIGHT),
-                (int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_x1))*WIDTH),
-                (int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y1))*HEIGHT), getContext()));
-
-
-
         pause = new Pause(getContext());
         gameOver = new GameOver(getContext());
 
@@ -234,8 +224,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             long timerElapsed = (System.nanoTime() - timerStart - pausedTimeTimer) / 1000000;
             long waterElapsed = (System.nanoTime() - waterStart - pausedTimeWater) / 1000000;
 
-
-            /*
             if (fireElapsed > 3000)
             {
                 //put here chance of cat
@@ -250,7 +238,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 pausedTimeFire = 0;
 
             }
-            */
+
 
             if (timerElapsed > 1000) {
                 timeRemaining--;
@@ -361,15 +349,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void populateFireCoords()
     {
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 4; i++)
         {
             fireX.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_x1))*WIDTH));
             fireX.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_x2))*WIDTH));
             fireX.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_x3))*WIDTH));
         }
-
-        fireX.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_x1))*WIDTH));
-        fireX.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_x3))*WIDTH));
 
         for(int i = 0; i < 3; i++)
         {
@@ -377,11 +362,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             fireY.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y2))*HEIGHT));
             fireY.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y3))*HEIGHT));
             fireY.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y4))*HEIGHT));
-            fireY.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y5))*HEIGHT));
         }
-
-        fireY.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y6))*HEIGHT));
-        fireY.add((int)(Double.parseDouble(getResources().getString(R.string.fire_spawn_y6))*HEIGHT));
     }
 
     public void addScore(int score)
