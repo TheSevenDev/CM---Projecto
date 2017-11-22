@@ -38,6 +38,8 @@
     <string name="fire_sprite_height">0.1</string>
     <string name="waterdrop_sprite_width">0.032</string>
     <string name="waterdrop_sprite_height">0.06</string>
+    <string name="cat_sprite_width">0.072</string>
+    <string name="cat_sprite_height">0.1</string>
 
     <string name="water_meter_sprite_width">0.05</string>
     <string name="water_meter_sprite_height">0.7</string>
@@ -52,6 +54,15 @@
     <string name="fire_spawn_y2">0.490</string>
     <string name="fire_spawn_y3">0.632</string>
     <string name="fire_spawn_y4">0.768</string>
+
+    <string name="cat_spawn_x1">0.20</string>
+    <string name="cat_spawn_x2">0.27</string>
+    <string name="cat_spawn_x3">0.80</string>
+
+    <string name="cat_spawn_y1">0.78</string>
+    <string name="cat_spawn_y2">0.70</string>
+    <string name="cat_spawn_y3">0.76</string>
+
 
     <string name="fire_score">5</string>
     <string name="cat_score">20</string>

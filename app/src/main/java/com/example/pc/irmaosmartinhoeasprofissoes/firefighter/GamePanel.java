@@ -133,6 +133,24 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         waterDecrease = Integer.parseInt(getResources().getString(R.string.water_decrease));
         waterGain = Integer.parseInt(getResources().getString(R.string.water_gain));
 
+        cats.add(new Cat(BitmapFactory.decodeResource(getResources(), R.drawable.gato),
+                (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_width)) * WIDTH),
+                (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_height)) * HEIGHT),
+                (int) (Double.parseDouble(getResources().getString(R.string.cat_spawn_x1)) * WIDTH),
+                (int) (Double.parseDouble(getResources().getString(R.string.cat_spawn_y1)) * HEIGHT), getContext()));
+
+        cats.add(new Cat(BitmapFactory.decodeResource(getResources(), R.drawable.gato),
+                (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_width)) * WIDTH),
+                (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_height)) * HEIGHT),
+                (int) (Double.parseDouble(getResources().getString(R.string.cat_spawn_x2)) * WIDTH),
+                (int) (Double.parseDouble(getResources().getString(R.string.cat_spawn_y2)) * HEIGHT), getContext()));
+
+        cats.add(new Cat(BitmapFactory.decodeResource(getResources(), R.drawable.gato),
+                (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_width)) * WIDTH),
+                (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_height)) * HEIGHT),
+                (int) (Double.parseDouble(getResources().getString(R.string.cat_spawn_x3)) * WIDTH),
+                (int) (Double.parseDouble(getResources().getString(R.string.cat_spawn_y3)) * HEIGHT), getContext()));
+
         pause = new Pause(getContext());
         gameOver = new GameOver(getContext());
 
@@ -190,9 +208,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             {
                 int option = gameOver.onTouchPauseScreen((int) x, (int) y);
 
-                if(option == Integer.parseInt(getResources().getString(R.string.game_over_restart_option)))
-                    restartGame();
-                else if(option == Integer.parseInt(getResources().getString(R.string.game_over_exit_option)))
+                //if(option == Integer.parseInt(getResources().getString(R.string.game_over_restart_option)))
+                //restartGame();
+                if(option == Integer.parseInt(getResources().getString(R.string.game_over_exit_option)))
                     gameActivity.onBackPressed();
             }
 
@@ -281,6 +299,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 gameOver.setGameOver(true);
                 musicBackground.pause();
                 MusicService.playSound(getContext(), R.raw.victory);
+                restartGame();
             }
         }
         else if(pause.isPaused())
