@@ -30,12 +30,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-    private final int GRAVITY = 9;
+    private final int GRAVITY = 15;
     public final int MIN_HEIGHT_BOUND = 20;
     public final int MAX_HEIGHT_BOUND = (HEIGHT - 150);
 
 
-    private final float MIN_DAYLIGHT = 57.0f; //VERIFICAR QUAL O VALOR ESTIMADO À LUZ DO DIA
+    private final float MIN_DAYLIGHT = 20.0f; //VERIFICAR QUAL O VALOR ESTIMADO À LUZ DO DIA
     private MainThread thread;
     private ScrollingBackground backgroundDay;
     private ScrollingBackground backgroundNight;
@@ -46,6 +46,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private ArrayList<Obstacle> obstacles;
     private long obstacleStartTime;
     private long ostacleElapsedTime;
+
+
+    private Bitmap health[];
+    private int currentHealth;
 
     private OrientationData orientationData;
     private LightData lightData;
@@ -107,11 +111,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         backgroundNight.setVector(-5);
 
         Rect playerRect = new Rect(150,150,300,275);
-        player = new Player(playerRect, BitmapFactory.decodeResource(getResources(), R.drawable.martinhopiloto),50, 50, context);
+        player = new Player(playerRect, BitmapFactory.decodeResource(getResources(), R.drawable.josepiloto),50, 50, context);
 
         playerPoint = new Point(170, HEIGHT/2);
         player.update(playerPoint);
 
+        health = new Bitmap[4];
+        health[0] = BitmapFactory.decodeResource(getResources(), R.drawable.slot0);
+        health[1] = BitmapFactory.decodeResource(getResources(), R.drawable.slot1);
+        health[2] = BitmapFactory.decodeResource(getResources(), R.drawable.slot2);
+        health[3] = BitmapFactory.decodeResource(getResources(), R.drawable.slot3);
 
         obstacles = new ArrayList<>();
         obstacleStartTime = System.nanoTime();
@@ -138,7 +147,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             float roll = orientationData.getOrientation()[2] - orientationData.getStartOrientation()[2];     //X DIRECTION
 
             float xSpeed = 2* roll * WIDTH/800f;
-            float ySpeed = 2* pitch * HEIGHT/800f; //1SECOND TO FULLFILL THE SCREEN
+            //float ySpeed = 2* pitch * HEIGHT/800f; //1SECOND TO FULLFILL THE SCREEN
 
             playerPoint.y -= Math.abs(xSpeed* elapsedTime) > 3 ? xSpeed* elapsedTime : 0;
         }
@@ -185,7 +194,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             else{
                 aux.update();
                 if(collision(aux,player)){
-                    System.out.println("REBENTOU");
+                    player.takeDamage(1);
+                    it.remove();
                 }
             }
         }
@@ -212,6 +222,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
 
             player.draw(canvas);
+            canvas.drawBitmap(health[player.getHealth()],0, 0, null); //CHANGE VALUES TO SCALE
             for(Obstacle ob : obstacles){
                 ob.draw(canvas);
             }

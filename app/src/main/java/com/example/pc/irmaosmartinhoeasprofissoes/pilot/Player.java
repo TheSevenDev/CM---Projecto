@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 
@@ -24,7 +25,7 @@ public class Player extends GameObject {
     private AnimationManager animationManager;
 
     public int score;
-
+    public int health;
     private long startTime;
 
     public Player(Rect rectangle, Bitmap res, int x, int y, Context context) {
@@ -39,9 +40,9 @@ public class Player extends GameObject {
 
 
         BitmapFactory bf = new BitmapFactory();
-        Bitmap idleimg = bf.decodeResource(context.getResources(), R.drawable.martinhopiloto);
-        Bitmap walk1 = bf.decodeResource(context.getResources(), R.drawable.martinhopiloto);
-        Bitmap walk2 = bf.decodeResource(context.getResources(), R.drawable.martinhopiloto);
+        Bitmap idleimg = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
+        Bitmap walk1 = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
+        Bitmap walk2 = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
 
         idle = new Animation(new Bitmap[]{idleimg}, 2);
         //walkUp = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
@@ -50,6 +51,7 @@ public class Player extends GameObject {
         animationManager =  new AnimationManager(new Animation[]{idle});
 
         score = 0;
+        health = 3;
         startTime = System.nanoTime();
     }
 
@@ -91,5 +93,19 @@ public class Player extends GameObject {
 
     public void resetScore(){
         score = 0;
+    }
+
+    public void takeDamage(int d){
+        health-=d;
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public boolean isAlive(){
+        return health>0;
+    }
+    public void rotate(Matrix m){
     }
 }

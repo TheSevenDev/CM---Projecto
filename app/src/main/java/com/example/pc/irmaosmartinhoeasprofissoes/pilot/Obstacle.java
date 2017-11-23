@@ -72,9 +72,5 @@ public class Obstacle extends GameObject{
         return width-10;
     }
 
-
-
-
-
-
 }
+
