@@ -351,7 +351,28 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             {
                 background.draw(canvas, false);
                 waterMeter.draw(canvas, false);
+
+                //draw fires
+                for(Fire fire: fires)
+                {
+                    fire.draw(canvas);
+                }
+
+                //draw cats
+                for(Cat cat: cats)
+                {
+                    cat.draw(canvas);
+                }
+
+                //draw drops
+                for(Waterdrop water: waterDrops)
+                {
+                    water.draw(canvas);
+                }
             }
+
+            if(!gameOver.isGameOver())
+                pause.draw(canvas);
 
             if(!waterMeter.isNoWaterWarning())
                 drawWaterLevel(canvas);
@@ -359,27 +380,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.clock),
                     (int)(0.05*WIDTH), (int)(0.1*HEIGHT),null);
 
-            //draw fires
-            for(Fire fire: fires)
-            {
-                fire.draw(canvas);
-            }
-
-            //draw cats
-            for(Cat cat: cats)
-            {
-                cat.draw(canvas);
-            }
-
-            //draw drops
-            for(Waterdrop water: waterDrops)
-            {
-                water.draw(canvas);
-            }
-
             drawText(canvas);
 
-            pause.draw(canvas);
             gameOver.draw(canvas);
 
             canvas.restoreToCount(savedState);

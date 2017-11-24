@@ -31,7 +31,7 @@
     <string name="pause_exit_width_mod">0.25</string>
     <string name="pause_exit_height_mod">0.15</string>
     <string name="pause_exit_x_mod">0.38</string>
-    <string name="pause_exit_y_mod">0.70</string>
+    <string name="pause_exit_y_mod">0.68</string>
 
     //+++++++++++++++++++ FIREFIGHTER ++++++++++++++++++++++++++++++++++++++
     <string name="fire_sprite_width">0.072</string>
@@ -85,15 +85,15 @@
     <string name="game_over_screen_x_mod">0.175</string>
     <string name="game_over_screen_y_mod">0.175</string>
 
-    <string name="game_over_restart_width_mod">0.1</string>
-    <string name="game_over_restart_height_mod">0.1</string>
-    <string name="game_over_restart_x_mod">0.375</string>
-    <string name="game_over_restart_y_mod">0.40</string>
+    <string name="game_over_restart_width_mod">0.25</string>
+    <string name="game_over_restart_height_mod">0.15</string>
+    <string name="game_over_restart_x_mod">0.38</string>
+    <string name="game_over_restart_y_mod">0.45</string>
 
-    <string name="game_over_exit_width_mod">0.1</string>
-    <string name="game_over_exit_height_mod">0.1</string>
-    <string name="game_over_exit_x_mod">0.375</string>
-    <string name="game_over_exit_y_mod">0.60</string>
+    <string name="game_over_exit_width_mod">0.25</string>
+    <string name="game_over_exit_height_mod">0.15</string>
+    <string name="game_over_exit_x_mod">0.38</string>
+    <string name="game_over_exit_y_mod">0.63</string>
 
 
 </resources>
