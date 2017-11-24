@@ -31,7 +31,7 @@ public class Pause
 
         paused = false;
 
-        pauseScreen = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.empty_splash),
+        pauseScreen = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.pause_screen),
                 (int)(GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.pause_screen_width_mod))),
                 (int)(GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.pause_screen_height_mod))), false);
 
