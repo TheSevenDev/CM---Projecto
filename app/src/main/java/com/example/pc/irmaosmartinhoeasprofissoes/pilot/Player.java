@@ -1,14 +1,17 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.content.SharedPreferences;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
+import com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseMinigame;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 /**
@@ -28,21 +31,36 @@ public class Player extends GameObject {
     public int health;
     private long startTime;
 
-    public Player(Rect rectangle, Bitmap res, int x, int y, Context context) {
+    public Player(Rect rectangle, int x, int y, Context context) {
         this.rectangle = rectangle;
         this.x = x;
         this.y = y;
         this.width = rectangle.width();
         this.height = rectangle.height();
         this.context = context;
-        //player = Bitmap.createScaledBitmap(res, width, height, false);
 
+        SharedPreferences sharedPref = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
 
 
         BitmapFactory bf = new BitmapFactory();
-        Bitmap idleimg = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
-        Bitmap walk1 = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
-        Bitmap walk2 = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
+        Bitmap idleimg;
+        Bitmap walk1;
+        Bitmap walk2;
+
+
+        if(sharedPref.getInt("gender",0) == 0){
+            idleimg = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
+            walk1 = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
+            walk2 = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
+
+        }
+        else
+        {
+            idleimg = bf.decodeResource(context.getResources(), R.drawable.mariapiloto);
+            walk1 = bf.decodeResource(context.getResources(), R.drawable.mariapiloto);
+            walk2 = bf.decodeResource(context.getResources(), R.drawable.mariapiloto);
+        }
+
 
         idle = new Animation(new Bitmap[]{idleimg}, 2);
         //walkUp = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
@@ -99,8 +117,21 @@ public class Player extends GameObject {
         health-=d;
     }
 
+    public void restoreHealth(int r){
+        if(health < 3)
+            health+=r;
+    }
+
     public int getHealth(){
         return health;
+    }
+
+    public void resetHealth(){
+        health = 3;
+    }
+
+    public Rect getImageRectangle(){
+        return rectangle;
     }
 
     public boolean isAlive(){

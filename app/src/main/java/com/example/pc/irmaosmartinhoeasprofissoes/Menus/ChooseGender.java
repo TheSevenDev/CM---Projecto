@@ -11,9 +11,6 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 public class ChooseGender extends GeneralActivity {
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
