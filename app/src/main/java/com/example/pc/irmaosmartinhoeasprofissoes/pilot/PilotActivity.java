@@ -33,7 +33,7 @@ public class PilotActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
 
-        setContentView(new GamePanel(this));
+        setContentView(new GamePanel(this, this));
 
         mp = MediaPlayer.create(this, R.raw.pilot);
         mp.setLooping(true);
