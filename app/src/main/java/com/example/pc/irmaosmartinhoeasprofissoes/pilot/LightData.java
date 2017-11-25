@@ -32,7 +32,6 @@ public class LightData implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor.getType() == Sensor.TYPE_LIGHT){
             lightValue = event.values[0];
-            System.out.println("LUZ: "+ lightValue);
         }
     }
 

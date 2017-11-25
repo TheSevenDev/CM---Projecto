@@ -92,6 +92,17 @@
     <string name="water_bar_left_mod">0.052</string>
     <string name="water_bar_right_mod">0.078</string>
 
+
+    //+++++++++++++++++++ PILOT ++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
     //+++++++++++++++++++ GAME OVER ++++++++++++++++++++++++++++++++++++++
     <string name="game_over_restart_option">1</string>
     <string name="game_over_exit_option">2</string>
@@ -112,9 +123,9 @@
     <string name="game_over_exit_y_mod">0.68</string>
 
     <string name="game_over_character_width_mod">0.20</string>
-    <string name="game_over_character_height_mod">0.48</string>
+    <string name="game_over_character_height_mod">0.60</string>
     <string name="game_over_character_x_mod">0.12</string>
-    <string name="game_over_character_y_mod">0.37</string>
+    <string name="game_over_character_y_mod">0.25</string>
 
 
 </resources>

@@ -143,7 +143,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             float x = event.getX();
             float y = event.getY();
 
-            if(!pause.isPaused())
+            if(!pause.isPaused() && !gameOver.isGameOver())
                 pause.onTouchPauseButton((int)x, (int)y);
             else if(pause.isPaused())
             {
@@ -153,38 +153,37 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             else if(gameOver.isGameOver())
             {
                 int option = gameOver.onTouchPauseScreen((int) x, (int) y);
-
                 if(option == Integer.parseInt(getResources().getString(R.string.game_over_restart_option)))
                     resetGame();
                 else if(option == Integer.parseInt(getResources().getString(R.string.game_over_exit_option)))
                     gameActivity.onBackPressed();
             }
         }
-
-
         return true;
     }
 
 
     public void resetGame(){
+
         Rect playerRect = new Rect(150,150,315,275);
         player = new Player(playerRect, 50, 50, context);
-
-        playerPoint = new Point(170, HEIGHT/2);
-        player.update(playerPoint);
         player.resetScore();
         player.resetHealth();
 
-        obstacles = new ArrayList<>();
 
-        pause.setPaused(false);
+        playerPoint = new Point(170, HEIGHT/2);
+        player.update(playerPoint);
+
+        obstacles = new ArrayList<>();
         gameOver.setGameOver(false);
     }
 
     public void update()
     {
-        if(!pause.isPaused() && !gameOver.isGameOver()) {
-            if (player.isAlive()) {
+        if(!player.isAlive())
+            gameOver.setGameOver(true);
+        else{
+            if(!pause.isPaused() && !gameOver.isGameOver()) {
                 if (frameTime < initTime)
                     frameTime = initTime;
 
@@ -198,11 +197,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 player.update(playerPoint);
 
                 checkCollision();
-            } else {
-                gameOver.setGameOver(true);
             }
         }
     }
+
 
 
     public void orientation(){
@@ -256,9 +254,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             Bitmap madBird = BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day_mad);
 
             if (obstacles.isEmpty()) {
-                obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, 68, 70, player.getScore(), 7));
+                obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, 66, 69, player.getScore(), 7));
             } else {
-                obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, 68, 70, player.getScore(), 7));
+                obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, 66, 69, player.getScore(), 7));
             }
 
             obstacleStartTime = System.nanoTime();

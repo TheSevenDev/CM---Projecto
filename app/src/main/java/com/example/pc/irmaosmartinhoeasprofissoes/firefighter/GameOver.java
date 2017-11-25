@@ -90,13 +90,13 @@ public class GameOver
 
     public int onTouchPauseScreen(int x, int y)
     {
-        //restart
+        //resume
         if (x >= (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.game_over_restart_x_mod)))
                 && x < ((int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.game_over_restart_x_mod)))
-                + (GamePanel.WIDTH * restartButton.getWidth()))
+                + (GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.game_over_restart_width_mod))))
                 && y >= (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.game_over_restart_y_mod)))
                 && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.game_over_restart_y_mod)))
-                + (GamePanel.HEIGHT * restartButton.getHeight())))
+                + (GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.game_over_restart_height_mod)))))
         {
             gameOver = false;
             return 1;
@@ -105,10 +105,11 @@ public class GameOver
         //exit
         if (x >= (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.game_over_exit_x_mod)))
                 && x < ((int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.game_over_exit_x_mod)))
-                + (GamePanel.WIDTH * exitButton.getWidth()))
+                + (GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.game_over_exit_width_mod))))
+
                 && y >= (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.game_over_exit_y_mod)))
                 && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.game_over_exit_y_mod)))
-                + (GamePanel.HEIGHT * exitButton.getHeight())))
+                + (GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.game_over_exit_height_mod)))))
             return 2;
         return 0;
     }
