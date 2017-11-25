@@ -20,7 +20,7 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
-        <item name="android:windowBackground">@drawable/mainmenu</item>
+        <item name="android:windowBackground">@drawable/main_menu</item>
         <item name="android:soundEffectsEnabled">false</item>
     </style>
 </resources>

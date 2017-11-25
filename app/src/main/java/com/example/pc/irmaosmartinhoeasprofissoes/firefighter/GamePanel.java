@@ -60,7 +60,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     private Random rand;
 
-    private int score;
+    private Score score;
     private int waterDecrease;
     private int waterGain;
     private double waterMeterValue;
@@ -160,7 +160,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                             && y >= f.getY() && y < (f.getY() + f.getHeight())) {
                         if (waterMeterValue >= waterDecrease) {
                             fires.remove(f);
-                            addScore(Integer.parseInt(getResources().getString(R.string.fire_score)));
+                            score.addScore(Integer.parseInt(getResources().getString(R.string.fire_score)));
                             decreaseWater();
                             MusicService.playSound(getContext(), R.raw.fire);
                         } else {
@@ -189,7 +189,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                             && y >= c.getY() && y < (c.getY() + c.getHeight()))
                     {
                             cats.remove(c);
-                            addScore(Integer.parseInt(getResources().getString(R.string.cat_score)));
+                        score.addScore(Integer.parseInt(getResources().getString(R.string.cat_score)));
                             MusicService.playSound(getContext(), R.raw.cat);
 
                         return true;
@@ -313,7 +313,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 fires.clear();
                 cats.clear();
                 waterDrops.clear();
-                gameOver.setScore(score);
+                //EVENTUALMENTE VAI MUDAR
+                gameOver.setScore(score.getScore());
                 gameOver.setGameOver(true);
                 musicBackground.pause();
                 MusicService.playSound(getContext(), R.raw.victory);
@@ -371,6 +372,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 }
             }
 
+            score.draw(canvas);
+
             if(!gameOver.isGameOver())
                 pause.draw(canvas);
 
@@ -378,7 +381,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 drawWaterLevel(canvas);
 
             canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.clock),
-                    (int)(0.05*WIDTH), (int)(0.1*HEIGHT),null);
+                    (int)(0.025*WIDTH), (int)(0.12*HEIGHT),null);
 
             drawText(canvas);
 
@@ -417,19 +420,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         catY.add((int)(Double.parseDouble(getResources().getString(R.string.cat_spawn_y3))*HEIGHT));
     }
 
-    public void addScore(int score)
-    {
-        this.score += score;
-    }
-
     public void drawText(Canvas canvas)
     {
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
         paint.setTextSize(30);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        canvas.drawText("SCORE: " + score, 0.02f*WIDTH, 0.05f*HEIGHT, paint);
-        canvas.drawText("" + timeRemaining, 0.10f*WIDTH, 0.10f*HEIGHT, paint);
+        canvas.drawText("" + timeRemaining, 0.05f*WIDTH, 0.145f*HEIGHT, paint);
     }
 
     public void decreaseWater()
@@ -497,8 +494,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         waterDrops = new ArrayList<>();
         cats = new ArrayList<>();
         waterMeterValue = 100;
-        timeRemaining = 5;
-        score = 0;
+        timeRemaining = 60;
+        score = new Score(getContext());
         //timerStart = System.nanoTime();
         fireStart = System.nanoTime();
         waterStart = System.nanoTime();

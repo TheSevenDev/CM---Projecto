@@ -63,8 +63,27 @@
     <string name="cat_spawn_y2">0.70</string>
     <string name="cat_spawn_y3">0.76</string>
 
-    <string name="fire_score">5</string>
-    <string name="cat_score">20</string>
+    <string name="fire_score">1</string>
+    <string name="cat_score">3</string>
+
+    <string name="star_score_height_mod">0.1</string>
+    <string name="star_score_width_mod">0.1</string>
+    <string name="star_score_x_mod">0.1</string>
+    <string name="star_score_y_mod">0.1</string>
+
+    <string name="star_width_mod">0.2355</string>
+    <string name="empty_star_x_mod">0</string>
+    <string name="one_third_star_x_mod">0.2548</string>
+    <string name="two_thirds_star_x_mod">0.5046</string>
+    <string name="full_star_x_mod">0.7644</string>
+    <!--
+    <string name="star_height">387</string>
+    <string name="star_width">416</string>
+    <string name="empty_star_x">0</string>
+    <string name="one_third_star_x">450</string>
+    <string name="two_thirds_star_x">900</string>
+    <string name="full_star_x">1350</string>-->
+
     <string name="water_decrease">15</string>
     <string name="water_gain">20</string>
     <string name="water_disappear_time">2</string>
