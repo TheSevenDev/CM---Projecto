@@ -90,7 +90,7 @@ public class GameOver
 
     public int onTouchPauseScreen(int x, int y)
     {
-        //resume
+        //restart
         if (x >= (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.game_over_restart_x_mod)))
                 && x < ((int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.game_over_restart_x_mod)))
                 + (GamePanel.WIDTH * restartButton.getWidth()))
@@ -109,10 +109,7 @@ public class GameOver
                 && y >= (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.game_over_exit_y_mod)))
                 && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.game_over_exit_y_mod)))
                 + (GamePanel.HEIGHT * exitButton.getHeight())))
-        {
             return 2;
-        }
-
         return 0;
     }
 

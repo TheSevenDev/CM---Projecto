@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.example.pc.irmaosmartinhoeasprofissoes.EnumGame;
 import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
 import com.example.pc.irmaosmartinhoeasprofissoes.Pause;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
@@ -51,6 +52,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private Bitmap health[];
 
     private Pause pause;
+    private GameOver gameOver;
 
     private OrientationData orientationData;
     private LightData lightData;
@@ -84,8 +86,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         frameTime = System.currentTimeMillis();
         initTime = System.currentTimeMillis();
-
-        pause = new Pause(context);
     }
 
     @Override
@@ -115,8 +115,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         backgroundNight = new ScrollingBackground(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_night) ,WIDTH, HEIGHT);
         backgroundNight.setVector(-5);
 
-        resetGame();
-
         health = new Bitmap[4];
         health[0] = BitmapFactory.decodeResource(getResources(), R.drawable.slot0);
         health[1] = BitmapFactory.decodeResource(getResources(), R.drawable.slot1);
@@ -126,9 +124,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         obstacles = new ArrayList<>();
         obstacleStartTime = System.nanoTime();
 
+        pause = new Pause(getContext());
+        gameOver = new GameOver(getContext(), EnumGame.PILOT);
+
 
         thread = new MainThread(getHolder(), this);
 
+        resetGame();
 
         thread.setRunning(true);
         thread.start();
@@ -148,6 +150,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 if(pause.onTouchPauseScreen((int) x, (int) y))
                     gameActivity.onBackPressed();
             }
+            else if(gameOver.isGameOver())
+            {
+                int option = gameOver.onTouchPauseScreen((int) x, (int) y);
+
+                if(option == Integer.parseInt(getResources().getString(R.string.game_over_restart_option)))
+                    resetGame();
+                else if(option == Integer.parseInt(getResources().getString(R.string.game_over_exit_option)))
+                    gameActivity.onBackPressed();
+            }
         }
 
 
@@ -165,11 +176,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         player.resetHealth();
 
         obstacles = new ArrayList<>();
+
+        pause.setPaused(false);
+        gameOver.setGameOver(false);
     }
 
     public void update()
     {
-        if(!pause.isPaused()) {
+        if(!pause.isPaused() && !gameOver.isGameOver()) {
             if (player.isAlive()) {
                 if (frameTime < initTime)
                     frameTime = initTime;
@@ -185,7 +199,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
                 checkCollision();
             } else {
-                resetGame();
+                gameOver.setGameOver(true);
             }
         }
     }
@@ -279,7 +293,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             canvas.restoreToCount(savedState);
         }
 
-        pause.draw(canvas);
+        if(!gameOver.isGameOver())
+            pause.draw(canvas);
+
+        gameOver.draw(canvas);
     }
 
     public boolean collision(Rect a, Rect b){
