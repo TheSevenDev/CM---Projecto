@@ -17,6 +17,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.Background;
+import com.example.pc.irmaosmartinhoeasprofissoes.EnumGame;
 import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.Pause;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
@@ -136,7 +137,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         waterGain = Integer.parseInt(getResources().getString(R.string.water_gain));
 
         pause = new Pause(getContext());
-        gameOver = new GameOver(getContext());
+        gameOver = new GameOver(getContext(), EnumGame.FIREFIGHTER);
 
         thread = new MainThread(getHolder(), this);
 
@@ -314,7 +315,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 cats.clear();
                 waterDrops.clear();
                 //EVENTUALMENTE VAI MUDAR
-                gameOver.setScore(score.getScore());
+                //gameOver.setScore(score.getScore());
                 gameOver.setGameOver(true);
                 musicBackground.pause();
                 MusicService.playSound(getContext(), R.raw.victory);
@@ -386,6 +387,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             drawText(canvas);
 
             gameOver.draw(canvas);
+            if(gameOver.isGameOver())
+            {
+                score.drawScoreGameOver(canvas);
+            }
 
             canvas.restoreToCount(savedState);
         }
@@ -494,7 +499,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         waterDrops = new ArrayList<>();
         cats = new ArrayList<>();
         waterMeterValue = 100;
-        timeRemaining = 60;
+        timeRemaining = 10;
         score = new Score(getContext());
         //timerStart = System.nanoTime();
         fireStart = System.nanoTime();

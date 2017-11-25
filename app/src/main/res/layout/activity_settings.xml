@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
-    android:background="@drawable/empty_splash"
+    android:background="@drawable/empty_panel"
     android:stretchColumns="2"
     >
 

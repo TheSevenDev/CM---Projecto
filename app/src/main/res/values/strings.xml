@@ -1,4 +1,8 @@
 <resources>
+    //+++++++++++++++++++ DATA SAVED ++++++++++++++++++++++++++++++++++++++
+    <string name="choose_male">0</string>
+    <string name="choose_female">1</string>
+
     //+++++++++++++++++++ MENUS ++++++++++++++++++++++++++++++++++++++
     <string name="app_name">Irmãos Martinho e as profissoes</string>
     <string name="title_activity_main">MainActivity</string>
@@ -66,23 +70,16 @@
     <string name="fire_score">1</string>
     <string name="cat_score">3</string>
 
-    <string name="star_score_height_mod">0.1</string>
-    <string name="star_score_width_mod">0.1</string>
-    <string name="star_score_x_mod">0.1</string>
-    <string name="star_score_y_mod">0.1</string>
+    <string name="star_score_height_mod">0.06</string>
+    <string name="star_score_width_mod">0.04</string>
+    <string name="star_score_x_mod">0.03</string>
+    <string name="star_score_y_mod">0.03</string>
 
     <string name="star_width_mod">0.2355</string>
     <string name="empty_star_x_mod">0</string>
     <string name="one_third_star_x_mod">0.2548</string>
     <string name="two_thirds_star_x_mod">0.5046</string>
     <string name="full_star_x_mod">0.7644</string>
-    <!--
-    <string name="star_height">387</string>
-    <string name="star_width">416</string>
-    <string name="empty_star_x">0</string>
-    <string name="one_third_star_x">450</string>
-    <string name="two_thirds_star_x">900</string>
-    <string name="full_star_x">1350</string>-->
 
     <string name="water_decrease">15</string>
     <string name="water_gain">20</string>
@@ -95,24 +92,29 @@
     <string name="water_bar_left_mod">0.052</string>
     <string name="water_bar_right_mod">0.078</string>
 
-
+    //+++++++++++++++++++ GAME OVER ++++++++++++++++++++++++++++++++++++++
     <string name="game_over_restart_option">1</string>
     <string name="game_over_exit_option">2</string>
 
-    <string name="game_over_screen_width_mod">0.65</string>
-    <string name="game_over_screen_height_mod">0.65</string>
-    <string name="game_over_screen_x_mod">0.175</string>
-    <string name="game_over_screen_y_mod">0.175</string>
+    <string name="game_over_screen_width_mod">0.8</string>
+    <string name="game_over_screen_height_mod">0.8</string>
+    <string name="game_over_screen_x_mod">0.1</string>
+    <string name="game_over_screen_y_mod">0.1</string>
 
     <string name="game_over_restart_width_mod">0.25</string>
     <string name="game_over_restart_height_mod">0.15</string>
     <string name="game_over_restart_x_mod">0.38</string>
-    <string name="game_over_restart_y_mod">0.45</string>
+    <string name="game_over_restart_y_mod">0.48</string>
 
     <string name="game_over_exit_width_mod">0.25</string>
     <string name="game_over_exit_height_mod">0.15</string>
     <string name="game_over_exit_x_mod">0.38</string>
-    <string name="game_over_exit_y_mod">0.63</string>
+    <string name="game_over_exit_y_mod">0.68</string>
+
+    <string name="game_over_character_width_mod">0.20</string>
+    <string name="game_over_character_height_mod">0.48</string>
+    <string name="game_over_character_x_mod">0.12</string>
+    <string name="game_over_character_y_mod">0.37</string>
 
 
 </resources>

@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
@@ -43,7 +46,7 @@ public class Score
         for (int i = 0; i < stars.size(); i++)
         {
             canvas.drawBitmap(stars.get(i),
-                    (int)(Double.parseDouble(context.getResources().getString(R.string.star_score_x_mod) + (i*0.05)) * GamePanel.WIDTH) ,
+                    (int)((Double.parseDouble(context.getResources().getString(R.string.star_score_x_mod)) + (i*0.04)) * GamePanel.WIDTH) ,
                     (int)(Double.parseDouble(context.getResources().getString(R.string.star_score_y_mod)) * GamePanel.HEIGHT), null);
         }
     }
@@ -56,26 +59,26 @@ public class Score
 
         if(score == 0)
         {
-            stars.add(scaledStar(EnumStarType.EMPTY_STAR));
+            stars.add(scaledStar(EnumStarType.EMPTY_STAR, false));
             return;
         }
 
         for(int i = 0; i < div; i++)
         {
-            stars.add(scaledStar(EnumStarType.FULL_STAR));
+            stars.add(scaledStar(EnumStarType.FULL_STAR, false));
         }
 
         if((score % 3) == 1)
         {
-            stars.add(scaledStar(EnumStarType.ONE_THIRD_STAR));
+            stars.add(scaledStar(EnumStarType.ONE_THIRD_STAR, false));
         }
         else if((score % 3) == 2)
         {
-            stars.add(scaledStar(EnumStarType.TWO_THIRDS_STAR));
+            stars.add(scaledStar(EnumStarType.TWO_THIRDS_STAR, false));
         }
     }
 
-    private Bitmap scaledStar(EnumStarType starType)
+    private Bitmap scaledStar(EnumStarType starType, boolean gameOver)
     {
         Bitmap unscaledBitmap;
         Bitmap image = BitmapFactory.decodeResource(context.getResources(), R.drawable.score_star);
@@ -85,18 +88,38 @@ public class Score
                 (int)(Double.parseDouble(context.getResources().getString(R.string.star_width_mod)) * image.getWidth()),
                 image.getHeight());
 
-        return Bitmap.createScaledBitmap(unscaledBitmap,
+        if(!gameOver)
+            return Bitmap.createScaledBitmap(unscaledBitmap,
                 (int)(Double.parseDouble(context.getResources().getString(R.string.star_score_width_mod))*GamePanel.WIDTH),
                 (int)(Double.parseDouble(context.getResources().getString(R.string.star_score_height_mod))*GamePanel.HEIGHT), false);
+        else
+            return Bitmap.createScaledBitmap(unscaledBitmap,
+                    (int)(Double.parseDouble(context.getResources().getString(R.string.star_score_width_mod))*GamePanel.WIDTH)*2,
+                    (int)(Double.parseDouble(context.getResources().getString(R.string.star_score_height_mod))*GamePanel.HEIGHT)*2, false);
+    }
 
-        /*
-        unscaledBitmap = Bitmap.createBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.score_star),
-                Integer.parseInt(context.getResources().getString(starType.getX())), 0,
-                Integer.parseInt(context.getResources().getString(R.string.star_width)),
-                Integer.parseInt(context.getResources().getString(R.string.star_height)));
+    public void drawScoreGameOver(Canvas canvas)
+    {
+        Bitmap bitAux = null;
 
-        return Bitmap.createScaledBitmap(unscaledBitmap,
-                (int)(Double.parseDouble(context.getResources().getString(R.string.star_score_width_mod))*GamePanel.WIDTH),
-                (int)(Double.parseDouble(context.getResources().getString(R.string.star_score_height_mod))*GamePanel.HEIGHT), false);*/
+        if(score < 3)
+        {
+            bitAux = scaledStar(EnumStarType.EMPTY_STAR, true);
+        }
+        else
+        {
+            bitAux = scaledStar(EnumStarType.FULL_STAR, true);
+        }
+
+        canvas.drawBitmap(bitAux,
+                (int)(0.46* GamePanel.WIDTH) ,
+                (int)(0.23 * GamePanel.HEIGHT), null);
+
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(75);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        canvas.drawText("" + (score/3), 0.49f * GamePanel.WIDTH, 0.32f * GamePanel.HEIGHT, paint);
+
     }
 }
