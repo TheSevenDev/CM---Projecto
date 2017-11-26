@@ -2,12 +2,16 @@ package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Vibrator;
 import android.support.constraint.solver.widgets.Rectangle;
 import android.view.MotionEvent;
@@ -16,6 +20,7 @@ import android.view.SurfaceView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.EnumGame;
 import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
+import com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseGender;
 import com.example.pc.irmaosmartinhoeasprofissoes.Pause;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GameOver;
@@ -63,6 +68,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private Context context;
     private Activity gameActivity;
 
+    private boolean recordChecked;
+    private boolean recordBroken;
+
     private Random rand = new Random();
 
     public GamePanel(Context context, Activity activity)
@@ -86,6 +94,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         frameTime = System.currentTimeMillis();
         initTime = System.currentTimeMillis();
+
+        SharedPreferences sharedPref = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+
+        if(!sharedPref.contains("pilotRecord"))
+        {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("pilotRecord", 0);
+            editor.apply();
+        }
+        recordChecked = false;
+        recordBroken = false;
     }
 
     @Override
@@ -176,12 +195,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         obstacles = new ArrayList<>();
         gameOver.setGameOver(false);
+
+        recordChecked = false;
+        recordBroken = false;
     }
 
     public void update()
     {
         if(!player.isAlive())
             gameOver.setGameOver(true);
+
         else{
             if(!pause.isPaused() && !gameOver.isGameOver()) {
                 if (frameTime < initTime)
@@ -293,9 +316,43 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         if(!gameOver.isGameOver())
             pause.draw(canvas);
-
-        gameOver.draw(canvas);
+        else {
+            gameOver.draw(canvas);
+            drawScore(canvas);
+        }
     }
+
+    public boolean checkRecord(){
+        SharedPreferences sharedPref = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+        if(player.getScore() > sharedPref.getInt("pilotRecord", 0)){
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("pilotRecord", player.getScore());
+            editor.apply();
+            recordChecked = true;
+            return true;
+        }
+        recordChecked = true;
+        return false;
+    }
+
+    public void drawScore(Canvas canvas) {
+        Paint paint = new Paint();
+        paint.setTextSize(53);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+
+        if (!recordChecked) {
+            recordBroken = checkRecord();
+        }
+
+        if (!recordBroken) {
+            paint.setColor(Color.YELLOW);
+            canvas.drawText("RECORDE", 0.415f * WIDTH, 0.25f * HEIGHT, paint);
+        }
+        paint.setColor(Color.BLACK);
+        canvas.drawText((player.getScore() + " metros"), 0.41f * WIDTH, 0.37f * HEIGHT, paint);
+
+    }
+
 
     public boolean collision(Rect a, Rect b){
         return Rect.intersects(a,b);
