@@ -251,20 +251,19 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 {
                     i = rand.nextInt(fireX.size());
 
-                    fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.fogo),
+                    fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.animacao_fogo),
                              (int) (Double.parseDouble(getResources().getString(R.string.fire_sprite_width)) * WIDTH),
                              (int) (Double.parseDouble(getResources().getString(R.string.fire_sprite_height)) * HEIGHT),
-                             fireX.get(i), fireY.get(i), getContext()));
-
+                             fireX.get(i), fireY.get(i), getContext(), 7));
                 }
                 else
                 {
                     i = rand.nextInt(catX.size());
 
-                    cats.add(new Cat(BitmapFactory.decodeResource(getResources(), R.drawable.gato),
+                    cats.add(new Cat(BitmapFactory.decodeResource(getResources(), R.drawable.animacao_gato),
                             (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_width)) * WIDTH),
                             (int) (Double.parseDouble(getResources().getString(R.string.cat_sprite_height)) * HEIGHT),
-                            catX.get(i), catY.get(i), getContext()));
+                            catX.get(i), catY.get(i), getContext(), 3));
 
                 }
 
@@ -296,10 +295,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 int x = rand.nextInt(maxW - minW + 1) + minW;
                 int y = rand.nextInt(maxH - minH + 1) + minH;
 
-                waterDrops.add(new Waterdrop(BitmapFactory.decodeResource(getResources(), R.drawable.gota),
+                waterDrops.add(new Waterdrop(BitmapFactory.decodeResource(getResources(), R.drawable.animacao_gota),
                         (int) (Double.parseDouble(getResources().getString(R.string.waterdrop_sprite_width)) * WIDTH),
                         (int) (Double.parseDouble(getResources().getString(R.string.waterdrop_sprite_height)) * HEIGHT),
-                        x, y, getContext()));
+                        x, y, getContext(), 2));
 
                 waterStart = System.nanoTime();
                 pausedTimeWater = 0;
@@ -499,7 +498,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         waterDrops = new ArrayList<>();
         cats = new ArrayList<>();
         waterMeterValue = 100;
-        timeRemaining = 10;
+        timeRemaining = 20;
         score = new Score(getContext());
         //timerStart = System.nanoTime();
         fireStart = System.nanoTime();

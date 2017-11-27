@@ -45,6 +45,18 @@
     <string name="cat_sprite_width">0.072</string>
     <string name="cat_sprite_height">0.1</string>
 
+    <string name="waterdrop_frame1_x">0</string>
+    <string name="waterdrop_frame2_x">0.5367</string>
+
+    <string name="waterdrop_frame_width">0.4632</string>
+
+    <string name="cat_frame1_x">0</string>
+    <string name="cat_frame2_x">0.3321</string>
+    <string name="cat_frame3_x">0.6678</string>
+
+    <string name="cat_frame_width">0.3221</string>
+
+
     <string name="water_meter_sprite_width">0.05</string>
     <string name="water_meter_sprite_height">0.7</string>
     <string name="water_meter_x">0.04</string>
@@ -58,6 +70,22 @@
     <string name="fire_spawn_y2">0.490</string>
     <string name="fire_spawn_y3">0.632</string>
     <string name="fire_spawn_y4">0.768</string>
+
+    <string name="fire_frame1_width">0.11875</string>
+    <string name="fire_frame2_width">0.1405</string>
+    <string name="fire_frame3_width">0.15</string>
+    <string name="fire_frame4_width">0.15675</string>
+    <string name="fire_frame5_width">0.1485</string>
+    <string name="fire_frame6_width">0.14125</string>
+    <string name="fire_frame7_width">0.1195</string>
+
+    <string name="fire_frame1_x">0</string>
+    <string name="fire_frame2_x">0.1225</string>
+    <string name="fire_frame3_x">0.2667</string>
+    <string name="fire_frame4_x">0.4185</string>
+    <string name="fire_frame5_x">0.57975</string>
+    <string name="fire_frame6_x">0.73225</string>
+    <string name="fire_frame7_x">0.8805</string>
 
     <string name="cat_spawn_x1">0.20</string>
     <string name="cat_spawn_x2">0.27</string>
@@ -111,6 +139,7 @@
     <string name="game_over_screen_height_mod">0.8</string>
     <string name="game_over_screen_x_mod">0.1</string>
     <string name="game_over_screen_y_mod">0.1</string>
+
 
     <string name="game_over_restart_width_mod">0.25</string>
     <string name="game_over_restart_height_mod">0.15</string>
