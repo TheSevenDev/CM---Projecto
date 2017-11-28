@@ -20,7 +20,7 @@ import java.util.Random;
 
 public class Obstacle extends GameObject{
 
-    private final int SPEED_CAP = 40;
+    private final int SPEED_CAP = 55;
     private Random rand = new Random();
     private int speed;
     private int score;

@@ -344,8 +344,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             recordBroken = checkRecord();
         }
 
-        if (!recordBroken) {
-            paint.setColor(Color.YELLOW);
+        if (recordBroken) {
+            paint.setColor(Color.parseColor("#FFFECF"));
             canvas.drawText("RECORDE", 0.415f * WIDTH, 0.25f * HEIGHT, paint);
         }
         paint.setColor(Color.BLACK);

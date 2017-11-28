@@ -8,10 +8,9 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.content.SharedPreferences;
+
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
-import com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseMinigame;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 /**
@@ -19,12 +18,15 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
  */
 
 public class Player extends GameObject {
+    private final int PILOT_ANIMATION_FRAMES = 7;
 
     private Bitmap player;
+    private Bitmap images[];
+
     private Rect rectangle;
 
     //Animations
-    private Animation idle, walkUp, walkDown;
+    private Animation pilotAnimation;
     private AnimationManager animationManager;
 
     public int score;
@@ -41,32 +43,33 @@ public class Player extends GameObject {
 
         SharedPreferences sharedPref = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
 
-
         BitmapFactory bf = new BitmapFactory();
-        Bitmap idleimg;
-        Bitmap walk1;
-        Bitmap walk2;
+
+        images = new Bitmap[PILOT_ANIMATION_FRAMES];
 
 
         if(sharedPref.getInt("gender",0) == 0){
-            idleimg = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
-            walk1 = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
-            walk2 = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
+            //idleimg = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
+            player = bf.decodeResource(context.getResources(), R.drawable.animacao_josepiloto);
 
         }
         else
         {
-            idleimg = bf.decodeResource(context.getResources(), R.drawable.mariapiloto);
-            walk1 = bf.decodeResource(context.getResources(), R.drawable.mariapiloto);
-            walk2 = bf.decodeResource(context.getResources(), R.drawable.mariapiloto);
+            //idleimg = bf.decodeResource(context.getResources(), R.drawable.mariapiloto);
+            player = bf.decodeResource(context.getResources(), R.drawable.animacao_mariapiloto);
         }
 
 
-        idle = new Animation(new Bitmap[]{idleimg}, 2);
-        //walkUp = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
-        //walkUp = walkDown = idle;
+        for(int i = 0; i< PILOT_ANIMATION_FRAMES; i++){
 
-        animationManager =  new AnimationManager(new Animation[]{idle});
+            images[i] = Bitmap.createBitmap(player, i * (width +260), 0, width + 270, height + 120);
+        }
+
+
+
+        pilotAnimation = new Animation(new Bitmap[]{images[3]}, 3);
+
+        animationManager =  new AnimationManager(new Animation[]{pilotAnimation});
 
         score = 0;
         health = 3;
@@ -76,7 +79,6 @@ public class Player extends GameObject {
 
     public void draw(Canvas canvas) {
 
-        //canvas.drawBitmap(player, x, y, null);
         animationManager.draw(canvas, rectangle);
     }
 
