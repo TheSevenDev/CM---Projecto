@@ -3,12 +3,14 @@ package com.example.pc.irmaosmartinhoeasprofissoes.cook;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.Background;
+import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 
 /**
@@ -61,9 +63,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void surfaceCreated(SurfaceHolder holder)
     {
-
         thread = new MainThread(getHolder(), this);
 
+        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.empty_splash), WIDTH, HEIGHT);
         thread.setRunning(true);
         thread.start();
     }
