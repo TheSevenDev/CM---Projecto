@@ -8,5 +8,5 @@ public enum EnumShape
 {
     SQUARE,
     CIRCLE,
-    TRIANGLE
+    HEXAGON
 }

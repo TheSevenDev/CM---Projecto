@@ -126,8 +126,11 @@
 
 
 
-
-
+    //+++++++++++++++++++ COOK +++++++++++++++++++++++++++++++++++++++
+    <string name="component_panel_x">0.1</string>
+    <string name="component_panel_y">0.8</string>
+    <string name="component_panel_width">0.4</string>
+    <string name="component_panel_height">0.8</string>
 
 
 

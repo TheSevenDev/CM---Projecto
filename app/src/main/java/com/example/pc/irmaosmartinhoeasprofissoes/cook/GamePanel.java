@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.Background;
+import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 
 /**
@@ -22,6 +24,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     private MainThread thread;
     private Background background;
+    private MediaPlayer musicBackground;
 
     private Activity gameActivity;
 
@@ -61,8 +64,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void surfaceCreated(SurfaceHolder holder)
     {
-
         thread = new MainThread(getHolder(), this);
+
+        musicBackground = MediaPlayer.create(getContext(), R.raw.cook);
+        musicBackground.start();
+        musicBackground.setLooping(true);
 
         thread.setRunning(true);
         thread.start();

@@ -6,7 +6,7 @@ package com.example.pc.irmaosmartinhoeasprofissoes.cook;
 
 public enum EnumCakeCover
 {
-    CHOCOLATE,
-    STRAWBERRY,
-    VANILLA;
+    BLUE,
+    PURPLE,
+    GREEN
 }

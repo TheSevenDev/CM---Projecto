@@ -38,10 +38,4 @@ public class Cake extends GameObject
         canvas.drawBitmap(image, x, y, null);
     }
 
-    public void changePosition(int x, int y)
-    {
-        this.x = x;
-        this.y = y;
-    }
-
 }
