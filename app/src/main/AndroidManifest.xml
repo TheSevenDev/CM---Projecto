@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Menus.ChooseGender"
-            android:screenOrientation="landscape"
+            android:screenOrientation="reverseLandscape"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,17 +23,17 @@
         </activity>
         <activity
             android:name=".Menus.ChooseMinigame"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="reverseLandscape" />
         <activity
             android:name=".Menus.MainMenu"
-            android:screenOrientation="landscape"
+            android:screenOrientation="reverseLandscape"
             android:theme="@style/MainMenuTheme" />
         <activity
             android:name=".firefighter.FirefighterActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="reverseLandscape" />
         <activity
             android:name=".pilot.PilotActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="reverseLandscape" />
 
         <service android:name=".MusicService" />
 

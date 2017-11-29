@@ -77,8 +77,7 @@ public class Fire extends GameObject
         {
             auxBitmap = Bitmap.createBitmap(spritesheet,
                     (int)(fireFramesX[i] * spritesheet.getWidth()), 0,
-                    (int)(fireFramesWidth[i] * spritesheet.getWidth()),
-                    spritesheet.getHeight());
+                    (int)(fireFramesWidth[i] * spritesheet.getWidth()), spritesheet.getHeight());
 
             image[i] = Bitmap.createScaledBitmap(auxBitmap,
                     (int)(Double.parseDouble(context.getResources().getString(R.string.fire_sprite_width))*GamePanel.WIDTH),

@@ -3,6 +3,7 @@ package com.example.pc.irmaosmartinhoeasprofissoes.cook;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.media.MediaPlayer;
 import android.view.MotionEvent;
@@ -66,6 +67,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     {
         thread = new MainThread(getHolder(), this);
 
+        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.empty_splash), WIDTH, HEIGHT);
         musicBackground = MediaPlayer.create(getContext(), R.raw.cook);
         musicBackground.start();
         musicBackground.setLooping(true);
