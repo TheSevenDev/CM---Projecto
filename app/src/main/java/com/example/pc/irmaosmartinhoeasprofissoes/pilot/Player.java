@@ -49,25 +49,22 @@ public class Player extends GameObject {
 
 
         if(sharedPref.getInt("gender",0) == 0){
-            //idleimg = bf.decodeResource(context.getResources(), R.drawable.josepiloto);
-            player = bf.decodeResource(context.getResources(), R.drawable.animacao_josepiloto);
+            player = bf.decodeResource(context.getResources(), R.drawable.animacao_mariapiloto);
 
         }
         else
         {
-            //idleimg = bf.decodeResource(context.getResources(), R.drawable.mariapiloto);
             player = bf.decodeResource(context.getResources(), R.drawable.animacao_mariapiloto);
         }
 
-
         for(int i = 0; i< PILOT_ANIMATION_FRAMES; i++){
-
-            images[i] = Bitmap.createBitmap(player, i * (width +260), 0, width + 270, height + 120);
+            images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES), 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), height+115);
         }
 
 
 
-        pilotAnimation = new Animation(new Bitmap[]{images[3]}, 3);
+        //pilotAnimation = new Animation(new Bitmap[]{images[0]}, 0.4f);
+        pilotAnimation = new Animation(images, 0.35f);
 
         animationManager =  new AnimationManager(new Animation[]{pilotAnimation});
 
