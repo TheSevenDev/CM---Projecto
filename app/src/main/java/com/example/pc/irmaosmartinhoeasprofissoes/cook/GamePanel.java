@@ -26,6 +26,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private MainThread thread;
     private Background background;
     private MediaPlayer musicBackground;
+    private ComponentRotator componentRotator;
 
     private Activity gameActivity;
 
@@ -60,17 +61,20 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             }catch(InterruptedException e){e.printStackTrace();}
         }
+
+        musicBackground.stop();
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder)
     {
-        thread = new MainThread(getHolder(), this);
-
-        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.empty_splash), WIDTH, HEIGHT);
+        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.firefighterbg), WIDTH, HEIGHT);
         musicBackground = MediaPlayer.create(getContext(), R.raw.cook);
         musicBackground.start();
         musicBackground.setLooping(true);
+        componentRotator = new ComponentRotator(getContext());
+
+        thread = new MainThread(getHolder(), this);
 
         thread.setRunning(true);
         thread.start();
@@ -84,7 +88,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             float x = event.getX();
             float y = event.getY();
 
-
+            componentRotator.onTouchArrows(x, y);
 
             return true;
         }
@@ -111,7 +115,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
 
+            background.draw(canvas, false);
 
+            componentRotator.draw(canvas);
 
             canvas.restoreToCount(savedState);
         }

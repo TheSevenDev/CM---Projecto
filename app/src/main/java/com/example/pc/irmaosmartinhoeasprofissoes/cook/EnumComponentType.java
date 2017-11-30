@@ -9,8 +9,8 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
 public enum EnumComponentType
 {
     SHAPE(R.drawable.cake_shapes),
-    COATING(-1),
-    TOPPING(-1);
+    COATING(R.drawable.coatings),
+    TOPPING(R.drawable.toppings);
 
     private int bitmapId;
     EnumComponentType(int bitmapId)

@@ -37,6 +37,7 @@
         android:layout_marginLeft="165dp"
         android:layout_marginTop="85dp"
         android:background="@drawable/round_corner"
+        android:onClick="cookGame"
         android:src="@drawable/jose_pasteleiro"
         android:text="@string/pasteleiro" />
 
@@ -47,6 +48,7 @@
         android:layout_marginLeft="170dp"
         android:layout_marginTop="320dp"
         android:background="@color/mainYellow"
+        android:onClick="cookGame"
         android:text="@string/pasteleiro"
         android:textColor="@color/titleColor"
         android:textSize="15dp" />
