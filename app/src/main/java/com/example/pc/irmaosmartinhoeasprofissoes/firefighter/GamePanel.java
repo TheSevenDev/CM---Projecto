@@ -328,6 +328,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             if(pausedTimeStart == 0)
                 pausedTimeStart = System.nanoTime();
         }
+
+        MediaPlayer mp = new MediaPlayer();
     }
 
     @Override

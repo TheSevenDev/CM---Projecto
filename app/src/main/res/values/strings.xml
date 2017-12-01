@@ -56,7 +56,6 @@
 
     <string name="cat_frame_width">0.3221</string>
 
-
     <string name="water_meter_sprite_width">0.05</string>
     <string name="water_meter_sprite_height">0.7</string>
     <string name="water_meter_x">0.04</string>
@@ -126,10 +125,23 @@
 
 
 
+    //+++++++++++++++++++ COOK +++++++++++++++++++++++++++++++++++++++
+    <string name="component_panel_x">0.65</string>
+    <string name="component_panel_y">0.15</string>
+    <string name="component_panel_width">0.2</string>
+    <string name="component_panel_height">0.7</string>
 
+    <string name="arrow_height">0.1</string>
+    <string name="arrow_width">0.15</string>
+    <string name="left_arrow_x">0.1</string>
+    <string name="left_arrow_y">0.8</string>
+    <string name="right_arrow_x">0.3</string>
+    <string name="right_arrow_y">0.8</string>
 
-
-
+    <string name="cake_width">0.2</string>
+    <string name="cake_height">0.2</string>
+    <string name="cake_x">0.2</string>
+    <string name="cake_y">0.5</string>
 
     //+++++++++++++++++++ GAME OVER ++++++++++++++++++++++++++++++++++++++
     <string name="game_over_restart_option">1</string>
@@ -139,7 +151,6 @@
     <string name="game_over_screen_height_mod">0.8</string>
     <string name="game_over_screen_x_mod">0.1</string>
     <string name="game_over_screen_y_mod">0.1</string>
-
 
     <string name="game_over_restart_width_mod">0.25</string>
     <string name="game_over_restart_height_mod">0.15</string>

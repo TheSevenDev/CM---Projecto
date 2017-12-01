@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
+import com.example.pc.irmaosmartinhoeasprofissoes.cook.CookActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.FirefighterActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.pilot.PilotActivity;
 
@@ -55,6 +56,11 @@ public class ChooseMinigame extends GeneralActivity {
     public void fireFighterGame(View view)
     {
         startActivity(new Intent(getApplicationContext(), FirefighterActivity.class));
+    }
+
+    public void cookGame(View view)
+    {
+        startActivity(new Intent(getApplicationContext(), CookActivity.class));
     }
 
     public void pilotGame(View view)
