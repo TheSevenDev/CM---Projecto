@@ -29,6 +29,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private ComponentRotator componentRotator;
 
     private Activity gameActivity;
+    private Cake cake;
 
     public GamePanel(Context context, Activity activity)
     {
@@ -72,7 +73,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         musicBackground = MediaPlayer.create(getContext(), R.raw.cook);
         musicBackground.start();
         musicBackground.setLooping(true);
-        componentRotator = new ComponentRotator(getContext());
+
+        cake = new Cake((int) (Double.parseDouble(getResources().getString(R.string.cake_width)) * WIDTH),
+                (int) (Double.parseDouble(getResources().getString(R.string.cake_height)) * HEIGHT),
+                (int) (Double.parseDouble(getResources().getString(R.string.cake_x)) * WIDTH),
+                (int) (Double.parseDouble(getResources().getString(R.string.cake_y)) * HEIGHT), getContext());
+
+        componentRotator = new ComponentRotator(getContext(), cake);
 
         thread = new MainThread(getHolder(), this);
 
@@ -89,6 +96,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             float y = event.getY();
 
             componentRotator.onTouchArrows(x, y);
+            componentRotator.onTouchComponentPanel(x, y);
 
             return true;
         }
@@ -118,6 +126,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             background.draw(canvas, false);
 
             componentRotator.draw(canvas);
+
+
+            if(cake.getImage() != null)
+                cake.draw(canvas);
 
             canvas.restoreToCount(savedState);
         }

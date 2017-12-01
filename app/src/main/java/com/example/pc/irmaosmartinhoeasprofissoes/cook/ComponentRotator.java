@@ -20,11 +20,14 @@ public class ComponentRotator
     private Bitmap componentPanel;
     private Bitmap leftArrow, rightArrow;
     private Context context;
+    private Cake activeCake;
 
-    public ComponentRotator(Context context)
+    public ComponentRotator(Context context, Cake cake)
     {
         this.context = context;
         fillComponentList();
+
+        this.activeCake = cake;
     }
 
     private void fillComponentList()
@@ -36,7 +39,7 @@ public class ComponentRotator
             components.add(c);
         }
 
-        selectedComponent = components.get(1);
+        selectedComponent = components.get(0);
         changeComponentPanel();
 
         createArrows();
@@ -84,7 +87,8 @@ public class ComponentRotator
                 + (GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.arrow_width))))
                 && y >= (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.left_arrow_y)))
                 && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.left_arrow_y)))
-                + (GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.arrow_height)))) && components.indexOf(selectedComponent) != 0)
+                + (GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.arrow_height))))
+                && components.indexOf(selectedComponent) != 0)
         {
             rotateLeft();
         }
@@ -95,11 +99,61 @@ public class ComponentRotator
                 + (GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.arrow_width))))
                 && y >= (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.right_arrow_y)))
                 && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.right_arrow_y)))
-                + (GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.arrow_height)))) && components.indexOf(selectedComponent) != components.size() -1)
+                + (GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.arrow_height))))
+                && components.indexOf(selectedComponent) != components.size() -1
+                && components.indexOf(activeCake.getLastComponentPut()) >= components.indexOf(selectedComponent))
         {
             rotateRight();
         }
 
+    }
+
+    public void onTouchComponentPanel(float x, float y)
+    {
+        if (x >= (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.component_panel_x)))
+                && x < ((int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.component_panel_x)))
+                + (GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.component_panel_width))))
+                && y >= (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.component_panel_y)))
+                && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.component_panel_y)))
+                + (GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.component_panel_height)))))
+        {
+
+            activeCake.setLastComponentPut(selectedComponent);
+
+            switch(selectedComponent)
+            {
+                case SHAPE:
+                    changeCakeShape(y);
+                    break;
+                case COATING:
+                    //changeCakeCoating(y);
+                    break;
+                case TOPPING:
+                    //changeCakeTopping(y);
+                    break;
+            }
+        }
+    }
+
+    public void changeCakeShape(float y)
+    {
+        if(y >= (GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.component_panel_y)))
+                && y <= (GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.component_panel_y))
+                +  componentPanel.getHeight()*0.33))
+        {
+            activeCake.switchShape(EnumShape.HEXAGON);
+        }
+        else if(y > (GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.component_panel_y))
+                + componentPanel.getHeight()*0.33)
+                && y <= (GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.component_panel_y))
+                +  componentPanel.getHeight()*0.66))
+        {
+            activeCake.switchShape(EnumShape.CIRCLE);
+        }
+        else
+        {
+            activeCake.switchShape(EnumShape.SQUARE);
+        }
     }
 
     private void changeComponentPanel()
@@ -120,7 +174,8 @@ public class ComponentRotator
                 (int)(Double.parseDouble(context.getResources().getString(R.string.left_arrow_x))* GamePanel.WIDTH),
                 (int)(Double.parseDouble(context.getResources().getString(R.string.left_arrow_y))* GamePanel.HEIGHT),null);
 
-        if(components.indexOf(selectedComponent) != components.size() - 1)
+        if(components.indexOf(selectedComponent) != components.size() - 1
+                && components.indexOf(activeCake.getLastComponentPut()) >= components.indexOf(selectedComponent))
             canvas.drawBitmap(rightArrow,
                 (int)(Double.parseDouble(context.getResources().getString(R.string.right_arrow_x))* GamePanel.WIDTH),
                 (int)(Double.parseDouble(context.getResources().getString(R.string.right_arrow_y))* GamePanel.HEIGHT),null);
