@@ -212,7 +212,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
                 backgroundDay.update();
                 backgroundNight.update();
-                spawnObstacles();
+                //spawnObstacles();
 
                 orientation();
                 playerPoint.y += GRAVITY;
@@ -223,7 +223,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
         }
     }
-
 
 
     public void orientation(){
@@ -303,7 +302,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 backgroundDay.draw(canvas);
             }
             else {
-                backgroundNight.draw(canvas);
+                backgroundDay.draw(canvas);
             }
 
             player.draw(canvas);
