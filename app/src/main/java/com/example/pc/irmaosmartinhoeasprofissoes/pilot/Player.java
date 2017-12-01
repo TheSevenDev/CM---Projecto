@@ -62,9 +62,11 @@ public class Player extends GameObject {
             //    images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES)-10, 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
             //else
             if(i==0)
-                images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES), 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
+                images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES)+5, 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
             else if(i==1)
-                images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES), 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
+                images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES)-5, 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
+            else if(i==2)
+                images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES)+3, 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
             else if(i==4)
                 images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES), 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
             else if(i==5)
@@ -77,7 +79,7 @@ public class Player extends GameObject {
 
 
         //pilotAnimation = new Animation(new Bitmap[]{images[6]}, 0.4f);
-        pilotAnimation = new Animation(images, 10);
+        pilotAnimation = new Animation(images, 10f);
 
         animationManager =  new AnimationManager(new Animation[]{pilotAnimation});
 
