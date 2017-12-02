@@ -52,7 +52,6 @@ public class Animation {
             frameIndex = frameIndex >= frames.length ? 0 : frameIndex;
             lastFrame = System.currentTimeMillis();
         }
-        System.out.println("CURRENT INDEX: " + frameIndex);
     }
 
     public void draw(Canvas canvas, Rect destination){

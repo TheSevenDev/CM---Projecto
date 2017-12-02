@@ -1,5 +1,7 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.Menus;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -15,23 +17,30 @@ public class MainMenu extends GeneralActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        startService(new Intent(this, MusicService.class));
-
+        if(!isServiceRunning(MusicService.class)) {
+            startService(new Intent(this, MusicService.class));
+        }
         setContentView(R.layout.activity_mainmenu);
     }
 
     public void chooseMinigameScreen(View view)
     {
-        startActivity(new Intent(getApplicationContext(), com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseMinigame.class));
+        startActivity(new Intent(getApplicationContext(), ChooseMinigame.class));
     }
 
-    //ONPAUSE() OU ONSTOP()
+
+    public void settings(View view)
+    {
+        startActivity(new Intent(getApplicationContext(), Settings.class));
+    }
+
+    /*//ONPAUSE() OU ONSTOP()
     @Override
     protected void onUserLeaveHint() {
         super.onUserLeaveHint();
         stopService(new Intent(this, MusicService.class));
     }
-
+    */
     @Override
     protected void onResume() {
         super.onResume();
@@ -42,5 +51,15 @@ public class MainMenu extends GeneralActivity {
     @Override
     public void onBackPressed() {
 
+    }
+
+    private boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

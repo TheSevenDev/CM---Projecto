@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@drawable/mainmenu">
+    tools:background="@drawable/main_menu">
 
     <ImageButton
         android:id="@+id/button_play"
@@ -39,6 +39,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:onClick="settings"
+        />
 
 </android.support.constraint.ConstraintLayout>

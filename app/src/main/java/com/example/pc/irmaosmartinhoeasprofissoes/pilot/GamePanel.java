@@ -2,6 +2,7 @@ package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -21,6 +22,7 @@ import android.view.SurfaceView;
 import com.example.pc.irmaosmartinhoeasprofissoes.EnumGame;
 import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
 import com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseGender;
+import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.Pause;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GameOver;
@@ -177,6 +179,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 else if(option == Integer.parseInt(getResources().getString(R.string.game_over_exit_option)))
                     gameActivity.onBackPressed();
             }
+            return true;
         }
         return true;
     }
@@ -212,7 +215,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
                 backgroundDay.update();
                 backgroundNight.update();
-                //spawnObstacles();
+                spawnObstacles();
 
                 orientation();
                 playerPoint.y += GRAVITY;
