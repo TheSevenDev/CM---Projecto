@@ -123,8 +123,6 @@
     //+++++++++++++++++++ PILOT ++++++++++++++++++++++++++++++++++++++
 
 
-
-
     //+++++++++++++++++++ COOK +++++++++++++++++++++++++++++++++++++++
     <string name="component_panel_x">0.65</string>
     <string name="component_panel_y">0.15</string>
@@ -166,6 +164,7 @@
     <string name="game_over_character_height_mod">0.60</string>
     <string name="game_over_character_x_mod">0.12</string>
     <string name="game_over_character_y_mod">0.25</string>
+    <string name="title_activity_tracker">Map</string>
 
 
 </resources>

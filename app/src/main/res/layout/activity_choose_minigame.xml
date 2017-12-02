@@ -127,17 +127,13 @@
         android:text="@string/aviador"
         android:textSize="12dp" />
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="445dp"
-        android:layout_marginTop="32dp"
-        android:background="@color/mainYellow"
+    <ImageView
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
         android:onClick="backToMainMenu"
-        android:text="@string/back_to_menu"
-        android:textColor="@color/titleColor"
-        android:textSize="14dp" />
+        android:src="@drawable/back" />
 
 
     <ImageView
