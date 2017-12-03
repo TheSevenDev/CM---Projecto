@@ -53,13 +53,13 @@ public class Cake extends GameObject
         switch(shape)
         {
             case HEXAGON:
-                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.bases), 0);
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.bases_temp), 0);
                 break;
             case CIRCLE:
-                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.bases), 0.33);
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.bases_temp), 0.33);
                 break;
             case SQUARE:
-                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.bases), 0.66);
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.bases_temp), 0.66);
                 break;
         }
     }
