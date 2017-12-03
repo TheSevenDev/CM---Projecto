@@ -32,6 +32,18 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/button3"
+        android:layout_below="@+id/button3"
+        android:layout_marginTop="83dp"
+        android:onClick="manageAudio"
+        android:text="Mute"
+        tools:layout_editor_absoluteX="252dp"
+        tools:layout_editor_absoluteY="146dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"

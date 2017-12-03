@@ -14,7 +14,7 @@ import android.support.annotation.Nullable;
 
 public class MusicService extends Service {
 
-    MediaPlayer mp;
+    public MediaPlayer mp;
 
     @Nullable
     @Override
@@ -49,6 +49,4 @@ public class MusicService extends Service {
         MediaPlayer mp = MediaPlayer.create(context, uri);
         mp.start();
     }
-
-
 }
