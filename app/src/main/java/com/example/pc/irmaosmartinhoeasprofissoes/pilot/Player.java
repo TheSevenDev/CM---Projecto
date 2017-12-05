@@ -70,9 +70,6 @@ public class Player extends GameObject {
 
         }
 
-
-
-        //pilotAnimation = new Animation(new Bitmap[]{images[6]}, 0.4f);
         pilotAnimation = new Animation(images, 0.4f);
 
         animationManager =  new AnimationManager(new Animation[]{pilotAnimation});
