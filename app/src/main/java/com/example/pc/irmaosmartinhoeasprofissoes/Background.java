@@ -13,7 +13,7 @@ import android.graphics.Paint;
 public class Background
 {
     protected Bitmap image;
-    protected int x, y, width, height, dx;
+    protected int x, y, width, height;
 
     public Background(Bitmap res, int w, int h)
     {

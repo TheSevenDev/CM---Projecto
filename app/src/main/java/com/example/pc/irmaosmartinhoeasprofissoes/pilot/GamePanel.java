@@ -1,18 +1,31 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Vibrator;
+import android.support.constraint.solver.widgets.Rectangle;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.example.pc.irmaosmartinhoeasprofissoes.EnumGame;
 import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
+import com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseGender;
+import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
+import com.example.pc.irmaosmartinhoeasprofissoes.Pause;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
+import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GameOver;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,18 +37,15 @@ import java.util.Random;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
-    //public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
-    //public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
-
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-    private final int GRAVITY = 9;
+    private final int GRAVITY = 7;
     public final int MIN_HEIGHT_BOUND = 20;
     public final int MAX_HEIGHT_BOUND = (HEIGHT - 150);
 
 
-    private final float MIN_DAYLIGHT = 57.0f; //VERIFICAR QUAL O VALOR ESTIMADO À LUZ DO DIA
+    private final float MIN_DAYLIGHT = 20.0f; //VERIFICAR QUAL O VALOR ESTIMADO À LUZ DO DIA
     private MainThread thread;
     private ScrollingBackground backgroundDay;
     private ScrollingBackground backgroundNight;
@@ -45,7 +55,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     private ArrayList<Obstacle> obstacles;
     private long obstacleStartTime;
-    private long ostacleElapsedTime;
+
+    private Bitmap health[];
+
+    private Pause pause;
+    private GameOver gameOver;
 
     private OrientationData orientationData;
     private LightData lightData;
@@ -54,13 +68,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private long initTime;
 
     private Context context;
+    private Activity gameActivity;
+
+    private boolean recordChecked;
+    private boolean recordBroken;
 
     private Random rand = new Random();
 
-    public GamePanel(Context context)
+    public GamePanel(Context context, Activity activity)
     {
         super(context);
         this.context = context;
+        this.gameActivity = activity;
 
         //add the callback to the surfaceholder to intercept events
         getHolder().addCallback(this);
@@ -77,6 +96,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         frameTime = System.currentTimeMillis();
         initTime = System.currentTimeMillis();
+
+        SharedPreferences sharedPref = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+
+        if(!sharedPref.contains("pilotRecord"))
+        {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("pilotRecord", 0);
+            editor.apply();
+        }
+        recordChecked = false;
+        recordBroken = false;
     }
 
     @Override
@@ -106,88 +136,155 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         backgroundNight = new ScrollingBackground(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_night) ,WIDTH, HEIGHT);
         backgroundNight.setVector(-5);
 
-        Rect playerRect = new Rect(150,150,300,275);
-        player = new Player(playerRect, BitmapFactory.decodeResource(getResources(), R.drawable.martinhopiloto),50, 50, context);
-
-        playerPoint = new Point(170, HEIGHT/2);
-        player.update(playerPoint);
-
+        health = new Bitmap[4];
+        health[0] = BitmapFactory.decodeResource(getResources(), R.drawable.slot0);
+        health[1] = BitmapFactory.decodeResource(getResources(), R.drawable.slot1);
+        health[2] = BitmapFactory.decodeResource(getResources(), R.drawable.slot2);
+        health[3] = BitmapFactory.decodeResource(getResources(), R.drawable.slot3);
 
         obstacles = new ArrayList<>();
         obstacleStartTime = System.nanoTime();
 
+        pause = new Pause(getContext());
+        gameOver = new GameOver(getContext(), EnumGame.PILOT);
+
 
         thread = new MainThread(getHolder(), this);
 
+        resetGame();
 
         thread.setRunning(true);
         thread.start();
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+            float x = event.getX();
+            float y = event.getY();
+
+            if(!pause.isPaused() && !gameOver.isGameOver())
+                pause.onTouchPauseButton((int)x, (int)y);
+            else if(pause.isPaused())
+            {
+                if(pause.onTouchPauseScreen((int) x, (int) y))
+                    gameActivity.onBackPressed();
+            }
+            else if(gameOver.isGameOver())
+            {
+                int option = gameOver.onTouchPauseScreen((int) x, (int) y);
+                if(option == Integer.parseInt(getResources().getString(R.string.game_over_restart_option)))
+                    resetGame();
+                else if(option == Integer.parseInt(getResources().getString(R.string.game_over_exit_option)))
+                    gameActivity.onBackPressed();
+            }
+            return true;
+        }
+        return true;
+    }
+
+
+    public void resetGame(){
+
+        Rect playerRect = new Rect(150,150,315,275);
+        player = new Player(playerRect, 50, 50, context);
+        player.resetScore();
+        player.resetHealth();
+
+
+        playerPoint = new Point(170, HEIGHT/2);
+        player.update(playerPoint);
+
+        obstacles = new ArrayList<>();
+        gameOver.setGameOver(false);
+
+        recordChecked = false;
+        recordBroken = false;
+    }
 
     public void update()
     {
-        if(frameTime < initTime)
-        frameTime = initTime;
+        if(!player.isAlive())
+            gameOver.setGameOver(true);
 
-        int elapsedTime = (int)(System.currentTimeMillis() - frameTime);
+        else{
+            if(!pause.isPaused() && !gameOver.isGameOver()) {
+                if (frameTime < initTime)
+                    frameTime = initTime;
+
+                backgroundDay.update();
+                backgroundNight.update();
+                spawnObstacles();
+
+                orientation();
+                playerPoint.y += GRAVITY;
+                checkBounds();
+                player.update(playerPoint);
+
+                checkCollision();
+            }
+        }
+    }
+
+
+    public void orientation(){
+        int elapsedTime = (int) (System.currentTimeMillis() - frameTime);
         frameTime = System.currentTimeMillis();
 
-        if(orientationData.getOrientation() != null && orientationData.getStartOrientation() != null) {
+        if (orientationData.getOrientation() != null && orientationData.getStartOrientation() != null) {
             float pitch = orientationData.getOrientation()[1] - orientationData.getStartOrientation()[1];    //Y DIRECTION
             float roll = orientationData.getOrientation()[2] - orientationData.getStartOrientation()[2];     //X DIRECTION
 
-            float xSpeed = 2* roll * WIDTH/800f;
-            float ySpeed = 2* pitch * HEIGHT/800f; //1SECOND TO FULLFILL THE SCREEN
+            float xSpeed = 2 * roll * WIDTH / 1100f;
 
-            playerPoint.y -= Math.abs(xSpeed* elapsedTime) > 3 ? xSpeed* elapsedTime : 0;
+            playerPoint.y -= Math.abs(xSpeed * elapsedTime) > 3 ? xSpeed * elapsedTime : 0;
         }
+    }
 
-        playerPoint.y+=GRAVITY;
-        //BOUNDS
-        if(playerPoint.x < 0)
+    public void checkBounds(){
+        if (playerPoint.x < 0)
             playerPoint.x = 0;
-        else if(playerPoint.x > WIDTH)
+        else if (playerPoint.x > WIDTH)
             playerPoint.x = WIDTH;
 
-        if(playerPoint.y < MIN_HEIGHT_BOUND)
+        if (playerPoint.y < MIN_HEIGHT_BOUND)
             playerPoint.y = MIN_HEIGHT_BOUND;
-        else if(playerPoint.y > MAX_HEIGHT_BOUND)
+        else if (playerPoint.y > MAX_HEIGHT_BOUND)
             playerPoint.y = MAX_HEIGHT_BOUND;
+    }
 
-        backgroundDay.update();
-        backgroundNight.update();
+    public void checkCollision(){
+        Iterator<Obstacle> it = obstacles.iterator();
+        Obstacle aux = null;
+        while (it.hasNext()) {
+            aux = it.next();
+            if (aux.getX() < -WIDTH)
+                it.remove();
+            else {
+                aux.update();
+                if (collision(aux.getRectangle(), player.getImageRectangle())) {
+                        player.takeDamage(1);
+                    it.remove();
+                }
+            }
+        }
+    }
 
-        player.update(playerPoint);
-
-
+    public void spawnObstacles(){
         long obstaclesElapsed = (System.nanoTime() - obstacleStartTime) / 1000000;
-        if(obstaclesElapsed > 1000) {
-            int randomY = (int)(rand.nextInt(MAX_HEIGHT_BOUND - 90) + 90);
+        if (obstaclesElapsed > (1000 - player.getScore()/4)) {
+            int randomY = (int) (rand.nextInt(MAX_HEIGHT_BOUND - 90) + 90);
             Bitmap bird = BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day);
             Bitmap madBird = BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day_mad);
 
             if (obstacles.isEmpty()) {
-                obstacles.add(new Obstacle(bird,madBird, WIDTH + 10, randomY, 68, 70, player.getScore(), 7));
+                obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, 66, 69, player.getScore(), 7));
             } else {
-                obstacles.add(new Obstacle(bird,madBird,WIDTH + 10, randomY,68,70, player.getScore(), 7));
+                obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, 66, 69, player.getScore(), 7));
             }
-            //reset timer
-            obstacleStartTime = System.nanoTime();
-        }
 
-        Iterator<Obstacle> it = obstacles.iterator();
-        Obstacle aux = null;
-        while(it.hasNext()){
-            aux = it.next();
-            if(aux.getX() < -WIDTH)
-                it.remove();
-            else{
-                aux.update();
-                if(collision(aux,player)){
-                    System.out.println("REBENTOU");
-                }
-            }
+            obstacleStartTime = System.nanoTime();
         }
     }
 
@@ -208,19 +305,59 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 backgroundDay.draw(canvas);
             }
             else {
-                backgroundNight.draw(canvas);
+                backgroundDay.draw(canvas);
             }
 
             player.draw(canvas);
+            canvas.drawBitmap(health[player.getHealth()],WIDTH*0.01f, HEIGHT*0.03f, null); //CHANGE VALUES TO SCALE
             for(Obstacle ob : obstacles){
                 ob.draw(canvas);
             }
             canvas.restoreToCount(savedState);
         }
+
+        if(!gameOver.isGameOver())
+            pause.draw(canvas);
+        else {
+            gameOver.draw(canvas);
+            drawScore(canvas);
+        }
     }
 
-    public boolean collision(GameObject a, GameObject b){
-        return Rect.intersects(a.getRectangle(),b.getRectangle());
+    public boolean checkRecord(){
+        SharedPreferences sharedPref = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+        if(player.getScore() > sharedPref.getInt("pilotRecord", 0)){
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("pilotRecord", player.getScore());
+            editor.apply();
+            recordChecked = true;
+            return true;
+        }
+        recordChecked = true;
+        return false;
+    }
+
+    public void drawScore(Canvas canvas) {
+        Paint paint = new Paint();
+        paint.setTextSize(53);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+
+        if (!recordChecked) {
+            recordBroken = checkRecord();
+        }
+
+        if (recordBroken) {
+            paint.setColor(Color.parseColor("#FFFECF"));
+            canvas.drawText("RECORDE", 0.415f * WIDTH, 0.25f * HEIGHT, paint);
+        }
+        paint.setColor(Color.BLACK);
+        canvas.drawText((player.getScore() + " metros"), 0.41f * WIDTH, 0.37f * HEIGHT, paint);
+
+    }
+
+
+    public boolean collision(Rect a, Rect b){
+        return Rect.intersects(a,b);
     }
 
 }

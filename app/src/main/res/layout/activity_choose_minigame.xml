@@ -21,13 +21,14 @@
     <Button
         android:id="@+id/desc_firefighter"
         android:layout_width="80dp"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="70dp"
-        android:layout_marginTop="320dp"
-        android:background="@color/mainYellow"
+        android:layout_marginTop="317dp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/gotham_bold_font"
+        android:background="@drawable/round_corner_profession_name"
         android:text="@string/bombeiro"
-        android:textColor="@color/titleColor"
-        android:textSize="15dp" />
+        android:textSize="12dp" />
 
     <!-- Caixa Pasteleiro   -->
     <ImageButton
@@ -37,19 +38,22 @@
         android:layout_marginLeft="165dp"
         android:layout_marginTop="85dp"
         android:background="@drawable/round_corner"
+        android:onClick="cookGame"
         android:src="@drawable/jose_pasteleiro"
         android:text="@string/pasteleiro" />
 
     <Button
         android:id="@+id/desc_baker"
         android:layout_width="89dp"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="170dp"
-        android:layout_marginTop="320dp"
-        android:background="@color/mainYellow"
+        android:layout_marginTop="317dp"
+        android:background="@drawable/round_corner_profession_name"
+        android:fontFamily="@font/gotham_bold_font"
+        android:onClick="cookGame"
         android:text="@string/pasteleiro"
-        android:textColor="@color/titleColor"
-        android:textSize="15dp" />
+        android:textColor="#FFFFFF"
+        android:textSize="12dp" />
 
 
     <!-- Caixa Professor   -->
@@ -67,13 +71,14 @@
     <Button
         android:id="@+id/desc_teacher"
         android:layout_width="89dp"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="275dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="317dp"
         android:background="@color/unavailableColor"
+        android:fontFamily="@font/gotham_bold_font"
         android:text="@string/professor"
-        android:textColor="@color/titleColor"
-        android:textSize="15dp" />
+        android:textColor="#FFFFFF"
+        android:textSize="12dp" />
 
     <!-- Caixa Pintor   -->
     <ImageButton
@@ -90,13 +95,14 @@
     <Button
         android:id="@+id/desc_painter"
         android:layout_width="89dp"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="380dp"
-        android:layout_marginTop="320dp"
-        android:background="@color/mainYellow"
+        android:layout_marginTop="317dp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/gotham_bold_font"
+        android:background="@drawable/round_corner_profession_name"
         android:text="@string/pintor"
-        android:textColor="@color/titleColor"
-        android:textSize="15dp" />
+        android:textSize="12dp" />
 
     <!-- Caixa Aviador   -->
     <ImageButton
@@ -114,36 +120,22 @@
     <Button
         android:id="@+id/desc_pilot"
         android:layout_width="89dp"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="485dp"
-        android:layout_marginTop="320dp"
-        android:background="@color/mainYellow"
+        android:layout_marginTop="317dp"
+        android:background="@drawable/round_corner_profession_name"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/gotham_bold_font"
         android:text="@string/aviador"
-        android:textColor="@color/titleColor"
-        android:textSize="15dp" />
+        android:textSize="12dp" />
 
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="@string/choose_minigame_title"
-        android:textColor="@color/titleColor"
-        android:textSize="20dp" />
-
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="445dp"
+    <ImageView
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:background="@color/mainYellow"
         android:onClick="backToMainMenu"
-        android:text="@string/back_to_menu"
-        android:textColor="@color/titleColor"
-        android:textSize="15dp" />
+        android:src="@drawable/back" />
 
 
     <ImageView

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
@@ -18,7 +20,7 @@ import java.util.Random;
 
 public class Obstacle extends GameObject{
 
-    private final int SPEED_CAP = 40;
+    private final int SPEED_CAP = 55;
     private Random rand = new Random();
     private int speed;
     private int score;
@@ -27,6 +29,9 @@ public class Obstacle extends GameObject{
     private Bitmap spritesheet;
     private Bitmap image[];
 
+    private boolean health;
+    private Bitmap healthImage;
+
     public Obstacle(Bitmap bird,Bitmap madBird, int x, int y,int w, int h, int s,int numFrames) {
         this.x = x;
         this.y = y;
@@ -34,14 +39,14 @@ public class Obstacle extends GameObject{
         this.height = h;
         score = s;
 
-        speed = 11 + (int)(rand.nextDouble() * score/30);
+        speed = 13 + (int)(rand.nextDouble() * score/30);
 
         if(speed >= SPEED_CAP)
             speed = SPEED_CAP;
 
         image = new Bitmap[numFrames];
 
-        if(speed <= 17)
+        if (speed <= 17)
             spritesheet = bird;
         else
             spritesheet = madBird;
@@ -61,20 +66,20 @@ public class Obstacle extends GameObject{
 
     public void draw(Canvas canvas){
         try {
-            canvas.drawBitmap(animation.getImage(), x, y, null);
+            canvas.drawBitmap(animation.getImage(), x, y, new Paint());
         }
         catch(Exception e){
             e.printStackTrace();
         }
     }
 
+    public boolean isHealth(){
+        return health;
+    }
+
     public int getWidht(){
         return width-10;
     }
 
-
-
-
-
-
 }
+

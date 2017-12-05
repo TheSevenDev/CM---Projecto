@@ -6,7 +6,9 @@ package com.example.pc.irmaosmartinhoeasprofissoes.cook;
 
 public enum EnumShape
 {
-    SQUARE,
+    HEXAGON,
     CIRCLE,
-    TRIANGLE
+    SQUARE
+
+
 }

@@ -1,11 +1,14 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
+
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
@@ -15,48 +18,79 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
  */
 
 public class Player extends GameObject {
+    private final int PILOT_ANIMATION_FRAMES = 7;
 
     private Bitmap player;
+    private Bitmap images[];
+
     private Rect rectangle;
 
     //Animations
-    private Animation idle, walkUp, walkDown;
+    private Animation pilotAnimation;
     private AnimationManager animationManager;
 
     public int score;
-
+    public int health;
     private long startTime;
 
-    public Player(Rect rectangle, Bitmap res, int x, int y, Context context) {
+    public Player(Rect rectangle, int x, int y, Context context) {
         this.rectangle = rectangle;
         this.x = x;
         this.y = y;
         this.width = rectangle.width();
         this.height = rectangle.height();
         this.context = context;
-        //player = Bitmap.createScaledBitmap(res, width, height, false);
 
-
+        SharedPreferences sharedPref = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
 
         BitmapFactory bf = new BitmapFactory();
-        Bitmap idleimg = bf.decodeResource(context.getResources(), R.drawable.martinhopiloto);
-        Bitmap walk1 = bf.decodeResource(context.getResources(), R.drawable.martinhopiloto);
-        Bitmap walk2 = bf.decodeResource(context.getResources(), R.drawable.martinhopiloto);
 
-        idle = new Animation(new Bitmap[]{idleimg}, 2);
-        //walkUp = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
-        //walkUp = walkDown = idle;
+        images = new Bitmap[PILOT_ANIMATION_FRAMES];
 
-        animationManager =  new AnimationManager(new Animation[]{idle});
+
+        if(sharedPref.getInt("gender",0) == 0){
+            player = bf.decodeResource(context.getResources(), R.drawable.animacao_mariapiloto);
+
+        }
+        else
+        {
+            player = bf.decodeResource(context.getResources(), R.drawable.animacao_mariapiloto);
+        }
+
+        for(int i = 0; i< PILOT_ANIMATION_FRAMES; i++){
+            //if(i==(PILOT_ANIMATION_FRAMES))
+            //    images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES)-10, 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
+            //else
+            if(i==0)
+                images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES)+5, 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
+            else if(i==1)
+                images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES)-5, 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
+            else if(i==2)
+                images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES)+3, 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
+            else if(i==4)
+                images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES), 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
+            else if(i==5)
+               images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES)+5, 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
+            else
+                images[i] = Bitmap.createBitmap(player, (int) i * (player.getWidth()/PILOT_ANIMATION_FRAMES)-5, 0, (int)(player.getWidth()/PILOT_ANIMATION_FRAMES), player.getHeight());
+
+        }
+
+
+
+        //pilotAnimation = new Animation(new Bitmap[]{images[6]}, 0.4f);
+        pilotAnimation = new Animation(images, 10f);
+
+        animationManager =  new AnimationManager(new Animation[]{pilotAnimation});
 
         score = 0;
+        health = 3;
         startTime = System.nanoTime();
     }
 
 
     public void draw(Canvas canvas) {
 
-        //canvas.drawBitmap(player, x, y, null);
         animationManager.draw(canvas, rectangle);
     }
 
@@ -91,5 +125,32 @@ public class Player extends GameObject {
 
     public void resetScore(){
         score = 0;
+    }
+
+    public void takeDamage(int d){
+        health-=d;
+    }
+
+    public void restoreHealth(int r){
+        if(health < 3)
+            health+=r;
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public void resetHealth(){
+        health = 3;
+    }
+
+    public Rect getImageRectangle(){
+        return rectangle;
+    }
+
+    public boolean isAlive(){
+        return health>0;
+    }
+    public void rotate(Matrix m){
     }
 }

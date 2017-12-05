@@ -11,9 +11,6 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 public class ChooseGender extends GeneralActivity {
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +39,7 @@ public class ChooseGender extends GeneralActivity {
     {
         SharedPreferences sharedPref = ChooseGender.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("gender", 0);
+        editor.putInt("gender", Integer.parseInt(this.getResources().getString(R.string.choose_male)));
         editor.apply();
         goToMainMenu();
     }
@@ -51,7 +48,7 @@ public class ChooseGender extends GeneralActivity {
     {
         SharedPreferences sharedPref = ChooseGender.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("gender", 1);
+        editor.putInt("gender", Integer.parseInt(this.getResources().getString(R.string.choose_female)));
         editor.apply();
         goToMainMenu();
     }
