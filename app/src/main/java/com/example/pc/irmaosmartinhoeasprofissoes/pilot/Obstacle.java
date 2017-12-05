@@ -20,7 +20,7 @@ import java.util.Random;
 
 public class Obstacle extends GameObject{
 
-    private final int SPEED_CAP = 55;
+    private final int SPEED_CAP = 68;
     private Random rand = new Random();
     private int speed;
     private int score;
@@ -39,7 +39,7 @@ public class Obstacle extends GameObject{
         this.height = h;
         score = s;
 
-        speed = 13 + (int)(rand.nextDouble() * score/30);
+        speed = 14 + (int) (rand.nextDouble() * score / 30);
 
         if(speed >= SPEED_CAP)
             speed = SPEED_CAP;

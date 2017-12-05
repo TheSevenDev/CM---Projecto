@@ -39,12 +39,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
-
-    private final int GRAVITY = 7;
     public final int MIN_HEIGHT_BOUND = 20;
     public final int MAX_HEIGHT_BOUND = (HEIGHT - 150);
-
-
+    private final int GRAVITY = 7;
     private final float MIN_DAYLIGHT = 20.0f; //VERIFICAR QUAL O VALOR ESTIMADO À LUZ DO DIA
     private MainThread thread;
     private ScrollingBackground backgroundDay;
@@ -274,7 +271,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public void spawnObstacles(){
         long obstaclesElapsed = (System.nanoTime() - obstacleStartTime) / 1000000;
         if (obstaclesElapsed > (1000 - player.getScore()/4)) {
-            int randomY = (int) (rand.nextInt(MAX_HEIGHT_BOUND - 90) + 90);
+            int randomY = rand.nextInt(MAX_HEIGHT_BOUND - 30) + 30;
             Bitmap bird = BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day);
             Bitmap madBird = BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day_mad);
 
@@ -305,7 +302,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 backgroundDay.draw(canvas);
             }
             else {
-                backgroundDay.draw(canvas);
+                backgroundNight.draw(canvas);
             }
 
             player.draw(canvas);
