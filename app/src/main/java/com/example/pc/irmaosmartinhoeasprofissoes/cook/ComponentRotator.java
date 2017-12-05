@@ -120,39 +120,53 @@ public class ComponentRotator
 
             activeCake.setLastComponentPut(selectedComponent);
 
-            switch(selectedComponent)
-            {
-                case SHAPE:
-                    changeCakeShape(y);
-                    break;
-                case COATING:
-                    //changeCakeCoating(y);
-                    break;
-                case TOPPING:
-                    //changeCakeTopping(y);
-                    break;
-            }
+            changeCakeComponent(y);
         }
     }
 
-    public void changeCakeShape(float y)
+    public void changeCakeComponent(float y)
     {
         if(y >= (GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.component_panel_y)))
                 && y <= (GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.component_panel_y))
                 +  componentPanel.getHeight()*0.33))
         {
-            activeCake.switchShape(EnumShape.HEXAGON);
+            switch(selectedComponent)
+            {
+                case SHAPE:
+                    activeCake.switchShape(EnumShape.HEXAGON);
+                    break;
+                case COATING:
+                    activeCake.switchCoating(EnumCakeCoating.PURPLE);
+                    break;
+            }
+
         }
         else if(y > (GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.component_panel_y))
                 + componentPanel.getHeight()*0.33)
                 && y <= (GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.component_panel_y))
                 +  componentPanel.getHeight()*0.66))
         {
-            activeCake.switchShape(EnumShape.CIRCLE);
+            switch(selectedComponent)
+            {
+                case SHAPE:
+                    activeCake.switchShape(EnumShape.CIRCLE);
+                    break;
+                case COATING:
+                    activeCake.switchCoating(EnumCakeCoating.BLUE);
+                    break;
+            }
         }
         else
         {
-            activeCake.switchShape(EnumShape.SQUARE);
+            switch(selectedComponent)
+            {
+                case SHAPE:
+                    activeCake.switchShape(EnumShape.SQUARE);
+                    break;
+                case COATING:
+                    activeCake.switchCoating(EnumCakeCoating.ORANGE);
+                    break;
+            }
         }
     }
 
