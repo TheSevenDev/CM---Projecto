@@ -138,6 +138,9 @@ public class ComponentRotator
                 case COATING:
                     activeCake.switchCoating(EnumCakeCoating.PURPLE);
                     break;
+                case TOPPING:
+                    activeCake.switchTopping(EnumCakeTopping.CHERRY);
+                    break;
             }
 
         }
@@ -154,6 +157,9 @@ public class ComponentRotator
                 case COATING:
                     activeCake.switchCoating(EnumCakeCoating.BLUE);
                     break;
+                case TOPPING:
+                    activeCake.switchTopping(EnumCakeTopping.CHOCOLATE);
+                    break;
             }
         }
         else
@@ -165,6 +171,9 @@ public class ComponentRotator
                     break;
                 case COATING:
                     activeCake.switchCoating(EnumCakeCoating.ORANGE);
+                    break;
+                case TOPPING:
+                    activeCake.switchTopping(EnumCakeTopping.STRAWBERRY);
                     break;
             }
         }
