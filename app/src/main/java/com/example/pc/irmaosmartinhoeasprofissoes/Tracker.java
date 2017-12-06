@@ -31,8 +31,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class Tracker extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
-    private static final int LOCATION_PERMISSION_CONSTANT = 1;
-
 
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -13,7 +14,7 @@ import android.view.WindowManager;
  * Created by Bruno on 12/11/2017.
  */
 
-public class GeneralActivity extends AppCompatActivity {
+public class GeneralActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

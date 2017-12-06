@@ -10,7 +10,6 @@
         android:id="@+id/alphaBackground2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
         android:alpha="0.8"
         android:background="@drawable/empty_panel"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,19 +52,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.36" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
-        android:layout_marginEnd="224dp"
-        android:layout_marginTop="8dp"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationButton"
-        app:layout_constraintVertical_bias="0.234" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -74,7 +60,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Localização do jogador"
+        android:text="Localização do jogador:"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/locationButton"
@@ -87,29 +73,45 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="36dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Música"
+        android:text="Créditos"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/volumeIcon"
-        app:layout_constraintHorizontal_bias="0.226"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.907"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/volumeIcon"
+        app:layout_constraintVertical_bias="0.875" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="92dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="8dp"
+        android:text="Música:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.246" />
+        app:layout_constraintVertical_bias="0.629" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/volumeIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="232dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/volume_up"
+        android:onClick="manageAudio"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/switch1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.545"
-        app:srcCompat="@drawable/volume_up" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationButton"
+        app:layout_constraintVertical_bias="0.354" />
+
 </android.support.constraint.ConstraintLayout>

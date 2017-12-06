@@ -11,11 +11,15 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
@@ -26,15 +30,27 @@ import java.util.ArrayList;
 
 public class MainMenu extends GeneralActivity {
 
-
+public static MediaPlayer mp;
 
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!isServiceRunning(MusicService.class)) {
-            startService(new Intent(this, MusicService.class));
+
+        //if (!isServiceRunning(MusicService.class)) {
+          //  startService(new Intent(this, MusicService.class));
+        //}
+        if(mp == null){
+            mp = MediaPlayer.create(this, R.raw.mainmenu);
+            mp.setLooping(true);
+            mp.setVolume(100, 100);
+            mp.start();
+        }
+
+        if(!mp.isPlaying()){
+            mp.seekTo(mp.getCurrentPosition() - 100);
+            mp.start();
         }
 
         setContentView(R.layout.activity_mainmenu);
@@ -57,9 +73,33 @@ public class MainMenu extends GeneralActivity {
     }
     */
     @Override
+    protected  void onPause(){
+        super.onPause();
+        //stopService(new Intent(this, MusicService.class));
+        mp.pause();
+    }
+
+    @Override
+    protected  void onStop(){
+        super.onStop();
+        //stopService(new Intent(this, MusicService.class));
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-        startService(new Intent(this, MusicService.class));
+        if(!mp.isPlaying()) {
+            mp.seekTo(mp.getCurrentPosition()- 100);
+            mp.start();
+        }
+        //startService(new Intent(this, MusicService.class));
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        mp.stop();
+        mp = null;
     }
 
     //NO ACTION FOR BACK BUTTON
@@ -78,4 +118,16 @@ public class MainMenu extends GeneralActivity {
         return false;
     }
 
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+    }
 }

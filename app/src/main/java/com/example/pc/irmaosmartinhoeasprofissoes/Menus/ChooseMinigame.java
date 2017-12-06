@@ -11,6 +11,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,10 +32,16 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
     private static final int PERMISSIONS_CONSTANT = 1;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_minigame);
+
+        if(!MainMenu.mp.isPlaying()) {
+            MainMenu.mp.seekTo(MainMenu.mp.getCurrentPosition() - 100);
+            MainMenu.mp.start();
+        }
 
         firefighter = (ImageButton)findViewById(R.id.imgbtn_firefighter);
         baker = (ImageButton)findViewById(R.id.imgbtn_baker);
@@ -89,9 +96,31 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
     @Override
     protected void onResume() {
         super.onResume();
-        if(!isServiceRunning(MusicService.class)){
-            startService(new Intent(this, MusicService.class));
+        //if(!isServiceRunning(MusicService.class)){
+        //    startService(new Intent(this, MusicService.class));
+        //}
+        if(!MainMenu.mp.isPlaying()) {
+            MainMenu.mp.seekTo(MainMenu.mp.getCurrentPosition() - 100);
+            MainMenu.mp.start();
         }
+    }
+    @Override
+    protected  void onPause(){
+        super.onPause();
+        MainMenu.mp.pause();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+
+    }
+
+    @Override
+    protected  void onDestroy(){
+        super.onDestroy();
+        MainMenu.mp.stop();
+        MainMenu.mp = null;
     }
 
     private boolean isServiceRunning(Class<?> serviceClass) {
