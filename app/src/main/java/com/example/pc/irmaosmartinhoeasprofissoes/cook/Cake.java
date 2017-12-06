@@ -82,6 +82,24 @@ public class Cake extends GameObject
         }
     }
 
+    public void switchTopping(EnumCakeTopping topping)
+    {
+        this.topping = topping;
+
+        switch(coating)
+        {
+            case PURPLE:
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet), 0);
+                break;
+            case BLUE:
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet), 0.335);
+                break;
+            case ORANGE:
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet), 0.67);
+                break;
+        }
+    }
+
 
     public void changeImage(Bitmap bitmap, double startingHeight)
     {
@@ -130,24 +148,119 @@ public class Cake extends GameObject
                         break;
                 }
                 break;
+            case TOPPING:
+                switch(shape)
+                {
+                    case HEXAGON:
+                        switch(topping)
+                        {
+                            case CHERRY:
+                                auxBitmap = Bitmap.createBitmap(bitmap,
+                                        (int)((bitmap.getWidth() * (0 + 0.1108 * 0))),
+                                        (int)(bitmap.getHeight() * startingHeight),
+                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+
+                                image = Bitmap.createScaledBitmap(auxBitmap,
+                                        getWidth(),
+                                        getHeight(), false);
+                                break;
+                            case CHOCOLATE:
+                                auxBitmap = Bitmap.createBitmap(bitmap,
+                                        (int)((bitmap.getWidth() * (0 + 0.1108 * 1))),
+                                        (int)(bitmap.getHeight() * startingHeight),
+                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+
+                                image = Bitmap.createScaledBitmap(auxBitmap,
+                                        getWidth(),
+                                        getHeight(), false);
+                                break;
+                            case STRAWBERRY:
+                                auxBitmap = Bitmap.createBitmap(bitmap,
+                                        (int)((bitmap.getWidth() * (0 + 0.1108 * 2))),
+                                        (int)(bitmap.getHeight() * startingHeight),
+                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+
+                                image = Bitmap.createScaledBitmap(auxBitmap,
+                                        getWidth(),
+                                        getHeight(), false);
+                                break;
+                        }
+                        break;
+                    case SQUARE:
+                        switch(topping)
+                        {
+                            case CHERRY:
+                                auxBitmap = Bitmap.createBitmap(bitmap,
+                                        (int)((bitmap.getWidth() * (0.33 + 0.1108 * 0))),
+                                        (int)(bitmap.getHeight() * startingHeight),
+                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+
+                                image = Bitmap.createScaledBitmap(auxBitmap,
+                                        getWidth(),
+                                        getHeight(), false);
+                                break;
+                            case CHOCOLATE:
+                                auxBitmap = Bitmap.createBitmap(bitmap,
+                                        (int)((bitmap.getWidth() * (0.33 + 0.1108 * 1))),
+                                        (int)(bitmap.getHeight() * startingHeight),
+                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+
+                                image = Bitmap.createScaledBitmap(auxBitmap,
+                                        getWidth(),
+                                        getHeight(), false);
+                                break;
+                            case STRAWBERRY:
+                                auxBitmap = Bitmap.createBitmap(bitmap,
+                                        (int)((bitmap.getWidth() * (0.33 + 0.1108 * 2))),
+                                        (int)(bitmap.getHeight() * startingHeight),
+                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+
+                                image = Bitmap.createScaledBitmap(auxBitmap,
+                                        getWidth(),
+                                        getHeight(), false);
+                                break;
+                        }
+                        break;
+                    case CIRCLE:
+                        switch(topping)
+                        {
+                            case CHERRY:
+                                auxBitmap = Bitmap.createBitmap(bitmap,
+                                        (int)((bitmap.getWidth() * (0.67 + 0.1108 * 0))),
+                                        (int)(bitmap.getHeight() * startingHeight),
+                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+
+                                image = Bitmap.createScaledBitmap(auxBitmap,
+                                        getWidth(),
+                                        getHeight(), false);
+                                break;
+                            case CHOCOLATE:
+                                auxBitmap = Bitmap.createBitmap(bitmap,
+                                        (int)((bitmap.getWidth() * (0.67 + 0.1108 * 1))),
+                                        (int)(bitmap.getHeight() * startingHeight),
+                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+
+                                image = Bitmap.createScaledBitmap(auxBitmap,
+                                        getWidth(),
+                                        getHeight(), false);
+                                break;
+                            case STRAWBERRY:
+                                auxBitmap = Bitmap.createBitmap(bitmap,
+                                        (int)((bitmap.getWidth() * (0.668 + 0.1108 * 2))),
+                                        (int)(bitmap.getHeight() * startingHeight),
+                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+
+                                image = Bitmap.createScaledBitmap(auxBitmap,
+                                        getWidth(),
+                                        getHeight(), false);
+                                break;
+                        }
+                        break;
+                }
+                break;
         }
 
     }
-
-    public void changeImageGrid(Bitmap bitmap, double startingHeight, double startingWidth)
-    {
-        Bitmap auxBitmap;
-
-        auxBitmap = Bitmap.createBitmap(bitmap,
-                0, (int)(bitmap.getHeight() * startingHeight),
-                bitmap.getWidth(), (int)(bitmap.getHeight() * 0.33));
-
-        image = Bitmap.createScaledBitmap(auxBitmap,
-                getWidth(),
-                getHeight(), false);
-    }
-
-
 
     public EnumComponentType getLastComponentPut()
     {

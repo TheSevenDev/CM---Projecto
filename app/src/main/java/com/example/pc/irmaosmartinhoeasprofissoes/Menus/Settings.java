@@ -29,16 +29,14 @@ public class Settings extends GeneralActivity {
         startActivity(new Intent(getApplicationContext(),  Tracker.class));
     }
 
-    public void manageAudio(){
-        System.out.print("Tenta");
+    public void manageAudio(View view){
+
         AudioManager manager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        System.out.print("Consegue" + manager);
+
         if(manager.getStreamVolume(AudioManager.STREAM_SYSTEM) > 0){
-            System.out.print("Dá mute");
-            //manager.setStreamVolume(AudioManager.STREAM_SYSTEM, 0, 0);
+            manager.adjustVolume(AudioManager.ADJUST_MUTE,0);
         }else{
-            System.out.print("No mute");
-           // manager.setStreamVolume(AudioManager.STREAM_SYSTEM, 100,0);
+            manager.adjustVolume(AudioManager.ADJUST_UNMUTE,0);
         }
 
     }
