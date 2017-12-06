@@ -20,7 +20,7 @@ import java.util.Random;
 
 public class Obstacle extends GameObject{
 
-    private final int SPEED_CAP = 55;
+    private final int SPEED_CAP = 68;
     private Random rand = new Random();
     private int speed;
     private int score;
@@ -29,9 +29,6 @@ public class Obstacle extends GameObject{
     private Bitmap spritesheet;
     private Bitmap image[];
 
-    private boolean health;
-    private Bitmap healthImage;
-
     public Obstacle(Bitmap bird,Bitmap madBird, int x, int y,int w, int h, int s,int numFrames) {
         this.x = x;
         this.y = y;
@@ -39,17 +36,15 @@ public class Obstacle extends GameObject{
         this.height = h;
         score = s;
 
-        speed = 13 + (int)(rand.nextDouble() * score/30);
+        speed = 14 + (int) (rand.nextDouble() * score / 30);
 
         if(speed >= SPEED_CAP)
             speed = SPEED_CAP;
 
         image = new Bitmap[numFrames];
 
-        if (speed <= 17)
-            spritesheet = bird;
-        else
-            spritesheet = madBird;
+        spritesheet = bird;
+
 
         for(int i= 0 ;i < image.length; i++){
             image[i] = Bitmap.createBitmap(spritesheet, 0, 0, width,height);
@@ -72,14 +67,5 @@ public class Obstacle extends GameObject{
             e.printStackTrace();
         }
     }
-
-    public boolean isHealth(){
-        return health;
-    }
-
-    public int getWidht(){
-        return width-10;
-    }
-
 }
 
