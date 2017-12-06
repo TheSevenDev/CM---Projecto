@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.graphics.*;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -109,22 +111,43 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
 
         return true;
     }
-//lkj
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void draw(Canvas canvas){
         super.draw(canvas);
         canvas.drawBitmap(background, 0, 0, new Paint());
         canvas.drawBitmap(draws[currentDraw], (int)(0.3*WIDTH),(int)(0.18*HEIGHT), new Paint());
         //84 WIDTH
-        //7 HEIGHT
+        //12 HEIGGHT
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.DKGRAY);
         canvas.drawCircle((int) (0.066*WIDTH),(int)(0.65*HEIGHT), 35, paint );
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.MAGENTA);
+
+        canvas.drawCircle((int) (0.066*WIDTH),(int)(0.65*HEIGHT), 35, paint );
+
         paint.setColor(Color.WHITE);
         canvas.drawCircle((int) (0.15*WIDTH),(int)(0.65*HEIGHT), 35, paint );
         paint.setColor(Color.RED);
-        canvas.drawCircle((int) (0.15*WIDTH),(int)(0.58*HEIGHT), 35, paint );
+        canvas.drawCircle((int) (0.15*WIDTH),(int)(0.53*HEIGHT), 35, paint );
+        paint.setColor(getContext().getColor(R.color.colorOrange));
+        canvas.drawCircle((int) (0.066*WIDTH),(int)(0.53*HEIGHT), 35, paint );
+        paint.setColor(getContext().getColor(R.color.colorYellow));
+        canvas.drawCircle((int) (0.066*WIDTH),(int)(0.41*HEIGHT), 35, paint );
+        paint.setColor(getContext().getColor(R.color.colorGreen));
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawCircle((int) (0.15*WIDTH),(int)(0.41*HEIGHT), 35, paint );
+        paint.setColor(getContext().getColor(R.color.titleColor));
+        canvas.drawCircle((int) (0.066*WIDTH),(int)(0.29*HEIGHT), 35, paint );
+        paint.setColor(getContext().getColor(R.color.colorPurple));
+        canvas.drawCircle((int) (0.15*WIDTH),(int)(0.29*HEIGHT), 35, paint );
+        paint.setColor(getContext().getColor(R.color.colorPink));
+        canvas.drawCircle((int) (0.066*WIDTH),(int)(0.17*HEIGHT), 35, paint );
+        paint.setColor(getContext().getColor(R.color.colorSkin));
+        canvas.drawCircle((int) (0.15*WIDTH),(int)(0.17*HEIGHT), 35, paint );
+
     }
 
     private void FloodFill(Bitmap bmp, Point pt, int targetColor, int replacementColor){

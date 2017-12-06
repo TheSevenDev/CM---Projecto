@@ -17,7 +17,7 @@ public class Cake extends GameObject
     private Bitmap image;
     private EnumShape shape;
     private EnumCakeCoating coating;
-    private EnumTopping topping;
+    private EnumCakeTopping topping;
     private EnumComponentType lastComponentPut;
 
     public Cake(int w, int h, int x, int y, Context context)
