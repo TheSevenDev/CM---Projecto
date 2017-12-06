@@ -51,6 +51,9 @@
         <activity
             android:name=".pilot.PilotActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".painter.PainterActivity"
+            android:screenOrientation="landscape" />
 
         <service android:name=".MusicService" />
 

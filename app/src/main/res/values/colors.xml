@@ -7,4 +7,8 @@
     <color name="mainBlue">#7ab5c7</color>
     <color name="mainYellow">#FFFECF</color>
     <color name="unavailableColor">#5D5D4C</color>
+    <color name="colorRed">#FF0202</color>
+    <color name="colorBlue">#094A98</color>
+    <color name="colorGreen">#00BA00</color>
+    <color name="colorYellow">#FFD600</color>
 </resources>

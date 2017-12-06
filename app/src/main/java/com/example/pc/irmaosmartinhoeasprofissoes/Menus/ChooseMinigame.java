@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import com.example.pc.irmaosmartinhoeasprofissoes.cook.CookActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.FirefighterActivity;
+import com.example.pc.irmaosmartinhoeasprofissoes.painter.PainterActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.pilot.PilotActivity;
 
 public class ChooseMinigame extends GeneralActivity {
@@ -85,6 +87,12 @@ public class ChooseMinigame extends GeneralActivity {
     {
         startActivity(new Intent(getApplicationContext(), PilotActivity.class));
     }
+
+    public void painterGame(View view)
+    {
+        startActivity(new Intent(getApplicationContext(), PainterActivity.class));
+    }
+
 
     public void changeToMale(View view){
         SharedPreferences sharedPref = ChooseMinigame.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
