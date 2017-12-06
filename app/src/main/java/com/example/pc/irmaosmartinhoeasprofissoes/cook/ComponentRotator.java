@@ -28,7 +28,7 @@ public class ComponentRotator
     public ComponentRotator(Context context, Cake cake)
     {
         this.context = context;
-        //randomizeTargetCake();
+        randomizeTargetCake();
 
         fillComponentList();
 
@@ -54,13 +54,18 @@ public class ComponentRotator
     {
         targetCake = new Cake((int)(Double.parseDouble(context.getResources().getString(R.string.cake_width)) * GamePanel.WIDTH),
                 (int) (Double.parseDouble(context.getResources().getString(R.string.cake_height)) * GamePanel.HEIGHT),
-                (int) (Double.parseDouble(context.getResources().getString(R.string.cake_x)) * GamePanel.WIDTH),
-                (int) (Double.parseDouble(context.getResources().getString(R.string.cake_y)) * GamePanel.HEIGHT), context);
+                (int) ((0.06) * GamePanel.WIDTH),
+                (int) ((0.12) * GamePanel.HEIGHT), context);
 
         targetCake.setShape(EnumCakeShape.values()[random.nextInt(EnumCakeShape.values().length)]);
         targetCake.setCoating(EnumCakeCoating.values()[random.nextInt(EnumCakeCoating.values().length)]);
         targetCake.setLastComponentPut(EnumComponentType.TOPPING);
         targetCake.switchTopping(EnumCakeTopping.values()[random.nextInt(EnumCakeTopping.values().length)]);
+    }
+
+    public Cake getTargetCake()
+    {
+        return targetCake;
     }
 
     public void rotateLeft()

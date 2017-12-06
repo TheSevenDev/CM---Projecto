@@ -69,7 +69,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void surfaceCreated(SurfaceHolder holder)
     {
-        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.firefighterbg), WIDTH, HEIGHT);
+        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background_cook), WIDTH, HEIGHT);
         musicBackground = MediaPlayer.create(getContext(), R.raw.cook);
         musicBackground.start();
         musicBackground.setLooping(true);
@@ -127,9 +127,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             componentRotator.draw(canvas);
 
-
             if(cake.getImage() != null)
                 cake.draw(canvas);
+
+            componentRotator.getTargetCake().draw(canvas);
 
             canvas.restoreToCount(savedState);
         }
