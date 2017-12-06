@@ -1,10 +1,17 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.Menus;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -13,13 +20,15 @@ import android.widget.ImageView;
 import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
+import com.example.pc.irmaosmartinhoeasprofissoes.Tracker;
 import com.example.pc.irmaosmartinhoeasprofissoes.cook.CookActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.FirefighterActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.pilot.PilotActivity;
 
-public class ChooseMinigame extends GeneralActivity {
+public class ChooseMinigame extends GeneralActivity implements LocationListener{
     private ImageButton firefighter, baker, teacher, painter, pilot;
     private ImageView chooseMale, chooseFemale;
+    private static final int PERMISSIONS_CONSTANT = 1;
 
 
     @Override
@@ -42,6 +51,34 @@ public class ChooseMinigame extends GeneralActivity {
 
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.activity_choose_minigame,null);
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else  {
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
+                        PERMISSIONS_CONSTANT);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
 
         if(sharedPref.getInt("gender",0) == 0)
             changeToMale(v);
@@ -69,21 +106,25 @@ public class ChooseMinigame extends GeneralActivity {
 
     public void backToMainMenu(View view){
         startActivity(new Intent(getApplicationContext(), MainMenu.class));
+        savePosition();
     }
 
     public void fireFighterGame(View view)
     {
         startActivity(new Intent(getApplicationContext(), FirefighterActivity.class));
+        savePosition();
     }
 
     public void cookGame(View view)
     {
         startActivity(new Intent(getApplicationContext(), CookActivity.class));
+        savePosition();
     }
 
     public void pilotGame(View view)
     {
         startActivity(new Intent(getApplicationContext(), PilotActivity.class));
+        savePosition();
     }
 
     public void changeToMale(View view){
@@ -116,5 +157,55 @@ public class ChooseMinigame extends GeneralActivity {
         pilot.setImageResource(R.drawable.maria_pilota);
         firefighter.setImageResource(R.drawable.maria_bombeira);
         teacher.setImageResource(R.drawable.maria_professora);
+    }
+
+    public void savePosition(){
+        LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Location lastKnownLocation;
+        SharedPreferences sharedPref = null;
+
+        try {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                // Should we show an explanation?
+
+            }
+                lm.requestSingleUpdate(LocationManager.GPS_PROVIDER,this,null);
+                lastKnownLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+                //SAVE LAST LOCATION
+                sharedPref = this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putFloat("lastLatitude", (float)lastKnownLocation.getLatitude());
+                editor.putFloat("lastLongitude", (float)lastKnownLocation.getLongitude());
+                editor.apply();
+            }catch (Exception e){
+
+        }
+
+    }
+
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 }

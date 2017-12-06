@@ -4,7 +4,7 @@
     <string name="choose_female">1</string>
 
     //+++++++++++++++++++ MENUS ++++++++++++++++++++++++++++++++++++++
-    <string name="app_name">Irmãos Martinho e as profissoes</string>
+    <string name="app_name">Irmãos Martinho e as profissões</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="choosegender_title">Escolhe com quem queres jogar!</string>
     <string name="mainmenu_play"><![CDATA[Jogar >]]></string>

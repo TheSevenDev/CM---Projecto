@@ -14,6 +14,7 @@ import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
@@ -23,13 +24,9 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class MainMenu extends GeneralActivity implements LocationListener {
+public class MainMenu extends GeneralActivity {
 
-    private LocationManager lm;
-    private float lastLongitude;
-    private float lastLatitude;
 
-    private Location lastKnownLocation;
 
     @SuppressLint("MissingPermission")
     @Override
@@ -41,25 +38,6 @@ public class MainMenu extends GeneralActivity implements LocationListener {
         }
 
         setContentView(R.layout.activity_mainmenu);
-
-        lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-        SharedPreferences sharedPref = null;
-        try{
-            lm.requestSingleUpdate(LocationManager.GPS_PROVIDER,this,null);
-            lastKnownLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-            //SAVE LAST LOCATION
-            sharedPref = MainMenu.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putFloat("lastLatitude", (float)lastKnownLocation.getLatitude());
-            editor.putFloat("lastLongitude", (float)lastKnownLocation.getLongitude());
-            editor.apply();
-            System.out.println("=============LATITUDE=============" + lastKnownLocation.getLatitude());
-            System.out.println("=============LONGITUDE=============" + lastKnownLocation.getLongitude());
-        }
-        catch (Exception e){
-
-        }
     }
 
     public void chooseMinigameScreen(View view) {
@@ -100,23 +78,4 @@ public class MainMenu extends GeneralActivity implements LocationListener {
         return false;
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
 }
