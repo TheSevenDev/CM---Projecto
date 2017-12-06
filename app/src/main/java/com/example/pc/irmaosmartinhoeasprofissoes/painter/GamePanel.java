@@ -1,5 +1,6 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.painter;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.*;
@@ -41,6 +42,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
     private int currentDraw;
     private Random rand = new Random();
 
+    private ArrayList<PaintingColor> colors;
+    private PaintingColor currentColor;
+
+    private Context context;
 
 
     public GamePanel(Context context, Activity activity){
@@ -55,6 +60,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
         draws = new Bitmap[NUMBER_OF_DRAWS];
 
         currentDraw = rand.nextInt(3 );
+
+        colors = new ArrayList<>();
+
+        this.context = context;
     }
 
     @Override
@@ -80,12 +89,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
         background = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.backgroundsemcores), WIDTH, HEIGHT, false);
 
         populateDraws();
+        populateColors();
 
-
-
-
-
-    }
+  }
 
     public void populateDraws(){
 
@@ -95,58 +101,84 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
 
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
+    public void populateColors()
+    {
+        colors.add(new PaintingColor(context,(int) (0.066*WIDTH), (int)(0.65*HEIGHT), (int)0.03, Color.DKGRAY, false));//PRETO
+        colors.add(new PaintingColor(context,(int) (0.15*WIDTH), (int)(0.65*HEIGHT), (int)0.03, Color.WHITE, true)); //BRANCO
+
+        colors.add(new PaintingColor(context,(int) (0.15*WIDTH), (int)(0.53*HEIGHT), (int)0.03, Color.RED, false)); //VERMELHO
+        colors.add(new PaintingColor(context,(int) (0.066*WIDTH), (int)(0.53*HEIGHT), (int)0.03,  getContext().getColor(R.color.colorOrange), false)); //LARANJA
+
+        colors.add(new PaintingColor(context, (int) (0.066*WIDTH), (int)(0.41*HEIGHT), (int)0.03, getContext().getColor(R.color.colorYellow), false)); //AMARELO
+        colors.add(new PaintingColor(context, (int) (0.15*WIDTH), (int)(0.41*HEIGHT), (int)0.03, getContext().getColor(R.color.colorGreen), false)); //VERDE
+
+        colors.add(new PaintingColor(context,(int) (0.066*WIDTH), (int)(0.29*HEIGHT), (int)0.03, getContext().getColor(R.color.colorBlue), false)); //AZUL
+        colors.add(new PaintingColor(context, (int) (0.15*WIDTH), (int)(0.29*HEIGHT), (int)0.03, getContext().getColor(R.color.colorPurple), false)); //ROXO
+
+        colors.add(new PaintingColor(context,(int) (0.066*WIDTH), (int)(0.17*HEIGHT), (int)0.03, getContext().getColor(R.color.colorPink), false)); //PINK
+        colors.add(new PaintingColor(context,(int) (0.15*WIDTH), (int)(0.17*HEIGHT), (int)0.03, getContext().getColor(R.color.colorSkin), false)); //PELE
+
+
+    }
+
     public void update(){
 
 
     }
 
-    public boolean onTouchEvent(MotionEvent event){
-        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
             int fX = (int) event.getX();
             int fY = (int) event.getY();
+
             Point p = new Point(fX, fY);
 
-                //FloodFill(background, p, android.graphics.Color.WHITE, android.graphics.Color.RED);
-        }
+            boolean onCircle = false;
+            for(PaintingColor c : colors){
 
+                if(c.onTouchEvent(fX, fY)) {
+                    onCircle = true;
+                    break;
+                }
+            }
+
+            if(onCircle) {
+                for (PaintingColor c : colors) {
+                    c.setSelected(false);
+                    if (c.onTouchEvent(fX, fY)) {
+                        c.setSelected(true);
+                    }
+                }
+            }
+
+            if (fX >= (0.66*WIDTH) && fX < ((0.66*WIDTH) + WIDTH)
+                    && fY >= (0.68*HEIGHT) && fY < (0.68*HEIGHT) + HEIGHT) {
+                FloodFill(draws[currentDraw],p,Color.WHITE,currentColor.getColor());
+            }
+
+
+        }
         return true;
     }
+
+
+
+
+                    //FloodFill(background, p, android.graphics.Color.WHITE, android.graphics.Color.RED);
+
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void draw(Canvas canvas){
         super.draw(canvas);
         canvas.drawBitmap(background, 0, 0, new Paint());
         canvas.drawBitmap(draws[currentDraw], (int)(0.3*WIDTH),(int)(0.18*HEIGHT), new Paint());
-        //84 WIDTH
-        //12 HEIGGHT
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.DKGRAY);
-        canvas.drawCircle((int) (0.066*WIDTH),(int)(0.65*HEIGHT), 35, paint );
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.MAGENTA);
 
-        canvas.drawCircle((int) (0.066*WIDTH),(int)(0.65*HEIGHT), 35, paint );
+        for (PaintingColor c: colors) {
+            c.draw(canvas);
+        }
 
-        paint.setColor(Color.WHITE);
-        canvas.drawCircle((int) (0.15*WIDTH),(int)(0.65*HEIGHT), 35, paint );
-        paint.setColor(Color.RED);
-        canvas.drawCircle((int) (0.15*WIDTH),(int)(0.53*HEIGHT), 35, paint );
-        paint.setColor(getContext().getColor(R.color.colorOrange));
-        canvas.drawCircle((int) (0.066*WIDTH),(int)(0.53*HEIGHT), 35, paint );
-        paint.setColor(getContext().getColor(R.color.colorYellow));
-        canvas.drawCircle((int) (0.066*WIDTH),(int)(0.41*HEIGHT), 35, paint );
-        paint.setColor(getContext().getColor(R.color.colorGreen));
-        paint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle((int) (0.15*WIDTH),(int)(0.41*HEIGHT), 35, paint );
-        paint.setColor(getContext().getColor(R.color.titleColor));
-        canvas.drawCircle((int) (0.066*WIDTH),(int)(0.29*HEIGHT), 35, paint );
-        paint.setColor(getContext().getColor(R.color.colorPurple));
-        canvas.drawCircle((int) (0.15*WIDTH),(int)(0.29*HEIGHT), 35, paint );
-        paint.setColor(getContext().getColor(R.color.colorPink));
-        canvas.drawCircle((int) (0.066*WIDTH),(int)(0.17*HEIGHT), 35, paint );
-        paint.setColor(getContext().getColor(R.color.colorSkin));
-        canvas.drawCircle((int) (0.15*WIDTH),(int)(0.17*HEIGHT), 35, paint );
 
     }
 

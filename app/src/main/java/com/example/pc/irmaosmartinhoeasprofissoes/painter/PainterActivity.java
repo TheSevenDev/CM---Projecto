@@ -1,10 +1,13 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.painter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 
 /**
  * Created by Marcos on 27/11/2017.
@@ -30,6 +33,7 @@ public class PainterActivity extends Activity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
 
+        stopService(new Intent(this, MusicService.class));
         setContentView(new GamePanel(this, this));
     }
 

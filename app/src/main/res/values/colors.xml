@@ -8,7 +8,7 @@
     <color name="mainYellow">#FFFECF</color>
     <color name="unavailableColor">#5D5D4C</color>
     <color name="colorRed">#FF0202</color>
-    <color name="colorBlue">#094A98</color>
+    <color name="colorBlue">#1E94EE</color>
     <color name="colorGreen">#00BA00</color>
     <color name="colorYellow">#FFD600</color>
     <color name="colorOrange">#FF8B00</color>
@@ -16,4 +16,5 @@
     <color name="colorBrown">#4D2A12</color>
     <color name="colorSkin">#FFCD94</color>
     <color name="colorPink">#FF69B4</color>
+    <color name="selectedColor">#00ffa5</color>
 </resources>
