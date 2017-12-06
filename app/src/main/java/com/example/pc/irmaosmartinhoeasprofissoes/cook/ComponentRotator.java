@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by TheSeven on 28/11/2017.
@@ -21,10 +22,14 @@ public class ComponentRotator
     private Bitmap leftArrow, rightArrow;
     private Context context;
     private Cake activeCake;
+    private Cake targetCake;
+    private Random random = new Random();
 
     public ComponentRotator(Context context, Cake cake)
     {
         this.context = context;
+        //randomizeTargetCake();
+
         fillComponentList();
 
         this.activeCake = cake;
@@ -43,6 +48,19 @@ public class ComponentRotator
         changeComponentPanel();
 
         createArrows();
+    }
+
+    private void randomizeTargetCake()
+    {
+        targetCake = new Cake((int)(Double.parseDouble(context.getResources().getString(R.string.cake_width)) * GamePanel.WIDTH),
+                (int) (Double.parseDouble(context.getResources().getString(R.string.cake_height)) * GamePanel.HEIGHT),
+                (int) (Double.parseDouble(context.getResources().getString(R.string.cake_x)) * GamePanel.WIDTH),
+                (int) (Double.parseDouble(context.getResources().getString(R.string.cake_y)) * GamePanel.HEIGHT), context);
+
+        targetCake.setShape(EnumCakeShape.values()[random.nextInt(EnumCakeShape.values().length)]);
+        targetCake.setCoating(EnumCakeCoating.values()[random.nextInt(EnumCakeCoating.values().length)]);
+        targetCake.setLastComponentPut(EnumComponentType.TOPPING);
+        targetCake.switchTopping(EnumCakeTopping.values()[random.nextInt(EnumCakeTopping.values().length)]);
     }
 
     public void rotateLeft()
@@ -133,7 +151,7 @@ public class ComponentRotator
             switch(selectedComponent)
             {
                 case SHAPE:
-                    activeCake.switchShape(EnumShape.HEXAGON);
+                    activeCake.switchShape(EnumCakeShape.HEXAGON);
                     break;
                 case COATING:
                     activeCake.switchCoating(EnumCakeCoating.PURPLE);
@@ -152,7 +170,7 @@ public class ComponentRotator
             switch(selectedComponent)
             {
                 case SHAPE:
-                    activeCake.switchShape(EnumShape.CIRCLE);
+                    activeCake.switchShape(EnumCakeShape.CIRCLE);
                     break;
                 case COATING:
                     activeCake.switchCoating(EnumCakeCoating.BLUE);
@@ -167,7 +185,7 @@ public class ComponentRotator
             switch(selectedComponent)
             {
                 case SHAPE:
-                    activeCake.switchShape(EnumShape.SQUARE);
+                    activeCake.switchShape(EnumCakeShape.SQUARE);
                     break;
                 case COATING:
                     activeCake.switchCoating(EnumCakeCoating.ORANGE);

@@ -15,7 +15,7 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
 public class Cake extends GameObject
 {
     private Bitmap image;
-    private EnumShape shape;
+    private EnumCakeShape shape;
     private EnumCakeCoating coating;
     private EnumCakeTopping topping;
     private EnumComponentType lastComponentPut;
@@ -41,12 +41,27 @@ public class Cake extends GameObject
         canvas.drawBitmap(image, x, y, null);
     }
 
+    public void setCoating(EnumCakeCoating coating)
+    {
+        this.coating = coating;
+    }
+
+    public void setShape(EnumCakeShape shape)
+    {
+        this.shape = shape;
+    }
+
+    public void setTopping(EnumCakeTopping topping)
+    {
+        this.topping = topping;
+    }
+
     public void setLastComponentPut(EnumComponentType componentType)
     {
         this.lastComponentPut = componentType;
     }
 
-    public void switchShape(EnumShape shape)
+    public void switchShape(EnumCakeShape shape)
     {
         this.shape = shape;
 
@@ -89,13 +104,13 @@ public class Cake extends GameObject
         switch(coating)
         {
             case PURPLE:
-                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet), 0);
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet2), 0);
                 break;
             case BLUE:
-                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet), 0.335);
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet2), 0.335);
                 break;
             case ORANGE:
-                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet), 0.67);
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet2), 0.67);
                 break;
         }
     }
@@ -191,7 +206,7 @@ public class Cake extends GameObject
                         {
                             case CHERRY:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0.33 + 0.1108 * 0))),
+                                        (int)((bitmap.getWidth() * (0.332 + 0.1108 * 0))),
                                         (int)(bitmap.getHeight() * startingHeight),
                                         (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
 
@@ -201,7 +216,7 @@ public class Cake extends GameObject
                                 break;
                             case CHOCOLATE:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0.33 + 0.1108 * 1))),
+                                        (int)((bitmap.getWidth() * (0.332 + 0.1108 * 1))),
                                         (int)(bitmap.getHeight() * startingHeight),
                                         (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
 
@@ -211,7 +226,7 @@ public class Cake extends GameObject
                                 break;
                             case STRAWBERRY:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0.33 + 0.1108 * 2))),
+                                        (int)((bitmap.getWidth() * (0.332 + 0.1108 * 2))),
                                         (int)(bitmap.getHeight() * startingHeight),
                                         (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
 
@@ -226,7 +241,7 @@ public class Cake extends GameObject
                         {
                             case CHERRY:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0.67 + 0.1108 * 0))),
+                                        (int)((bitmap.getWidth() * (0.666 + 0.1108 * 0))),
                                         (int)(bitmap.getHeight() * startingHeight),
                                         (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
 
@@ -236,7 +251,7 @@ public class Cake extends GameObject
                                 break;
                             case CHOCOLATE:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0.67 + 0.1108 * 1))),
+                                        (int)((bitmap.getWidth() * (0.666 + 0.1108 * 1))),
                                         (int)(bitmap.getHeight() * startingHeight),
                                         (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
 
