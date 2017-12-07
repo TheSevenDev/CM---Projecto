@@ -13,6 +13,7 @@ import android.view.SurfaceView;
 import com.example.pc.irmaosmartinhoeasprofissoes.Background;
 import com.example.pc.irmaosmartinhoeasprofissoes.Pause;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
+import com.example.pc.irmaosmartinhoeasprofissoes.GameOver;
 
 
 /**
@@ -26,6 +27,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     private MainThread thread;
     private Pause pause;
+    private GameOver gameOver;
     private Background background;
     private MediaPlayer musicBackground;
     private ComponentRotator componentRotator;
@@ -101,6 +103,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             {
                 componentRotator.onTouchArrows(x, y);
                 componentRotator.onTouchComponentPanel(x, y);
+                pause.onTouchPauseButton((int)x, (int)y);
             }
             else if(pause.isPaused())
             {
@@ -162,7 +165,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 componentRotator.draw(canvas, false);
 
                 componentRotator.getTargetCake().draw(canvas, false);
+
+
             }
+
+            pause.draw(canvas);
 
             canvas.restoreToCount(savedState);
         }

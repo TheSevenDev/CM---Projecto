@@ -1,4 +1,4 @@
-package com.example.pc.irmaosmartinhoeasprofissoes.firefighter;
+package com.example.pc.irmaosmartinhoeasprofissoes;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,6 +13,7 @@ import com.example.pc.irmaosmartinhoeasprofissoes.EnumGame;
 import com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseMinigame;
 import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
+import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GamePanel;
 
 /**
  * Created by TheSeven on 19/11/2017.

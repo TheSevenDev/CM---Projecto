@@ -2,7 +2,6 @@ package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -13,19 +12,14 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.os.Vibrator;
-import android.support.constraint.solver.widgets.Rectangle;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.EnumGame;
-import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
-import com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseGender;
-import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.Pause;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
-import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GameOver;
+import com.example.pc.irmaosmartinhoeasprofissoes.GameOver;
 
 import java.util.ArrayList;
 import java.util.Iterator;
