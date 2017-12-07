@@ -4,7 +4,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
+import android.graphics.Paint;
 
+import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 import java.util.ArrayList;
@@ -24,6 +28,9 @@ public class ComponentRotator
     private Cake activeCake;
     private Cake targetCake;
     private Random random = new Random();
+    private Bitmap crossError;
+    private boolean isError, blinkingError;
+    private long errorStartTime;
 
     public ComponentRotator(Context context, Cake cake)
     {
@@ -33,6 +40,10 @@ public class ComponentRotator
         fillComponentList();
 
         this.activeCake = cake;
+
+        crossError = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_mark),
+            (int)(0.4 * GamePanel.WIDTH),
+            (int)(0.4 * GamePanel.HEIGHT), false);
     }
 
     private void fillComponentList()
@@ -200,6 +211,9 @@ public class ComponentRotator
                     break;
             }
         }
+
+        if(selectedComponent == EnumComponentType.TOPPING)
+            matchCakes();
     }
 
     private void changeComponentPanel()
@@ -209,21 +223,110 @@ public class ComponentRotator
                 (int)(Double.parseDouble(context.getResources().getString(R.string.component_panel_height))* GamePanel.HEIGHT), false);
     }
 
-    public void draw(Canvas canvas)
+    public void draw(Canvas canvas, boolean paused)
     {
-        canvas.drawBitmap(componentPanel,
-                (int)(Double.parseDouble(context.getResources().getString(R.string.component_panel_x))* GamePanel.WIDTH),
-                (int)(Double.parseDouble(context.getResources().getString(R.string.component_panel_y))* GamePanel.HEIGHT),null);
+        if(paused)
+        {
+            Paint paint = new Paint();
+            paint.setColorFilter(new LightingColorFilter(Color.rgb(123, 123, 123), 0));
 
-        if(components.indexOf(selectedComponent) != 0)
-            canvas.drawBitmap(leftArrow,
-                (int)(Double.parseDouble(context.getResources().getString(R.string.left_arrow_x))* GamePanel.WIDTH),
-                (int)(Double.parseDouble(context.getResources().getString(R.string.left_arrow_y))* GamePanel.HEIGHT),null);
+            canvas.drawBitmap(componentPanel,
+                    (int) (Double.parseDouble(context.getResources().getString(R.string.component_panel_x)) * GamePanel.WIDTH),
+                    (int) (Double.parseDouble(context.getResources().getString(R.string.component_panel_y)) * GamePanel.HEIGHT), paint);
 
-        if(components.indexOf(selectedComponent) != components.size() - 1
-                && components.indexOf(activeCake.getLastComponentPut()) >= components.indexOf(selectedComponent))
-            canvas.drawBitmap(rightArrow,
-                (int)(Double.parseDouble(context.getResources().getString(R.string.right_arrow_x))* GamePanel.WIDTH),
-                (int)(Double.parseDouble(context.getResources().getString(R.string.right_arrow_y))* GamePanel.HEIGHT),null);
+            if (components.indexOf(selectedComponent) != 0)
+                canvas.drawBitmap(leftArrow,
+                        (int) (Double.parseDouble(context.getResources().getString(R.string.left_arrow_x)) * GamePanel.WIDTH),
+                        (int) (Double.parseDouble(context.getResources().getString(R.string.left_arrow_y)) * GamePanel.HEIGHT), paint);
+
+            if (components.indexOf(selectedComponent) != components.size() - 1
+                    && components.indexOf(activeCake.getLastComponentPut()) >= components.indexOf(selectedComponent))
+                canvas.drawBitmap(rightArrow,
+                        (int) (Double.parseDouble(context.getResources().getString(R.string.right_arrow_x)) * GamePanel.WIDTH),
+                        (int) (Double.parseDouble(context.getResources().getString(R.string.right_arrow_y)) * GamePanel.HEIGHT), paint);
+        }
+        else
+        {
+            canvas.drawBitmap(componentPanel,
+                    (int) (Double.parseDouble(context.getResources().getString(R.string.component_panel_x)) * GamePanel.WIDTH),
+                    (int) (Double.parseDouble(context.getResources().getString(R.string.component_panel_y)) * GamePanel.HEIGHT), null);
+
+            if (components.indexOf(selectedComponent) != 0)
+                canvas.drawBitmap(leftArrow,
+                        (int) (Double.parseDouble(context.getResources().getString(R.string.left_arrow_x)) * GamePanel.WIDTH),
+                        (int) (Double.parseDouble(context.getResources().getString(R.string.left_arrow_y)) * GamePanel.HEIGHT), null);
+
+            if (components.indexOf(selectedComponent) != components.size() - 1
+                    && components.indexOf(activeCake.getLastComponentPut()) >= components.indexOf(selectedComponent))
+                canvas.drawBitmap(rightArrow,
+                        (int) (Double.parseDouble(context.getResources().getString(R.string.right_arrow_x)) * GamePanel.WIDTH),
+                        (int) (Double.parseDouble(context.getResources().getString(R.string.right_arrow_y)) * GamePanel.HEIGHT), null);
+
+            if (blinkingError)
+                canvas.drawBitmap(crossError,
+                        (int) (0.10 * GamePanel.WIDTH),
+                        (int) (0.47 * GamePanel.HEIGHT), null);
+        }
+    }
+
+    public void matchCakes()
+    {
+        if(activeCake.getShape().equals(targetCake.getShape()) &&
+                activeCake.getCoating().equals(targetCake.getCoating()) &&
+                activeCake.getTopping().equals(targetCake.getTopping()))
+        {
+            //win screen
+        }
+        else
+        {
+            isError = true;
+            errorStartTime = System.nanoTime();
+            MusicService.playSound(context, R.raw.victory);
+        }
+    }
+
+    public void update()
+    {
+        long timeElapsed = (System.nanoTime() - errorStartTime)/1000000;
+
+        if(isError)
+        {
+            if (timeElapsed > 100) {
+                blinkingError = false;
+            }
+
+            if (timeElapsed > 200) {
+                blinkingError = true;
+            }
+
+            if (timeElapsed > 300) {
+                blinkingError = false;
+            }
+
+            if (timeElapsed > 400) {
+                blinkingError = true;
+            }
+
+            if (timeElapsed > 500) {
+                blinkingError = false;
+            }
+
+            if (timeElapsed > 600) {
+                blinkingError = true;
+            }
+
+            if (timeElapsed > 700) {
+                blinkingError = false;
+            }
+
+            if (timeElapsed > 800) {
+                blinkingError = true;
+            }
+
+            if (timeElapsed > 900) {
+                blinkingError = false;
+                isError = false;
+            }
+        }
     }
 }

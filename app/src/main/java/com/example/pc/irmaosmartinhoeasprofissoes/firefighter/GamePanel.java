@@ -317,7 +317,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 //gameOver.setScore(score.getScore());
                 gameOver.setGameOver(true);
                 musicBackground.pause();
-                MusicService.playSound(getContext(), R.raw.victory);
             }
         }
         else if(pause.isPaused())
@@ -328,8 +327,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             if(pausedTimeStart == 0)
                 pausedTimeStart = System.nanoTime();
         }
-
-        MediaPlayer mp = new MediaPlayer();
     }
 
     @Override

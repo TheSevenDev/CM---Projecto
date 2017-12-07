@@ -11,6 +11,7 @@ import android.graphics.Typeface;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.EnumGame;
 import com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseMinigame;
+import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 /**
@@ -58,6 +59,9 @@ public class GameOver
     public void setGameOver(boolean b)
     {
         gameOver = b;
+
+        if(b)
+            MusicService.playSound(context, R.raw.victory);
     }
 
     public void draw(Canvas canvas)

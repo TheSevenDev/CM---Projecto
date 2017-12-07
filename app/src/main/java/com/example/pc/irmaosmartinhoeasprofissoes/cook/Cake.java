@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
+import android.graphics.Paint;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
@@ -36,9 +39,16 @@ public class Cake extends GameObject
         return image;
     }
 
-    public void draw(Canvas canvas)
+    public void draw(Canvas canvas, boolean paused)
     {
-        canvas.drawBitmap(image, x, y, null);
+        if(paused)
+        {
+            Paint paint = new Paint();
+            paint.setColorFilter(new LightingColorFilter(Color.rgb(123, 123, 123), 0));
+            canvas.drawBitmap(image, x, y, paint);
+        }
+        else
+            canvas.drawBitmap(image, x, y, null);
     }
 
     public void setCoating(EnumCakeCoating coating)
@@ -59,6 +69,18 @@ public class Cake extends GameObject
     public void setLastComponentPut(EnumComponentType componentType)
     {
         this.lastComponentPut = componentType;
+    }
+
+    public EnumCakeShape getShape() {
+        return shape;
+    }
+
+    public EnumCakeCoating getCoating() {
+        return coating;
+    }
+
+    public EnumCakeTopping getTopping() {
+        return topping;
     }
 
     public void switchShape(EnumCakeShape shape)
@@ -114,7 +136,6 @@ public class Cake extends GameObject
                 break;
         }
     }
-
 
     public void changeImage(Bitmap bitmap, double startingHeight)
     {
