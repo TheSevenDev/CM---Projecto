@@ -30,7 +30,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
-    public final int NUMBER_OF_DRAWS = 3;
+    public final int NUMBER_OF_DRAWS = 4;
 
     private MainThread thread;
     private Bitmap background;
@@ -59,7 +59,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         draws = new Bitmap[NUMBER_OF_DRAWS];
 
-        currentDraw = rand.nextInt(3);
+        currentDraw = rand.nextInt(NUMBER_OF_DRAWS);
 
         colors = new ArrayList<>();
 
@@ -101,29 +101,32 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public void populateDraws() {
 
-        draws[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.professordraw), (int) (0.66 * WIDTH), (int) (0.68 * HEIGHT), false);
-        draws[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.pilotodraw), (int) (0.66 * WIDTH), (int) (0.68 * HEIGHT), false);
-        draws[2] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.pintordraw), (int) (0.55 * WIDTH), (int) (0.70 * HEIGHT), false);
+        draws[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.pintordraw), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_width))) * WIDTH), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_height))) * HEIGHT), false);
+        draws[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.pilotodraw), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_width))) * WIDTH), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_height))) * HEIGHT), false);
+        draws[2] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.professordraw), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_width))) * WIDTH), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_height))) * HEIGHT), false);
+        draws[3] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.carrodraw), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_width))) * WIDTH), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_height))) * HEIGHT), false);
 
     }
 
     @TargetApi(Build.VERSION_CODES.M)
     public void populateColors() {
-        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.65 * HEIGHT), (int) 0.03, Color.DKGRAY, false));//PRETO
-        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.65 * HEIGHT), (int) 0.03, Color.WHITE, true)); //BRANCO
+        int radius = (int)((Double.parseDouble(context.getResources().getString(R.string.painting_colors_radius))) * WIDTH);
+
+        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.65 * HEIGHT), radius, Color.DKGRAY, false));//PRETO
+        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.65 * HEIGHT), radius, Color.WHITE, true)); //BRANCO
 
 
-        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.53 * HEIGHT), (int) 0.03, Color.RED, false)); //VERMELHO
-        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.53 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorOrange), false)); //LARANJA
+        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.53 * HEIGHT), radius, Color.RED, false)); //VERMELHO
+        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.53 * HEIGHT), radius, getContext().getColor(R.color.colorOrange), false)); //LARANJA
 
-        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.41 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorYellow), false)); //AMARELO
-        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.41 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorGreen), false)); //VERDE
+        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.41 * HEIGHT), radius, getContext().getColor(R.color.colorYellow), false)); //AMARELO
+        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.41 * HEIGHT), radius, getContext().getColor(R.color.colorGreen), false)); //VERDE
 
-        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.29 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorBlue), false)); //AZUL
-        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.29 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorPurple), false)); //ROXO
+        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.29 * HEIGHT), radius, getContext().getColor(R.color.colorBlue), false)); //AZUL
+        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.29 * HEIGHT), radius, getContext().getColor(R.color.colorPurple), false)); //ROXO
 
-        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.17 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorPink), false)); //PINK
-        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.17 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorSkin), false)); //PELE
+        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.17 * HEIGHT), radius, getContext().getColor(R.color.colorPink), false)); //PINK
+        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.17 * HEIGHT), radius, getContext().getColor(R.color.colorSkin), false)); //PELE
 
         currentColor = colors.get(1);
     }
@@ -158,10 +161,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                     }
                 }
 
-                if (fX >= (int) (0.3 * WIDTH) && fX < ((int) (0.3 * WIDTH) + draws[currentDraw].getWidth())
-                        && fY >= (int) (0.18 * HEIGHT) && fY < ((int) (0.18 * HEIGHT) + draws[currentDraw].getHeight())) {
-                    int x = fX - (int) (0.3 * WIDTH);
-                    int y = fY - (int) (0.18 * HEIGHT);
+                if (fX >= (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_x))) * WIDTH) && fX < ((int) ((Double.parseDouble(context.getResources().getString(R.string.painting_x))) * WIDTH) + draws[currentDraw].getWidth())
+                        && fY >= (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_y))) * HEIGHT) && fY < ((int) ((Double.parseDouble(context.getResources().getString(R.string.painting_y))) * HEIGHT) + draws[currentDraw].getHeight())) {
+                    int x = fX - (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_x))) * WIDTH);
+                    int y = fY - (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_y))) * HEIGHT);
                     int color = draws[currentDraw].getPixel(x,y);
                     if(color!= -16777216) // BLACK
                         floodFill(draws[currentDraw], new Point(x, y), draws[currentDraw].getPixel(x, y), currentColor.getColor());
@@ -182,7 +185,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public void draw(Canvas canvas) {
         super.draw(canvas);
         canvas.drawBitmap(background, 0, 0, new Paint());
-        canvas.drawBitmap(draws[currentDraw], (int) (0.3 * WIDTH), (int) (0.18 * HEIGHT), new Paint());
+        canvas.drawBitmap(draws[currentDraw], (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_x))) * WIDTH), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_y))) * HEIGHT), new Paint());
 
         for (PaintingColor c : colors) {
             c.draw(canvas);

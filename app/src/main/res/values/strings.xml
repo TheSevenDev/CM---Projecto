@@ -119,7 +119,12 @@
     <string name="water_bar_left_mod">0.052</string>
     <string name="water_bar_right_mod">0.078</string>
 
-
+    //+++++++++++++++++++ PAINTER ++++++++++++++++++++++++++++++++++++++
+    <string name="painting_width">0.742</string>
+    <string name="painting_height">0.783</string>
+    <string name="painting_x">0.23</string>
+    <string name="painting_y">0.105</string>
+    <string name="painting_colors_radius">0.0292</string>
     //+++++++++++++++++++ PILOT ++++++++++++++++++++++++++++++++++++++
 
 
