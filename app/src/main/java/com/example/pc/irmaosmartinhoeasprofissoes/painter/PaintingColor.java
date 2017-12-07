@@ -58,7 +58,7 @@ public class PaintingColor{
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(color);
-        canvas.drawCircle(cx,cy, 35, paint );
+        canvas.drawCircle(cx,cy, radius, paint );
 
         if(isSelected()){
             paint.setStyle(Paint.Style.STROKE);
