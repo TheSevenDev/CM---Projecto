@@ -85,6 +85,10 @@ public class GameOver
                     (int) (GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.game_over_character_x_mod))),
                     (int) (GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.game_over_character_y_mod))), null);
 
+            canvas.drawBitmap(professionItem,
+                    (int) (GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.game_over_profession_x_mod))),
+                    (int) (GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.game_over_profession_y_mod))), null);
+
             /*
             canvas.drawBitmap(scoreImage,
                     (int) (GamePanel.WIDTH * xScore),
@@ -125,37 +129,20 @@ public class GameOver
         int gender = sharedPref.getInt("gender",0);
         Bitmap auxCharacter = null, auxProfessionItem = null;
 
-        switch(enumGame)
-        {
-            case FIREFIGHTER:
-                if(gender == Integer.parseInt(context.getResources().getString(R.string.choose_male)))
-                    auxCharacter = BitmapFactory.decodeResource(context.getResources(), R.drawable.jose_bombeiro);
-                else
-                    auxCharacter = BitmapFactory.decodeResource(context.getResources(), R.drawable.maria_bombeira);
+        if(gender == Integer.parseInt(context.getResources().getString(R.string.choose_male)))
+            auxCharacter = BitmapFactory.decodeResource(context.getResources(), enumGame.getMaleImage());
+        else
+            auxCharacter = BitmapFactory.decodeResource(context.getResources(), enumGame.getFemaleImage());
 
-                //auxProfessionItem = BitmapFactory.decodeResource(context.getResources(), R.drawable.bombeiro);
-                break;
-            case COOK:
-                if(gender == Integer.parseInt(context.getResources().getString(R.string.choose_male)))
-                    auxCharacter = BitmapFactory.decodeResource(context.getResources(), R.drawable.jose_pasteleiro);
-                else
-                    auxCharacter = BitmapFactory.decodeResource(context.getResources(), R.drawable.maria_pasteleira);
-
-                //auxProfessionItem = BitmapFactory.decodeResource(context.getResources(), R.drawable.bombeiro);
-                break;
-            case PILOT:
-                if(gender == Integer.parseInt(context.getResources().getString(R.string.choose_male)))
-                    auxCharacter = BitmapFactory.decodeResource(context.getResources(), R.drawable.jose_piloto);
-                else
-                    auxCharacter = BitmapFactory.decodeResource(context.getResources(), R.drawable.maria_pilota);
-
-                //auxProfessionItem = BitmapFactory.decodeResource(context.getResources(), R.drawable.bombeiro);
-                break;
-        }
+        auxProfessionItem = BitmapFactory.decodeResource(context.getResources(), enumGame.getProfImage());
 
         character = Bitmap.createScaledBitmap(auxCharacter,
                 (int)(GamePanel.WIDTH*Double.parseDouble(context.getResources().getString(R.string.game_over_character_width_mod))),
                 (int)(GamePanel.HEIGHT*Double.parseDouble(context.getResources().getString(R.string.game_over_character_height_mod))), false);
+
+        professionItem = Bitmap.createScaledBitmap(auxProfessionItem,
+                (int)(GamePanel.WIDTH*Double.parseDouble(context.getResources().getString(R.string.game_over_profession_width_mod))),
+                (int)(GamePanel.HEIGHT*Double.parseDouble(context.getResources().getString(R.string.game_over_profession_height_mod))), false);
     }
 
     private void setScoreImage(Bitmap image, double x, double y)
