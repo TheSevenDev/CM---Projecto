@@ -2,7 +2,6 @@ package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -13,19 +12,14 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.os.Vibrator;
-import android.support.constraint.solver.widgets.Rectangle;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.EnumGame;
-import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
-import com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseGender;
-import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.Pause;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
-import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GameOver;
+import com.example.pc.irmaosmartinhoeasprofissoes.GameOver;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -253,7 +247,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void checkCollision(){
         Iterator<Obstacle> it = obstacles.iterator();
-        Obstacle aux = null;
+        Obstacle aux;
         while (it.hasNext()) {
             aux = it.next();
             if (aux.getX() < -WIDTH)
@@ -272,14 +266,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         long obstaclesElapsed = (System.nanoTime() - obstacleStartTime) / 1000000;
         if (obstaclesElapsed > (1000 - player.getScore()/4)) {
             int randomY = rand.nextInt(MAX_HEIGHT_BOUND - 30) + 30;
-            Bitmap bird = BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day);
-            Bitmap madBird = BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day_mad);
+            Bitmap bird = BitmapFactory.decodeResource(getResources(), R.drawable.pilot_obstacle);
+            Bitmap madBird = BitmapFactory.decodeResource(getResources(), R.drawable.pilot_obstacle_fast);
 
-            if (obstacles.isEmpty()) {
-                obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, 66, 69, player.getScore(), 7));
-            } else {
-                obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, 66, 69, player.getScore(), 7));
-            }
+            obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, player.getScore()));
 
             obstacleStartTime = System.nanoTime();
         }

@@ -2,7 +2,6 @@ package com.example.pc.irmaosmartinhoeasprofissoes.firefighter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -18,11 +17,11 @@ import android.view.SurfaceView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.Background;
 import com.example.pc.irmaosmartinhoeasprofissoes.EnumGame;
+import com.example.pc.irmaosmartinhoeasprofissoes.GameOver;
 import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.Pause;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -36,6 +35,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
 
+    private final int TIMEOUT = 3;
     //PODE SER MELHOR
     //DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
     //int a = displayMetrics.widthPixels;
@@ -112,7 +112,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.firefighterbg), WIDTH, HEIGHT);
+        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.bg_teste), WIDTH, HEIGHT);
         waterMeter = new WaterMeter(BitmapFactory.decodeResource(getResources(), R.drawable.barraagua),
                 (int)(Double.parseDouble(getResources().getString(R.string.water_meter_sprite_width)) * WIDTH),
                 (int)(Double.parseDouble(getResources().getString(R.string.water_meter_sprite_height)) * HEIGHT),
@@ -317,7 +317,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 //gameOver.setScore(score.getScore());
                 gameOver.setGameOver(true);
                 musicBackground.pause();
-                MusicService.playSound(getContext(), R.raw.victory);
             }
         }
         else if(pause.isPaused())
@@ -328,8 +327,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             if(pausedTimeStart == 0)
                 pausedTimeStart = System.nanoTime();
         }
-
-        MediaPlayer mp = new MediaPlayer();
     }
 
     @Override
@@ -378,6 +375,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             if(!gameOver.isGameOver())
                 pause.draw(canvas);
+            else
+            {
+                gameOver.draw(canvas);
+                score.drawScoreGameOver(canvas);
+            }
+
 
             if(!waterMeter.isNoWaterWarning())
                 drawWaterLevel(canvas);
@@ -386,12 +389,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                     (int)(0.025*WIDTH), (int)(0.12*HEIGHT),null);
 
             drawText(canvas);
-
-            gameOver.draw(canvas);
-            if(gameOver.isGameOver())
-            {
-                score.drawScoreGameOver(canvas);
-            }
 
             canvas.restoreToCount(savedState);
         }
@@ -500,7 +497,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         waterDrops = new ArrayList<>();
         cats = new ArrayList<>();
         waterMeterValue = 100;
-        timeRemaining = 20;
+        timeRemaining = TIMEOUT;
         score = new Score(getContext());
         //timerStart = System.nanoTime();
         fireStart = System.nanoTime();
