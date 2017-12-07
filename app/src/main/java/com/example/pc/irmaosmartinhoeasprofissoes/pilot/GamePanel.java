@@ -275,7 +275,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             Bitmap bird = BitmapFactory.decodeResource(getResources(), R.drawable.pilot_obstacle);
             Bitmap madBird = BitmapFactory.decodeResource(getResources(), R.drawable.pilot_obstacle_fast);
 
-            obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, 66, 69, player.getScore(), 7));
+            obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, player.getScore()));
 
             obstacleStartTime = System.nanoTime();
         }

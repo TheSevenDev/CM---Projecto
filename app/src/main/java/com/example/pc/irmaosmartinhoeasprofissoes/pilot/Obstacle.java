@@ -23,17 +23,13 @@ public class Obstacle extends GameObject{
     private final int SPEED_CAP = 68;
     private Random rand = new Random();
     private int speed;
-    private int score;
     private Animation animation = new Animation();
 
     private Bitmap spritesheet;
 
-    public Obstacle(Bitmap bird,Bitmap madBird, int x, int y,int w, int h, int s,int numFrames) {
+    public Obstacle(Bitmap bird,Bitmap madBird, int x, int y, int score) {
         this.x = x;
         this.y = y;
-        this.width = w;
-        this.height = h;
-        score = s;
 
         speed = 14 + (int) (rand.nextDouble() * score / 30);
 

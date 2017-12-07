@@ -64,6 +64,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         colors = new ArrayList<>();
 
         this.context = context;
+
+        pause = new Pause(context);
     }
 
 
@@ -136,34 +138,39 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             int fX = (int) event.getX();
             int fY = (int) event.getY();
 
-            boolean onCircle = false;
-            for (PaintingColor c : colors) {
-
-                if (c.onTouchEvent(fX, fY)) {
-                    onCircle = true;
-                    break;
-                }
-            }
-            if (onCircle) {
+            if(!pause.isPaused()) {
+                pause.onTouchPauseButton(fX, fY);
+                boolean onCircle = false;
                 for (PaintingColor c : colors) {
-                    c.setSelected(false);
+
                     if (c.onTouchEvent(fX, fY)) {
-                        c.setSelected(true);
-                        currentColor = c;
+                        onCircle = true;
+                        break;
                     }
                 }
-            }
+                if (onCircle) {
+                    for (PaintingColor c : colors) {
+                        c.setSelected(false);
+                        if (c.onTouchEvent(fX, fY)) {
+                            c.setSelected(true);
+                            currentColor = c;
+                        }
+                    }
+                }
 
-            if (fX >= (int) (0.3 * WIDTH) && fX < ((int) (0.3 * WIDTH) + draws[currentDraw].getWidth())
-                    && fY >= (int) (0.18 * HEIGHT) && fY < ((int) (0.18 * HEIGHT) + draws[currentDraw].getHeight())) {
-                System.out.println("==========COLOR : ==============");
-                int x = fX - (int) (0.3 * WIDTH);
-                int y = fY - (int) (0.18 * HEIGHT);
-                System.out.println("========= " + draws[currentDraw].getWidth() + "; " + draws[currentDraw].getHeight());
-                floodFill(draws[currentDraw], new Point(x, y), draws[currentDraw].getPixel(x, y), currentColor.getColor());
+                if (fX >= (int) (0.3 * WIDTH) && fX < ((int) (0.3 * WIDTH) + draws[currentDraw].getWidth())
+                        && fY >= (int) (0.18 * HEIGHT) && fY < ((int) (0.18 * HEIGHT) + draws[currentDraw].getHeight())) {
+                    int x = fX - (int) (0.3 * WIDTH);
+                    int y = fY - (int) (0.18 * HEIGHT);
+                    int color = draws[currentDraw].getPixel(x,y);
+                    if(color!= -16777216) // BLACK
+                        floodFill(draws[currentDraw], new Point(x, y), draws[currentDraw].getPixel(x, y), currentColor.getColor());
+                }
+
             }
-            else{
-                System.out.println("==========NO COLOR : ==============");
+            else if(pause.isPaused()){
+                if(pause.onTouchPauseScreen(fX, fY))
+                    gameActivity.onBackPressed();
             }
         }
         return true;
@@ -180,6 +187,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         for (PaintingColor c : colors) {
             c.draw(canvas);
         }
+
+        pause.draw(canvas);
     }
 
     private void floodFill(Bitmap image, Point node, int targetColor, int replacementColor) {
