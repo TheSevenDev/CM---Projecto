@@ -281,7 +281,7 @@ public class ComponentRotator
         {
             isError = true;
             errorStartTime = System.nanoTime();
-            MusicService.playSound(context, R.raw.victory);
+            MusicService.playSound(context, R.raw.error);
         }
     }
 
