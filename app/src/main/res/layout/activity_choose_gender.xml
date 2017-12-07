@@ -21,7 +21,7 @@
         android:autoSizeMinTextSize="30sp"
         android:autoSizeStepGranularity="5sp"
         android:text="@string/choosegender_title"
-        android:textColor="@color/titleColor"
+        android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

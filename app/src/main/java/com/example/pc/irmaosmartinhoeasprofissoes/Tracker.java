@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -27,6 +29,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.List;
 
 public class Tracker extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
@@ -71,9 +76,21 @@ public class Tracker extends FragmentActivity implements OnMapReadyCallback, Loc
         double longitude = sharedPref.getFloat("lastLongitude", 0.0f);
 
         LatLng coord = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(coord).title("Último jogo"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(coord));
+        Geocoder geocoder = new Geocoder(getApplicationContext());
+        try {
+            List<Address> adressList = geocoder.getFromLocation(latitude, longitude, 1);
+            String local = "Último jogo - ";
+            if(adressList.get(0).getLocality() !=null){
+                local += adressList.get(0).getLocality() + " , " + adressList.get(0).getCountryName();
+            }else{
+                local += adressList.get(0).getCountryName();
+            }
 
+            mMap.addMarker(new MarkerOptions().position(coord).title(local));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coord, 10.2f));
+        }catch (IOException e){
+
+        }
     }
 
     public void savePosition(){

@@ -27,7 +27,6 @@ public class Obstacle extends GameObject{
     private Animation animation = new Animation();
 
     private Bitmap spritesheet;
-    private Bitmap image[];
 
     public Obstacle(Bitmap bird,Bitmap madBird, int x, int y,int w, int h, int s,int numFrames) {
         this.x = x;
@@ -41,16 +40,9 @@ public class Obstacle extends GameObject{
         if(speed >= SPEED_CAP)
             speed = SPEED_CAP;
 
-        image = new Bitmap[numFrames];
-
         spritesheet = bird;
 
-
-        for(int i= 0 ;i < image.length; i++){
-            image[i] = Bitmap.createBitmap(spritesheet, 0, 0, width,height);
-        }
-
-        animation.setFrames(image);
+        animation.setFrames(new Bitmap[]{spritesheet});
         animation.setDelay(100 - speed);
     }
 
