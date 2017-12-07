@@ -35,7 +35,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-    private final int TIMEOUT = 50;
+    private final int TIMEOUT = 3;
     //PODE SER MELHOR
     //DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
     //int a = displayMetrics.widthPixels;
@@ -375,6 +375,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             if(!gameOver.isGameOver())
                 pause.draw(canvas);
+            else
+            {
+                gameOver.draw(canvas);
+                score.drawScoreGameOver(canvas);
+            }
+
 
             if(!waterMeter.isNoWaterWarning())
                 drawWaterLevel(canvas);
@@ -383,12 +389,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                     (int)(0.025*WIDTH), (int)(0.12*HEIGHT),null);
 
             drawText(canvas);
-
-            gameOver.draw(canvas);
-            if(gameOver.isGameOver())
-            {
-                score.drawScoreGameOver(canvas);
-            }
 
             canvas.restoreToCount(savedState);
         }

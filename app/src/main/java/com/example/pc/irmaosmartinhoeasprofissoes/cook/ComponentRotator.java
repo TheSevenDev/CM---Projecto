@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 
+import com.example.pc.irmaosmartinhoeasprofissoes.GameOver;
 import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
@@ -29,10 +30,11 @@ public class ComponentRotator
     private Cake targetCake;
     private Random random = new Random();
     private Bitmap crossError;
-    private boolean isError, blinkingError;
+    private boolean isError, blinkingError, cakesMatch;
     private long errorStartTime;
+    private GameOver gameOver;
 
-    public ComponentRotator(Context context, Cake cake)
+    public ComponentRotator(Context context, Cake cake, GameOver gameOver)
     {
         this.context = context;
         randomizeTargetCake();
@@ -40,10 +42,17 @@ public class ComponentRotator
         fillComponentList();
 
         this.activeCake = cake;
+        this.cakesMatch = false;
 
         crossError = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_mark),
             (int)(0.4 * GamePanel.WIDTH),
             (int)(0.4 * GamePanel.HEIGHT), false);
+
+        this.gameOver = gameOver;
+    }
+
+    public boolean isCakesMatch() {
+        return cakesMatch;
     }
 
     private void fillComponentList()
@@ -275,7 +284,7 @@ public class ComponentRotator
                 activeCake.getCoating().equals(targetCake.getCoating()) &&
                 activeCake.getTopping().equals(targetCake.getTopping()))
         {
-            //win screen
+            gameOver.setGameOver(true);
         }
         else
         {

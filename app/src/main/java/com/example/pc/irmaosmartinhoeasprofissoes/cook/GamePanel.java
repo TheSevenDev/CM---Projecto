@@ -11,6 +11,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.Background;
+import com.example.pc.irmaosmartinhoeasprofissoes.EnumGame;
 import com.example.pc.irmaosmartinhoeasprofissoes.Pause;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import com.example.pc.irmaosmartinhoeasprofissoes.GameOver;
@@ -77,13 +78,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         musicBackground = MediaPlayer.create(getContext(), R.raw.cook);
         musicBackground.setLooping(true);
 
-        cake = new Cake((int) (Double.parseDouble(getResources().getString(R.string.cake_width)) * WIDTH),
-                (int) (Double.parseDouble(getResources().getString(R.string.cake_height)) * HEIGHT),
-                (int) (Double.parseDouble(getResources().getString(R.string.cake_x)) * WIDTH),
-                (int) (Double.parseDouble(getResources().getString(R.string.cake_y)) * HEIGHT), getContext());
+        gameOver = new GameOver(getContext(), EnumGame.COOK);
+        restartGame();
 
-        componentRotator = new ComponentRotator(getContext(), cake);
         pause = new Pause(getContext());
+
 
         thread = new MainThread(getHolder(), this);
 
@@ -99,7 +98,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             float x = event.getX();
             float y = event.getY();
 
-            if(!pause.isPaused() /*&& !gameOver.isGameOver()*/)
+            if(!pause.isPaused() && !gameOver.isGameOver())
             {
                 componentRotator.onTouchArrows(x, y);
                 componentRotator.onTouchComponentPanel(x, y);
@@ -108,6 +107,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             else if(pause.isPaused())
             {
                 if(pause.onTouchPauseScreen((int) x, (int) y))
+                    gameActivity.onBackPressed();
+            }
+            else if(gameOver.isGameOver())
+            {
+                int option = gameOver.onTouchPauseScreen((int) x, (int) y);
+
+                if(option == Integer.parseInt(getResources().getString(R.string.game_over_restart_option)))
+                    restartGame();
+                else if(option == Integer.parseInt(getResources().getString(R.string.game_over_exit_option)))
                     gameActivity.onBackPressed();
             }
 
@@ -120,12 +128,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void update()
     {
-        if(!pause.isPaused() /*&& !gameOver.isGameOver()*/)
+        if(!pause.isPaused() && !gameOver.isGameOver())
         {
             if (!musicBackground.isPlaying()) {
                 musicBackground.start();
             }
             componentRotator.update();
+
         }
         else if(pause.isPaused())
         {
@@ -147,7 +156,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
 
-            if(pause.isPaused() /*|| gameOver.isGameOver()*/)
+            if(pause.isPaused() || gameOver.isGameOver())
             {
                 background.draw(canvas, true);
 
@@ -165,13 +174,30 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 componentRotator.draw(canvas, false);
 
                 componentRotator.getTargetCake().draw(canvas, false);
-
-
             }
 
-            pause.draw(canvas);
+            if(!gameOver.isGameOver())
+                pause.draw(canvas);
+            else
+            {
+                gameOver.draw(canvas);
+                canvas.drawBitmap(componentRotator.getTargetCake().getImage(),
+                        (int)(0.40* com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GamePanel.WIDTH) ,
+                        (int)(0.23 * com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GamePanel.HEIGHT), null);
+                //score.drawScoreGameOver(canvas);
+            }
 
             canvas.restoreToCount(savedState);
         }
+    }
+
+    public void restartGame()
+    {
+        cake = new Cake((int) (Double.parseDouble(getResources().getString(R.string.cake_width)) * WIDTH),
+                (int) (Double.parseDouble(getResources().getString(R.string.cake_height)) * HEIGHT),
+                (int) (Double.parseDouble(getResources().getString(R.string.cake_x)) * WIDTH),
+                (int) (Double.parseDouble(getResources().getString(R.string.cake_y)) * HEIGHT), getContext());
+
+        componentRotator = new ComponentRotator(getContext(), cake, gameOver);
     }
 }
