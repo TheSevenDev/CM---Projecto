@@ -26,7 +26,7 @@ import java.util.Random;
  * Created by Marcos on 24/11/2017.
  */
 
-public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
+public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
@@ -48,7 +48,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
     private Context context;
 
 
-    public GamePanel(Context context, Activity activity){
+    public GamePanel(Context context, Activity activity) {
         super(context);
 
         getHolder().addCallback(this);
@@ -59,30 +59,34 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
 
         draws = new Bitmap[NUMBER_OF_DRAWS];
 
-        currentDraw = rand.nextInt(3 );
+        currentDraw = rand.nextInt(3);
 
         colors = new ArrayList<>();
 
         this.context = context;
     }
 
+
     @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height){}
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+    }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         boolean retry = true;
-        while(retry){
+        while (retry) {
             try {
                 thread.setRunning(false);
                 thread.join();
-            }catch (InterruptedException e){e.printStackTrace();}
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             retry = false;
         }
     }
 
     @Override
-    public void surfaceCreated(SurfaceHolder holder){
+    public void surfaceCreated(SurfaceHolder holder) {
         thread.setRunning(true);
         thread.start();
 
@@ -91,38 +95,38 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
         populateDraws();
         populateColors();
 
-  }
+    }
 
-    public void populateDraws(){
+    public void populateDraws() {
 
-        draws[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.professordraw), (int) (0.66*WIDTH) , (int) (0.68*HEIGHT), false);
-        draws[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.pilotodraw), (int) (0.66*WIDTH),(int)(0.68*HEIGHT), false);
-        draws[2] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.pintordraw), (int) (0.60*WIDTH),(int)(0.70*HEIGHT), false);
+        draws[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.professordraw), (int) (0.66 * WIDTH), (int) (0.68 * HEIGHT), false);
+        draws[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.pilotodraw), (int) (0.66 * WIDTH), (int) (0.68 * HEIGHT), false);
+        draws[2] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.pintordraw), (int) (0.55 * WIDTH), (int) (0.70 * HEIGHT), false);
 
     }
 
     @TargetApi(Build.VERSION_CODES.M)
-    public void populateColors()
-    {
-        colors.add(new PaintingColor(context,(int) (0.066*WIDTH), (int)(0.65*HEIGHT), (int)0.03, Color.DKGRAY, false));//PRETO
-        colors.add(new PaintingColor(context,(int) (0.15*WIDTH), (int)(0.65*HEIGHT), (int)0.03, Color.WHITE, true)); //BRANCO
-
-        colors.add(new PaintingColor(context,(int) (0.15*WIDTH), (int)(0.53*HEIGHT), (int)0.03, Color.RED, false)); //VERMELHO
-        colors.add(new PaintingColor(context,(int) (0.066*WIDTH), (int)(0.53*HEIGHT), (int)0.03,  getContext().getColor(R.color.colorOrange), false)); //LARANJA
-
-        colors.add(new PaintingColor(context, (int) (0.066*WIDTH), (int)(0.41*HEIGHT), (int)0.03, getContext().getColor(R.color.colorYellow), false)); //AMARELO
-        colors.add(new PaintingColor(context, (int) (0.15*WIDTH), (int)(0.41*HEIGHT), (int)0.03, getContext().getColor(R.color.colorGreen), false)); //VERDE
-
-        colors.add(new PaintingColor(context,(int) (0.066*WIDTH), (int)(0.29*HEIGHT), (int)0.03, getContext().getColor(R.color.colorBlue), false)); //AZUL
-        colors.add(new PaintingColor(context, (int) (0.15*WIDTH), (int)(0.29*HEIGHT), (int)0.03, getContext().getColor(R.color.colorPurple), false)); //ROXO
-
-        colors.add(new PaintingColor(context,(int) (0.066*WIDTH), (int)(0.17*HEIGHT), (int)0.03, getContext().getColor(R.color.colorPink), false)); //PINK
-        colors.add(new PaintingColor(context,(int) (0.15*WIDTH), (int)(0.17*HEIGHT), (int)0.03, getContext().getColor(R.color.colorSkin), false)); //PELE
+    public void populateColors() {
+        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.65 * HEIGHT), (int) 0.03, Color.DKGRAY, false));//PRETO
+        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.65 * HEIGHT), (int) 0.03, Color.WHITE, true)); //BRANCO
 
 
+        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.53 * HEIGHT), (int) 0.03, Color.RED, false)); //VERMELHO
+        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.53 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorOrange), false)); //LARANJA
+
+        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.41 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorYellow), false)); //AMARELO
+        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.41 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorGreen), false)); //VERDE
+
+        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.29 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorBlue), false)); //AZUL
+        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.29 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorPurple), false)); //ROXO
+
+        colors.add(new PaintingColor(context, (int) (0.066 * WIDTH), (int) (0.17 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorPink), false)); //PINK
+        colors.add(new PaintingColor(context, (int) (0.15 * WIDTH), (int) (0.17 * HEIGHT), (int) 0.03, getContext().getColor(R.color.colorSkin), false)); //PELE
+
+        currentColor = colors.get(1);
     }
 
-    public void update(){
+    public void update() {
 
 
     }
@@ -132,86 +136,88 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
             int fX = (int) event.getX();
             int fY = (int) event.getY();
 
-            Point p = new Point(fX, fY);
-
             boolean onCircle = false;
-            for(PaintingColor c : colors){
+            for (PaintingColor c : colors) {
 
-                if(c.onTouchEvent(fX, fY)) {
+                if (c.onTouchEvent(fX, fY)) {
                     onCircle = true;
                     break;
                 }
             }
-
-            if(onCircle) {
+            if (onCircle) {
                 for (PaintingColor c : colors) {
                     c.setSelected(false);
                     if (c.onTouchEvent(fX, fY)) {
                         c.setSelected(true);
+                        currentColor = c;
                     }
                 }
             }
 
-            if (fX >= (0.66*WIDTH) && fX < ((0.66*WIDTH) + WIDTH)
-                    && fY >= (0.68*HEIGHT) && fY < (0.68*HEIGHT) + HEIGHT) {
-                FloodFill(draws[currentDraw],p,Color.WHITE,currentColor.getColor());
+            if (fX >= (int) (0.3 * WIDTH) && fX < ((int) (0.3 * WIDTH) + draws[currentDraw].getWidth())
+                    && fY >= (int) (0.18 * HEIGHT) && fY < ((int) (0.18 * HEIGHT) + draws[currentDraw].getHeight())) {
+                System.out.println("==========COLOR : ==============");
+                int x = fX - (int) (0.3 * WIDTH);
+                int y = fY - (int) (0.18 * HEIGHT);
+                System.out.println("========= " + draws[currentDraw].getWidth() + "; " + draws[currentDraw].getHeight());
+                floodFill(draws[currentDraw], new Point(x, y), draws[currentDraw].getPixel(x, y), currentColor.getColor());
             }
-
-
+            else{
+                System.out.println("==========NO COLOR : ==============");
+            }
         }
         return true;
     }
 
 
-
-
-                    //FloodFill(background, p, android.graphics.Color.WHITE, android.graphics.Color.RED);
-
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void draw(Canvas canvas){
+    public void draw(Canvas canvas) {
         super.draw(canvas);
         canvas.drawBitmap(background, 0, 0, new Paint());
-        canvas.drawBitmap(draws[currentDraw], (int)(0.3*WIDTH),(int)(0.18*HEIGHT), new Paint());
+        canvas.drawBitmap(draws[currentDraw], (int) (0.3 * WIDTH), (int) (0.18 * HEIGHT), new Paint());
 
-        for (PaintingColor c: colors) {
+        for (PaintingColor c : colors) {
             c.draw(canvas);
         }
-
-
     }
 
-    private void FloodFill(Bitmap bmp, Point pt, int targetColor, int replacementColor){
-        Queue<Point> q = new LinkedList<>();
-        q.add(pt);
-        while (q.size() > 0) {
-            Point n = q.poll();
-            if (bmp.getPixel(n.x, n.y) != targetColor)
-                continue;
+    private void floodFill(Bitmap image, Point node, int targetColor, int replacementColor) {
+        int width = image.getWidth();
+        int height = image.getHeight();
 
-            Point w = n, e = new Point(n.x + 1, n.y);
-            while ((w.x > 0) && (bmp.getPixel(w.x, w.y) == targetColor)) {
-                bmp.setPixel(w.x, w.y, replacementColor);
-                if ((w.y > 0) && (bmp.getPixel(w.x, w.y - 1) == targetColor))
-                    q.add(new Point(w.x, w.y - 1));
-                if ((w.y < bmp.getHeight() - 1)
-                        && (bmp.getPixel(w.x, w.y + 1) == targetColor))
-                    q.add(new Point(w.x, w.y + 1));
-                w.x--;
-            }
-            while ((e.x < bmp.getWidth() - 1)
-                    && (bmp.getPixel(e.x, e.y) == targetColor)) {
-                bmp.setPixel(e.x, e.y, replacementColor);
-
-                if ((e.y > 0) && (bmp.getPixel(e.x, e.y - 1) == targetColor))
-                    q.add(new Point(e.x, e.y - 1));
-                if ((e.y < bmp.getHeight() - 1)
-                        && (bmp.getPixel(e.x, e.y + 1) == targetColor))
-                    q.add(new Point(e.x, e.y + 1));
-                e.x++;
-            }
-        }}
-
-
+        int target = targetColor;
+        int replacement = replacementColor;
+        if (target != replacement) {
+            Queue<Point> queue = new LinkedList<Point>();
+            do {
+                int x = node.x;
+                int y = node.y;
+                while (x > 0 && image.getPixel(x - 1, y) == target) {
+                    x--;
+                }
+                boolean spanUp = false;
+                boolean spanDown = false;
+                while (x < width && image.getPixel(x, y) == target) {
+                    image.setPixel(x, y, replacement);
+                    if (!spanUp && y > 0 && image.getPixel(x, y - 1) == target) {
+                        queue.add(new Point(x, y - 1));
+                        spanUp = true;
+                    } else if (spanUp && y > 0
+                            && image.getPixel(x, y - 1) != target) {
+                        spanUp = false;
+                    }
+                    if (!spanDown && y < height - 1
+                            && image.getPixel(x, y + 1) == target) {
+                        queue.add(new Point(x, y + 1));
+                        spanDown = true;
+                    } else if (spanDown && y < height - 1
+                            && image.getPixel(x, y + 1) != target) {
+                        spanDown = false;
+                    }
+                    x++;
+                }
+            } while ((node = queue.poll()) != null);
+        }
+    }
 }

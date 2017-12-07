@@ -36,6 +36,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
 
+    private final int TIMEOUT = 50;
     //PODE SER MELHOR
     //DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
     //int a = displayMetrics.widthPixels;
@@ -112,7 +113,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.firefighterbg), WIDTH, HEIGHT);
+        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.bg_teste), WIDTH, HEIGHT);
         waterMeter = new WaterMeter(BitmapFactory.decodeResource(getResources(), R.drawable.barraagua),
                 (int)(Double.parseDouble(getResources().getString(R.string.water_meter_sprite_width)) * WIDTH),
                 (int)(Double.parseDouble(getResources().getString(R.string.water_meter_sprite_height)) * HEIGHT),
@@ -317,7 +318,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 //gameOver.setScore(score.getScore());
                 gameOver.setGameOver(true);
                 musicBackground.pause();
-                MusicService.playSound(getContext(), R.raw.victory);
+                MediaPlayer mp = MediaPlayer.create(this.getContext(), R.raw.victory);
+                mp.setLooping(false);
+                mp.setVolume(100, 100);
+                mp.start();
             }
         }
         else if(pause.isPaused())
@@ -328,8 +332,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             if(pausedTimeStart == 0)
                 pausedTimeStart = System.nanoTime();
         }
-
-        MediaPlayer mp = new MediaPlayer();
     }
 
     @Override
@@ -500,7 +502,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         waterDrops = new ArrayList<>();
         cats = new ArrayList<>();
         waterMeterValue = 100;
-        timeRemaining = 20;
+        timeRemaining = TIMEOUT;
         score = new Score(getContext());
         //timerStart = System.nanoTime();
         fireStart = System.nanoTime();

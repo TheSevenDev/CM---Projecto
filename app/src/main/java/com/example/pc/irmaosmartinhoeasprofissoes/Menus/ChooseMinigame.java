@@ -24,6 +24,7 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import com.example.pc.irmaosmartinhoeasprofissoes.Tracker;
 import com.example.pc.irmaosmartinhoeasprofissoes.cook.CookActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.FirefighterActivity;
+import com.example.pc.irmaosmartinhoeasprofissoes.painter.PainterActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.pilot.PilotActivity;
 
 public class ChooseMinigame extends GeneralActivity implements LocationListener{
@@ -119,8 +120,10 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
     @Override
     protected  void onDestroy(){
         super.onDestroy();
-        MainMenu.mp.stop();
-        MainMenu.mp = null;
+        if(MainMenu.mp != null) {
+            MainMenu.mp.stop();
+            MainMenu.mp = null;
+        }
     }
 
     private boolean isServiceRunning(Class<?> serviceClass) {
@@ -147,6 +150,12 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
     public void cookGame(View view)
     {
         startActivity(new Intent(getApplicationContext(), CookActivity.class));
+        savePosition();
+    }
+
+    public void painterGame(View view)
+    {
+        startActivity(new Intent(getApplicationContext(), PainterActivity.class));
         savePosition();
     }
 

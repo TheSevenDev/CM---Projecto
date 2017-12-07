@@ -253,7 +253,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void checkCollision(){
         Iterator<Obstacle> it = obstacles.iterator();
-        Obstacle aux = null;
+        Obstacle aux;
         while (it.hasNext()) {
             aux = it.next();
             if (aux.getX() < -WIDTH)
@@ -272,14 +272,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         long obstaclesElapsed = (System.nanoTime() - obstacleStartTime) / 1000000;
         if (obstaclesElapsed > (1000 - player.getScore()/4)) {
             int randomY = rand.nextInt(MAX_HEIGHT_BOUND - 30) + 30;
-            Bitmap bird = BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day);
-            Bitmap madBird = BitmapFactory.decodeResource(getResources(), R.drawable.obstacle_day_mad);
+            Bitmap bird = BitmapFactory.decodeResource(getResources(), R.drawable.pilot_obstacle);
+            Bitmap madBird = BitmapFactory.decodeResource(getResources(), R.drawable.pilot_obstacle_fast);
 
-            if (obstacles.isEmpty()) {
-                obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, 66, 69, player.getScore(), 7));
-            } else {
-                obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, 66, 69, player.getScore(), 7));
-            }
+            obstacles.add(new Obstacle(bird, madBird, WIDTH + 10, randomY, 66, 69, player.getScore(), 7));
 
             obstacleStartTime = System.nanoTime();
         }
