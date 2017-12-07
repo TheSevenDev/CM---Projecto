@@ -164,6 +164,12 @@
     <string name="game_over_character_height_mod">0.60</string>
     <string name="game_over_character_x_mod">0.14</string>
     <string name="game_over_character_y_mod">0.25</string>
+
+    <string name="game_over_profession_width_mod">0.20</string>
+    <string name="game_over_profession_height_mod">0.20</string>
+    <string name="game_over_profession_x_mod">0.65</string>
+    <string name="game_over_profession_y_mod">0.55</string>
+
     <string name="title_activity_tracker">Map</string>
 
 
