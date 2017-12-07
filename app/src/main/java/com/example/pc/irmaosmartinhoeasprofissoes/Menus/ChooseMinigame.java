@@ -11,7 +11,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
-import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
-import com.example.pc.irmaosmartinhoeasprofissoes.Tracker;
 import com.example.pc.irmaosmartinhoeasprofissoes.cook.CookActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.FirefighterActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.pilot.PilotActivity;

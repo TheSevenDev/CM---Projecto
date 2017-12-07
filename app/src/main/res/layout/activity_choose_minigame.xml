@@ -1,162 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBlue"
-    android:orientation="horizontal">
-
-    <!-- Caixa Bombeiro   -->
-    <ImageButton
-        android:id="@+id/imgbtn_firefighter"
-        android:layout_width="100dp"
-        android:layout_height="250dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="85dp"
-        android:onClick="fireFighterGame"
-        android:src="@drawable/jose_bombeiro"
-        android:background="@drawable/round_corner"
-        android:text="@string/bombeiro"
-        />
-
-    <Button
-        android:id="@+id/desc_firefighter"
-        android:layout_width="80dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="317dp"
-        android:textColor="#FFFFFF"
-        android:fontFamily="@font/gotham_bold_font"
-        android:background="@drawable/round_corner_profession_name"
-        android:text="@string/bombeiro"
-        android:textSize="12dp" />
-
-    <!-- Caixa Pasteleiro   -->
-    <ImageButton
-        android:id="@+id/imgbtn_baker"
-        android:layout_width="100dp"
-        android:layout_height="250dp"
-        android:layout_marginLeft="165dp"
-        android:layout_marginTop="85dp"
-        android:background="@drawable/round_corner"
-        android:onClick="cookGame"
-        android:src="@drawable/jose_pasteleiro"
-        android:text="@string/pasteleiro" />
-
-    <Button
-        android:id="@+id/desc_baker"
-        android:layout_width="89dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="170dp"
-        android:layout_marginTop="317dp"
-        android:background="@drawable/round_corner_profession_name"
-        android:fontFamily="@font/gotham_bold_font"
-        android:onClick="cookGame"
-        android:text="@string/pasteleiro"
-        android:textColor="#FFFFFF"
-        android:textSize="12dp" />
-
-
-    <!-- Caixa Professor   -->
-    <ImageButton
-        android:id="@+id/imgbtn_teacher"
-        android:layout_width="100dp"
-        android:layout_height="250dp"
-        android:layout_marginLeft="270dp"
-        android:layout_marginTop="85dp"
-        android:background="@drawable/round_corner_unavailable"
-        android:src="@drawable/jose_professor"
-        android:text="@string/professor"
-        />
-
-    <Button
-        android:id="@+id/desc_teacher"
-        android:layout_width="89dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="275dp"
-        android:layout_marginTop="317dp"
-        android:background="@color/unavailableColor"
-        android:fontFamily="@font/gotham_bold_font"
-        android:text="@string/professor"
-        android:textColor="#FFFFFF"
-        android:textSize="12dp" />
-
-    <!-- Caixa Pintor   -->
-    <ImageButton
-        android:id="@+id/imgbtn_painter"
-        android:layout_width="100dp"
-        android:layout_height="250dp"
-        android:layout_marginLeft="375dp"
-        android:layout_marginTop="85dp"
-        android:background="@drawable/round_corner"
-        android:src="@drawable/jose_pintor"
-        android:onClick="painterGame"
-        android:text="@string/pintor"
-        />
-
-    <Button
-        android:id="@+id/desc_painter"
-        android:layout_width="89dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="380dp"
-        android:layout_marginTop="317dp"
-        android:textColor="#FFFFFF"
-        android:fontFamily="@font/gotham_bold_font"
-        android:background="@drawable/round_corner_profession_name"
-        android:text="@string/pintor"
-        android:textSize="12dp" />
-
-    <!-- Caixa Aviador   -->
-    <ImageButton
-        android:id="@+id/imgbtn_pilot"
-        android:layout_width="100dp"
-        android:layout_height="250dp"
-        android:layout_marginLeft="480dp"
-        android:layout_marginTop="85dp"
-        android:background="@drawable/round_corner"
-        android:src="@drawable/jose_piloto"
-        android:onClick="pilotGame"
-        android:text="@string/aviador"
-        />
-
-    <Button
-        android:id="@+id/desc_pilot"
-        android:layout_width="89dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="485dp"
-        android:layout_marginTop="317dp"
-        android:background="@drawable/round_corner_profession_name"
-        android:textColor="#FFFFFF"
-        android:fontFamily="@font/gotham_bold_font"
-        android:text="@string/aviador"
-        android:textSize="12dp" />
-
-    <ImageView
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:onClick="backToMainMenu"
-        android:src="@drawable/back" />
-
-
-    <ImageView
-        android:id="@+id/img_chooseMale"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="60dp"
-        android:layout_marginTop="15dp"
-        android:onClick="changeToMale"
-        android:src="@drawable/jose_face" />
+    android:background="@drawable/menus_background">
 
     <ImageView
         android:id="@+id/img_chooseFemale"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:onClick="changeToFemale"
-        android:src="@drawable/maria_face" />
+        android:src="@drawable/maria_face_resp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.986"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/img_chooseMale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="changeToMale"
+        android:src="@drawable/jose_face_resp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.892"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <ImageView
+        android:id="@+id/backButton2"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="backButton"
+        android:onClick="backToMainMenu"
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <ImageButton
+        android:id="@+id/imgbtn_painter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/container_resp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/jose_pintor" />
+
+    <ImageButton
+        android:id="@+id/imgbtn_pilot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/container_resp"
+        android:onClick="pilotGame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/jose_piloto" />
+
+    <ImageButton
+        android:id="@+id/imgbtn_firefighter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/container_resp"
+        android:onClick="cookGame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/jose_bombeiro" />
+
+    <ImageButton
+        android:id="@+id/imgbtn_baker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/container_resp"
+        android:onClick="cookGame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/jose_pasteleiro" />
+
+    <ImageButton
+        android:id="@+id/imgbtn_teacher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/container_resp_blocked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/jose_professor" />
+
+    <TextView
+        android:id="@+id/btnPasteleiro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_container_resp"
+        android:text="@string/pasteleiro"
+        android:textAlignment="center"
+        android:textColorLink="@android:color/background_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgbtn_baker"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/btnBombeiro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_container_resp"
+        android:text="@string/bombeiro"
+        android:textAlignment="center"
+        android:textColorLink="@android:color/background_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgbtn_firefighter"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/btnProfessor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_container_resp_blocked"
+        android:text="@string/professor"
+        android:textAlignment="center"
+        android:textColorLink="@android:color/background_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgbtn_teacher"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/btnPintor"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_container_resp"
+        android:text="@string/pintor"
+        android:textAlignment="center"
+        android:textColorLink="@android:color/background_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgbtn_painter"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/btnAviador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_container_resp"
+        android:text="@string/aviador"
+        android:textAlignment="center"
+        android:textColorLink="@android:color/background_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgbtn_pilot"
+        app:layout_constraintVertical_bias="0.0" />
+
+</android.support.constraint.ConstraintLayout>
