@@ -134,9 +134,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 musicBackground.start();
             }
             componentRotator.update();
-
         }
-        else if(pause.isPaused())
+        else
         {
             if(musicBackground.isPlaying())
                 musicBackground.pause();

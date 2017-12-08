@@ -316,6 +316,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 //EVENTUALMENTE VAI MUDAR
                 //gameOver.setScore(score.getScore());
                 gameOver.setGameOver(true);
+                //MusicService.playSound(getContext(), R.raw.victory);
                 musicBackground.pause();
             }
         }

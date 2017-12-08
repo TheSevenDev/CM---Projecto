@@ -12,6 +12,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -255,6 +256,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             else {
                 aux.update();
                 if (collision(aux.getRectangle(), player.getImageRectangle())) {
+                    Vibrator v = (Vibrator) gameActivity.getSystemService(Context.VIBRATOR_SERVICE);
+                    // Vibrate for 500 milliseconds
+                    v.vibrate(500);
                         player.takeDamage(1);
                     it.remove();
                 }

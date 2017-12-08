@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 
@@ -28,6 +30,9 @@ public class Player extends GameObject {
     private Animation pilotAnimation;
     private AnimationManager animationManager;
     private long startTime;
+
+    private boolean damaged, blinkingDamage;
+    private long startDamageTime;
 
     public Player(Rect rectangle, Context context) {
         this.rectangle = rectangle;
@@ -78,9 +83,10 @@ public class Player extends GameObject {
     }
 
 
-    public void draw(Canvas canvas) {
-
-        animationManager.draw(canvas, rectangle);
+    public void draw(Canvas canvas)
+    {
+        if(!blinkingDamage)
+            animationManager.draw(canvas, rectangle);
     }
 
     public void update(Point point) {
@@ -94,7 +100,49 @@ public class Player extends GameObject {
 
         animationManager.playAnim(0);
         animationManager.update();
+
+        if(damaged)
+            animationBlink();
     }
+
+    public void animationBlink()
+    {
+        long timeElapsed = (System.nanoTime() - startDamageTime)/1000000;
+
+        if (timeElapsed > 100) {
+            blinkingDamage = true;
+        }
+
+        if (timeElapsed > 200) {
+            blinkingDamage = false;
+        }
+
+        if (timeElapsed > 300) {
+            blinkingDamage = true;
+        }
+
+        if (timeElapsed > 400) {
+            blinkingDamage = false;
+        }
+
+        if (timeElapsed > 500) {
+            blinkingDamage = true;
+        }
+
+        if (timeElapsed > 600) {
+            blinkingDamage = false;
+        }
+
+        if (timeElapsed > 700) {
+            blinkingDamage = true;
+        }
+
+        if (timeElapsed > 800) {
+            blinkingDamage = false;
+            damaged = false;
+        }
+    }
+
     public int getScore(){
         return score;
     }
@@ -105,6 +153,9 @@ public class Player extends GameObject {
 
     public void takeDamage(int d){
         health-=d;
+
+        startDamageTime = System.nanoTime();
+        damaged = true;
     }
 
     public int getHealth(){

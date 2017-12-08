@@ -164,6 +164,9 @@ public class ComponentRotator
             activeCake.setLastComponentPut(selectedComponent);
 
             changeCakeComponent(y);
+
+            if(selectedComponent != EnumComponentType.TOPPING)
+                MusicService.playSound(context, R.raw.drill);
         }
     }
 
