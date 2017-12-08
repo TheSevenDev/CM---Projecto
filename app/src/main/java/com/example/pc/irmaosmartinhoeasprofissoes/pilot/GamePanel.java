@@ -178,13 +178,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void resetGame(){
 
-        Rect playerRect = new Rect(150,150,315,275);
-        player = new Player(playerRect, 50, 50, context);
+        Rect playerRect = new Rect((int)(0.125*WIDTH),(int)(0.208*HEIGHT),(int)(0.2633*WIDTH),(int)(0.3819*HEIGHT));
+        player = new Player(playerRect, context);
         player.resetScore();
         player.resetHealth();
 
 
-        playerPoint = new Point(170, HEIGHT/2);
+        playerPoint = new Point((int)(0.1421*WIDTH), HEIGHT/2);
         player.update(playerPoint);
 
         obstacles = new ArrayList<>();

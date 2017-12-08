@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:text="Localização do jogador:"
         android:textSize="24sp"
@@ -78,6 +78,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Créditos"
+        android:onClick="credits"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="92dp"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="127dp"
         android:layout_marginTop="8dp"
         android:text="Música:"
         android:textSize="24sp"
@@ -104,7 +105,7 @@
         android:id="@+id/volumeIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="92dp"
         android:layout_marginEnd="232dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/volume_up"
@@ -112,6 +113,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationButton"
-        app:layout_constraintVertical_bias="0.354" />
+        app:layout_constraintVertical_bias="0.629" />
 
 </android.support.constraint.ConstraintLayout>

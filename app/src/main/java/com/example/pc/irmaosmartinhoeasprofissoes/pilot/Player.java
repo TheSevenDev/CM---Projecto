@@ -29,10 +29,8 @@ public class Player extends GameObject {
     private AnimationManager animationManager;
     private long startTime;
 
-    public Player(Rect rectangle, int x, int y, Context context) {
+    public Player(Rect rectangle, Context context) {
         this.rectangle = rectangle;
-        this.x = x;
-        this.y = y;
         this.width = rectangle.width();
         this.height = rectangle.height();
         this.context = context;

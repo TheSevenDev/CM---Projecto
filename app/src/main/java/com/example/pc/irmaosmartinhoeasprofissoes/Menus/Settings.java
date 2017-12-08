@@ -14,6 +14,8 @@ import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import com.example.pc.irmaosmartinhoeasprofissoes.Tracker;
 
+import java.util.Set;
+
 public class Settings extends GeneralActivity {
 private boolean muted = false;
     @Override
@@ -32,6 +34,10 @@ private boolean muted = false;
         startActivity(new Intent(getApplicationContext(),  Tracker.class));
     }
 
+    public void credits(View view){
+        startActivity(new Intent(getApplicationContext(), Credits.class));
+    }
+
     public void manageAudio(View view){
 
         ImageView audioIcon = (ImageButton) findViewById(R.id.volumeIcon);
@@ -46,6 +52,8 @@ private boolean muted = false;
         }
 
     }
+
+
 
     @Override
     protected void onResume() {
