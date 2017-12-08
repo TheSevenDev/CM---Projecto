@@ -2,6 +2,7 @@ package com.example.pc.irmaosmartinhoeasprofissoes.painter;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -17,6 +18,7 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 public class PaintingColor{
 
+    public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     private int cx, cy, radius;
     private boolean selected;
     private int color;
@@ -64,7 +66,7 @@ public class PaintingColor{
             paint.setStyle(Paint.Style.STROKE);
             paint.setStrokeWidth(5);
             paint.setColor(context.getColor(R.color.selectedColor));
-            canvas.drawCircle((int) cx,cy, 35, paint );
+            canvas.drawCircle((int) cx,cy, (int)((Double.parseDouble(context.getResources().getString(R.string.painting_colors_radius))) * WIDTH), paint );
         }
     }
 
