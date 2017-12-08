@@ -98,12 +98,6 @@ public static boolean muted;
         //startService(new Intent(this, MusicService.class));
     }
 
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        mp.stop();
-        mp = null;
-    }
 
     //NO ACTION FOR BACK BUTTON
     @Override

@@ -9,10 +9,15 @@
     <string name="choosegender_title">Escolhe com quem queres jogar!</string>
     <string name="mainmenu_play"><![CDATA[Jogar >]]></string>
     <string name="professor">Professor</string>
+    <string name="professora">Professora</string>
     <string name="aviador">Aviador</string>
+    <string name="aviadora">Aviadora</string>
     <string name="bombeiro">Bombeiro</string>
+    <string name="bombeira">Bombeira</string>
     <string name="pintor">Pintor</string>
+    <string name="pintora">Pintora</string>
     <string name="pasteleiro">Pasteleiro</string>
+    <string name="pasteleira">Pasteleira</string>
     <string name="choose_minigame_title">Escolhe a Profissão!</string>
     <string name="back_to_menu">Voltar ao Menu</string>
 
