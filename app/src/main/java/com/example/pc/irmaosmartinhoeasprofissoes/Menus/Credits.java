@@ -14,8 +14,8 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
 public class Credits extends GeneralActivity {
     private final int ANIMATION_DURATION = 25000;
 
-    private TextView creditsText;
-    private Animation animation;
+    private TextView creditsText , creditsText2;
+    private Animation animation, animation2;
 
 
     @Override
@@ -26,10 +26,52 @@ public class Credits extends GeneralActivity {
         animation = AnimationUtils.loadAnimation(this, R.anim.credits);
         animation.setRepeatCount(Animation.INFINITE);
         animation.setDuration(ANIMATION_DURATION);
+
+        animation2 = AnimationUtils.loadAnimation(this, R.anim.credits2);
+        animation2.setRepeatCount(Animation.INFINITE);
+        animation2.setDuration(ANIMATION_DURATION);
+
         creditsText = findViewById(R.id.creditsText);
         creditsText.setText(creditsText());
 
         creditsText.startAnimation(animation);
+
+        creditsText2 = findViewById(R.id.creditsText2);
+        creditsText2.setText(creditsText2());
+
+        creditsText2.startAnimation(animation);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //if(!isServiceRunning(MusicService.class)){
+        //    startService(new Intent(this, MusicService.class));
+        //}
+        if(!MainMenu.mp.isPlaying()) {
+            MainMenu.mp.seekTo(MainMenu.mp.getCurrentPosition() - 100);
+            MainMenu.mp.start();
+        }
+    }
+    @Override
+    protected  void onPause(){
+        super.onPause();
+        MainMenu.mp.pause();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+
+    }
+
+    @Override
+    protected  void onDestroy(){
+        super.onDestroy();
+        if(MainMenu.mp != null) {
+            MainMenu.mp.stop();
+            MainMenu.mp = null;
+        }
     }
 
     public void backToSettings(View view){
@@ -41,13 +83,17 @@ public class Credits extends GeneralActivity {
         String str = "";
         str+="Desenvolvido por\nBárbara Teixeira\nBruno Pereira\nDiogo Abreu\nMarcos Letras \nRicardo Fernandes";
         str+="\n\nCom colaboração de\nrh0 de opengameart.org\nbevoullin.com de opengameart.org\nProfessora Rossana Santos";
-        str+="\n\nMúsica de\nNicolai Heidlas - KLONKY DONKEY\n" +
-                             "Nicolai Heidlas - Cartoon\n" +
-                             "Mattia Cupelli - Action Cartoon Music\n" +
-                             "EmanMusic - Fly Away\n" +
-                             "Klubz Productions - Cartoon Music - \"Curious Fun\"\n" +
-                             "Audio Lounge - Happy Piano Background Music\n";
+        str+="\n\nMúsica de\nNicolai Heidlas - KLONKY DONKEY\nNicolai Heidlas - Cartoon\nMattia Cupelli - Action Cartoon Music\nEmanMusic - Fly Away\nKlubz Productions - Cartoon Music Curious Fun\nAudio Lounge - Happy Piano Background Music";
 
+
+        str+="\n\nInstituto Politécnico de Setúbal";
+        str+="\n\u00A9 2018";
+        return str;
+    }
+
+    private String creditsText2(){
+        String str = "";
+        str+="\n\nMúsica de\nNicolai Heidlas - KLONKY DONKEY\nNicolai Heidlas - Cartoon\nMattia Cupelli - Action Cartoon Music\nEmanMusic - Fly Away\nKlubz Productions - Cartoon Music Curious Fun\nAudio Lounge - Happy Piano Background Music";
 
         str+="\n\nInstituto Politécnico de Setúbal";
         str+="\n\u00A9 2018";
