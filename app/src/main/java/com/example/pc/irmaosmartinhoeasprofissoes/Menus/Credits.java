@@ -26,10 +26,10 @@ public class Credits extends GeneralActivity {
         animation = AnimationUtils.loadAnimation(this, R.anim.credits);
         animation.setRepeatCount(Animation.INFINITE);
         animation.setDuration(ANIMATION_DURATION);
-        //creditsText = findViewById(R.id.creditsText);
-        //creditsText.setText(creditsText());
+        creditsText = findViewById(R.id.creditsText);
+        creditsText.setText(creditsText());
 
-     //   creditsText.startAnimation(animation);
+        creditsText.startAnimation(animation);
     }
 
     public void backToSettings(View view){
@@ -40,11 +40,17 @@ public class Credits extends GeneralActivity {
 
         String str = "";
         str+="Desenvolvido por\nBárbara Teixeira\nBruno Pereira\nDiogo Abreu\nMarcos Letras \nRicardo Fernandes";
-        str+="\n\nCom colaboração de\nsamonasta";
+        str+="\n\nCom colaboração de\nrh0 de opengameart.org\nbevoullin.com de opengameart.org\nProfessora Rossana Santos";
+        str+="\n\nMúsica de\nNicolai Heidlas - KLONKY DONKEY\n" +
+                             "Nicolai Heidlas - Cartoon\n" +
+                             "Mattia Cupelli - Action Cartoon Music\n" +
+                             "EmanMusic - Fly Away\n" +
+                             "Klubz Productions - Cartoon Music - \"Curious Fun\"\n" +
+                             "Audio Lounge - Happy Piano Background Music\n";
 
 
-
-
+        str+="\n\nInstituto Politécnico de Setúbal";
+        str+="\n\u00A9 2018";
         return str;
     }
 }

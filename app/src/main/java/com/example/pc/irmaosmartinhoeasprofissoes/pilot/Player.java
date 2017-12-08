@@ -70,7 +70,6 @@ public class Player extends GameObject {
         }
 
         pilotAnimation = new Animation(images, 0.45f);
-        //pilotAnimation = new Animation(new Bitmap[]{images[6], images[1]}, 0.5f);
         animationManager =  new AnimationManager(new Animation[]{pilotAnimation});
 
         score = 0;
