@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.pc.irmaosmartinhoeasprofissoes.Menus.Credits"
-    tools:background="@drawable/emptycloud"
-    >
+    android:background="@drawable/emptycloud">
+
     <ImageView
         android:id="@+id/backButton2"
         android:layout_width="42dp"
@@ -31,9 +30,9 @@
         android:id="@+id/creditsText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="20sp"
-        android:textColor="#000000"
         android:gravity="top|center"
+        android:textColor="#000000"
+        android:textSize="20sp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
