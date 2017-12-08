@@ -196,11 +196,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void update()
     {
-        if(!player.isAlive())
+        if(!player.isAlive()) {
             gameOver.setGameOver(true);
-
-        else{
-            if(!pause.isPaused() && !gameOver.isGameOver()) {
+            player.resetHealth();
+        }
+        else if (!pause.isPaused() && !gameOver.isGameOver()) {
                 if (frameTime < initTime)
                     frameTime = initTime;
 
@@ -215,8 +215,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
                 checkCollision();
             }
-        }
     }
+
 
 
     public void orientation(){
@@ -283,32 +283,33 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         final float scaleFactorX = getWidth()/(WIDTH*1.f);
         final float scaleFactorY = getHeight()/(HEIGHT*1.f);
 
-        if(canvas!=null)
-        {
+        if(canvas!=null) {
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
 
-            if(lightData.getLightValue() >= MIN_DAYLIGHT) {
+            if (lightData.getLightValue() >= MIN_DAYLIGHT) {
                 backgroundDay.draw(canvas);
-            }
-            else {
+            } else {
                 backgroundNight.draw(canvas);
             }
 
             player.draw(canvas);
-            canvas.drawBitmap(health[player.getHealth()],WIDTH*0.01f, HEIGHT*0.03f, null); //CHANGE VALUES TO SCALE
-            for(Obstacle ob : obstacles){
+            canvas.drawBitmap(health[player.getHealth()], WIDTH * 0.01f, HEIGHT * 0.03f, null); //CHANGE VALUES TO SCALE
+            for (Obstacle ob : obstacles) {
                 ob.draw(canvas);
             }
+
+
+            if (!gameOver.isGameOver())
+                pause.draw(canvas);
+            else {
+                gameOver.draw(canvas);
+                drawScore(canvas);
+            }
+
             canvas.restoreToCount(savedState);
         }
 
-        if(!gameOver.isGameOver())
-            pause.draw(canvas);
-        else {
-            gameOver.draw(canvas);
-            drawScore(canvas);
-        }
     }
 
     public boolean checkRecord(){

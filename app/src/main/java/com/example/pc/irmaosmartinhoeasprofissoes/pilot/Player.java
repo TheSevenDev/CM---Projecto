@@ -56,20 +56,21 @@ public class Player extends GameObject {
             if(i==0)
                 images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) - (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.04), player.getHeight());
             else if(i==1)
-                images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES) - (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.04), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.01), player.getHeight());
+                images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES) - (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.04), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0), player.getHeight());
             else if(i==2)
-                images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES) - (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.04), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.04), player.getHeight());
+                images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES) - (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.04), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0), player.getHeight());
             else if (i == 3)
-                images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.01), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.035), player.getHeight());
+                images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES) - (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.025), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.01), player.getHeight());
             else if(i==4)
-                images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.04), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.04), player.getHeight());
+                images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.01), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0), player.getHeight());
             else if(i==5)
-                images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.05), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.035), player.getHeight());
+                images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.05), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES)* 0), player.getHeight());
             else if (i == 6)
-                images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.05), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) - (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.04), player.getHeight());
+                images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.045), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) - (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.045), player.getHeight());
         }
 
-        pilotAnimation = new Animation(images, 0.5f);
+        pilotAnimation = new Animation(images, 0.45f);
+        //pilotAnimation = new Animation(new Bitmap[]{images[6], images[1]}, 0.5f);
         animationManager =  new AnimationManager(new Animation[]{pilotAnimation});
 
         score = 0;
