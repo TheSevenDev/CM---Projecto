@@ -31,6 +31,7 @@ import java.util.ArrayList;
 public class MainMenu extends GeneralActivity {
 
 public static MediaPlayer mp;
+public static boolean muted;
 
     @SuppressLint("MissingPermission")
     @Override
@@ -46,7 +47,9 @@ public static MediaPlayer mp;
             mp.setLooping(true);
             mp.setVolume(100, 100);
             mp.start();
+            muted = false;
         }
+
 
         if(!mp.isPlaying()){
             mp.seekTo(mp.getCurrentPosition() - 100);

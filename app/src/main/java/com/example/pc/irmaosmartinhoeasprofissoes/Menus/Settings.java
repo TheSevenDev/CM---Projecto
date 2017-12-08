@@ -18,11 +18,12 @@ import com.example.pc.irmaosmartinhoeasprofissoes.Tracker;
 import java.util.Set;
 
 public class Settings extends GeneralActivity {
-private boolean muted = false;
+    private ImageView audioIcon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        audioIcon = (ImageButton) findViewById(R.id.volumeIcon);
         getAudioState();
 
     }
@@ -40,8 +41,7 @@ private boolean muted = false;
     }
 
     private void getAudioState(){
-        ImageView audioIcon = (ImageButton) findViewById(R.id.volumeIcon);
-        if(muted){
+        if(MainMenu.muted){
             audioIcon.setImageResource(R.drawable.volume_down);
         }else{
             audioIcon.setImageResource(R.drawable.volume_up);
@@ -49,28 +49,15 @@ private boolean muted = false;
     }
 
     public void manageAudio(View view){
-        SharedPreferences sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
-        if(!sharedPref.contains("musicState"))
-        {
-
-            editor.putBoolean("musicState", false);
-
-        }
-
-        ImageView audioIcon = (ImageButton) findViewById(R.id.volumeIcon);
-        if(muted){
+        if(MainMenu.muted){
             MainMenu.mp.setVolume(1,1);
-            muted = false;
+            MainMenu.muted = false;
             audioIcon.setImageResource(R.drawable.volume_up);
         }else{
             MainMenu.mp.setVolume(0,0);
-            muted = true;
-            editor.putBoolean("musicState", true);
+            MainMenu.muted = true;
             audioIcon.setImageResource(R.drawable.volume_down);
         }
-        editor.apply();
 
     }
 
