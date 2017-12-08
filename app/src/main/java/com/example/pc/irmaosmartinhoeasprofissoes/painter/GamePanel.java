@@ -37,6 +37,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Pause pause;
     private Activity gameActivity;
 
+    private Bitmap leftArrow, rightArrow;
 
     private Bitmap[] draws;
     private int currentDraw;
@@ -66,6 +67,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         this.context = context;
 
         pause = new Pause(context);
+
+
     }
 
 
@@ -97,6 +100,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         populateDraws();
         populateColors();
 
+        createArrows();
     }
 
     public void populateDraws() {
@@ -140,6 +144,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             int fX = (int) event.getX();
             int fY = (int) event.getY();
+
+            onTouchArrows(fX,fY);
 
             if(!pause.isPaused()) {
                 pause.onTouchPauseButton(fX, fY);
@@ -231,5 +237,61 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 }
             } while ((node = queue.poll()) != null);
         }
+    }
+
+    public void createArrows()
+    {
+        Bitmap auxBitmap;
+        Bitmap originalImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.arrows);
+
+        auxBitmap = Bitmap.createBitmap(originalImage,
+                0, 0,
+                (int)(0.5 * originalImage.getWidth()), originalImage.getHeight());
+
+        leftArrow = Bitmap.createScaledBitmap(auxBitmap,
+                (int)(Double.parseDouble(context.getResources().getString(R.string.arrow_width))*GamePanel.WIDTH),
+                (int)(Double.parseDouble(context.getResources().getString(R.string.arrow_height))*GamePanel.HEIGHT), false);
+
+        auxBitmap = Bitmap.createBitmap(originalImage,
+                (int)(0.5 * originalImage.getWidth()), 0,
+                (int)(0.5 * originalImage.getWidth()), originalImage.getHeight());
+
+        rightArrow = Bitmap.createScaledBitmap(auxBitmap,
+                (int)(Double.parseDouble(context.getResources().getString(R.string.arrow_width))*GamePanel.WIDTH),
+                (int)(Double.parseDouble(context.getResources().getString(R.string.arrow_height))*GamePanel.HEIGHT), false);
+    }
+
+    public void onTouchArrows(float x, float y)
+    {
+        //left arrow
+        if (x >= (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.left_arrow_x)))
+                && x < ((int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.left_arrow_x)))
+                + (GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.arrow_width))))
+                && y >= (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.left_arrow_y)))
+                && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.left_arrow_y)))
+                + (GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.arrow_height)))))
+
+        {
+            if(currentDraw==0){
+                currentDraw = 2;
+            }
+            currentDraw = currentDraw -1;
+        }
+
+        //right arrow
+        if (x >= (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.right_arrow_x)))
+                && x < ((int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.right_arrow_x)))
+                + (GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.arrow_width))))
+                && y >= (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.right_arrow_y)))
+                && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.right_arrow_y)))
+                + (GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.arrow_height)))))
+
+        {
+            if(currentDraw==2){
+                currentDraw=0;
+            }
+            currentDraw = currentDraw+1;
+        }
+
     }
 }
