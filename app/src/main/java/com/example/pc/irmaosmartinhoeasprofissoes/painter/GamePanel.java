@@ -100,7 +100,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         populateDraws();
         populateColors();
 
-        createArrows();
+
     }
 
     public void populateDraws() {
@@ -148,6 +148,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             onTouchArrows(fX,fY);
 
             if(!pause.isPaused()) {
+                onTouchArrows(fX,fY);
                 pause.onTouchPauseButton(fX, fY);
                 boolean onCircle = false;
                 for (PaintingColor c : colors) {
@@ -198,6 +199,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         pause.draw(canvas);
+
+        drawArrows(canvas);
+
+
     }
 
     private void floodFill(Bitmap image, Point node, int targetColor, int replacementColor) {
@@ -293,5 +298,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             currentDraw = currentDraw+1;
         }
 
+    }
+
+    public void drawArrows(Canvas canvas){
+
+        createArrows();
+
+        canvas.drawBitmap(rightArrow,
+                (int) (0.16 * GamePanel.WIDTH),
+                (int) (0.88 * GamePanel.HEIGHT), null);
+
+        canvas.drawBitmap(leftArrow,
+                (int) (0* GamePanel.WIDTH),
+                (int) (0.88* GamePanel.HEIGHT), null);
     }
 }
