@@ -137,14 +137,14 @@
     <string name="arrow_height">0.1</string>
     <string name="arrow_width">0.15</string>
     <string name="left_arrow_x">0.1</string>
-    <string name="left_arrow_y">0.8</string>
+    <string name="left_arrow_y">0.9</string>
     <string name="right_arrow_x">0.3</string>
-    <string name="right_arrow_y">0.8</string>
+    <string name="right_arrow_y">0.9</string>
 
     <string name="cake_width">0.2</string>
     <string name="cake_height">0.2</string>
     <string name="cake_x">0.2</string>
-    <string name="cake_y">0.54</string>
+    <string name="cake_y">0.64</string>
 
     //+++++++++++++++++++ GAME OVER ++++++++++++++++++++++++++++++++++++++
     <string name="game_over_restart_option">1</string>
