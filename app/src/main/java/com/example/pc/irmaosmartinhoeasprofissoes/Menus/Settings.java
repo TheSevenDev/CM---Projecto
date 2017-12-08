@@ -2,6 +2,7 @@ package com.example.pc.irmaosmartinhoeasprofissoes.Menus;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -22,7 +23,7 @@ private boolean muted = false;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
+        getAudioState();
 
     }
 
@@ -38,18 +39,42 @@ private boolean muted = false;
         startActivity(new Intent(getApplicationContext(), Credits.class));
     }
 
-    public void manageAudio(View view){
+    private void getAudioState(){
+        SharedPreferences sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+
+        muted = sharedPref.getBoolean("musicState",false);
 
         ImageView audioIcon = (ImageButton) findViewById(R.id.volumeIcon);
         if(muted){
-            MainMenu.mp.setVolume(100,100);
+            audioIcon.setImageResource(R.drawable.volume_down);
+        }else{
+            audioIcon.setImageResource(R.drawable.volume_up);
+        }
+    }
+
+    public void manageAudio(View view){
+        SharedPreferences sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        if(!sharedPref.contains("musicState"))
+        {
+
+            editor.putBoolean("musicState", false);
+
+        }
+
+        ImageView audioIcon = (ImageButton) findViewById(R.id.volumeIcon);
+        if(muted){
+            MainMenu.mp.setVolume(1,1);
             muted = false;
             audioIcon.setImageResource(R.drawable.volume_up);
         }else{
             MainMenu.mp.setVolume(0,0);
             muted = true;
+            editor.putBoolean("musicState", true);
             audioIcon.setImageResource(R.drawable.volume_down);
         }
+        editor.apply();
 
     }
 
@@ -61,6 +86,7 @@ private boolean muted = false;
         //if(!isServiceRunning(MusicService.class)){
         //    startService(new Intent(this, MusicService.class));
         //}
+        getAudioState();
         if(!MainMenu.mp.isPlaying()) {
             MainMenu.mp.seekTo(MainMenu.mp.getCurrentPosition() - 100);
             MainMenu.mp.start();
