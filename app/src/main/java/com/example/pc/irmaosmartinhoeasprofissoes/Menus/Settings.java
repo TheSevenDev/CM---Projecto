@@ -40,10 +40,6 @@ private boolean muted = false;
     }
 
     private void getAudioState(){
-        SharedPreferences sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
-
-        muted = sharedPref.getBoolean("musicState",false);
-
         ImageView audioIcon = (ImageButton) findViewById(R.id.volumeIcon);
         if(muted){
             audioIcon.setImageResource(R.drawable.volume_down);
