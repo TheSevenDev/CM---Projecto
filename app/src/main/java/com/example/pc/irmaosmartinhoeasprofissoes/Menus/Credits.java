@@ -12,7 +12,7 @@ import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 public class Credits extends GeneralActivity {
-    private final int ANIMATION_DURATION = 30000;
+    private final int ANIMATION_DURATION = 25000;
 
     private TextView creditsText;
     private Animation animation;
