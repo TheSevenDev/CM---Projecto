@@ -45,6 +45,11 @@ public class Fire extends GameObject
         animation.setDelay(50);
     }
 
+    public Bitmap getBitmap()
+    {
+        return animation.getImage();
+    }
+
     public void draw(Canvas canvas)
     {
         canvas.drawBitmap(animation.getImage(),x,y,null);

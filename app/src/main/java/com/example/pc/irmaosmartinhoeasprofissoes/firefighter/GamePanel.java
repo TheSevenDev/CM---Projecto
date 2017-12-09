@@ -35,7 +35,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-    private final int TIMEOUT = 3;
+    private final int TIMEOUT = 60;
     //PODE SER MELHOR
     //DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
     //int a = displayMetrics.widthPixels;
@@ -139,6 +139,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         pause = new Pause(getContext());
         gameOver = new GameOver(getContext(), EnumGame.FIREFIGHTER);
 
+        for(int i = 0; i < 5; i++)
+        {
+            fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.animacao_fogo),
+                    (int) (Double.parseDouble(getResources().getString(R.string.fire_sprite_width)) * WIDTH),
+                    (int) (Double.parseDouble(getResources().getString(R.string.fire_sprite_height)) * HEIGHT),
+                    fireX.get(i), fireY.get(i), getContext(), 7));
+        }
+
         thread = new MainThread(getHolder(), this);
 
         thread.setRunning(true);
@@ -150,15 +158,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     {
         if(event.getAction() == MotionEvent.ACTION_DOWN)
         {
-            float x = event.getX();
+            float x = event.getX() - 50;
             float y = event.getY();
 
             if(!pause.isPaused() && !gameOver.isGameOver())
             {
                 for (Fire f : fires)
                 {
-                    if (x >= f.getX() && x < (f.getX() + f.getWidth())
-                            && y >= f.getY() && y < (f.getY() + f.getHeight())) {
+                    if (x >= f.getX() && x < (f.getX() + f.getBitmap().getWidth())
+                            && y >= f.getY() && y < (f.getY() + f.getBitmap().getHeight())) {
                         if (waterMeterValue >= waterDecrease) {
                             fires.remove(f);
                             score.addScore(Integer.parseInt(getResources().getString(R.string.fire_score)));

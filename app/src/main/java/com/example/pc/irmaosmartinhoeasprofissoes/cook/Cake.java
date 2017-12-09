@@ -41,14 +41,18 @@ public class Cake extends GameObject
 
     public void draw(Canvas canvas, boolean paused)
     {
+        Paint paint = new Paint();
+
         if(paused)
         {
-            Paint paint = new Paint();
             paint.setColorFilter(new LightingColorFilter(Color.rgb(123, 123, 123), 0));
-            canvas.drawBitmap(image, x, y, paint);
         }
         else
-            canvas.drawBitmap(image, x, y, null);
+        {
+            paint = null;
+        }
+
+        canvas.drawBitmap(image, x, y, paint);
     }
 
     public void setCoating(EnumCakeCoating coating)
@@ -282,7 +286,8 @@ public class Cake extends GameObject
                                 break;
                             case STRAWBERRY:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0.668 + 0.1108 * 2))),
+                                        //if not working change to 0.668
+                                        (int)((bitmap.getWidth() * (0.666 + 0.1108 * 2))),
                                         (int)(bitmap.getHeight() * startingHeight),
                                         (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
 
