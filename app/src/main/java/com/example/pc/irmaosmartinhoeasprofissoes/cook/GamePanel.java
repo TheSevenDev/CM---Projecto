@@ -181,8 +181,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             {
                 gameOver.draw(canvas);
                 canvas.drawBitmap(componentRotator.getTargetCake().getImage(),
-                        (int)(0.40* com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GamePanel.WIDTH) ,
-                        (int)(0.23 * com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GamePanel.HEIGHT), null);
+                        (int)(Double.parseDouble(getResources().getString(R.string.game_over_cake_x)) * WIDTH) ,
+                        (int)(Double.parseDouble(getResources().getString(R.string.game_over_cake_y)) * HEIGHT), null);
                 //score.drawScoreGameOver(canvas);
             }
 

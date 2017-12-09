@@ -151,6 +151,25 @@
     <string name="cake_x">0.18</string>
     <string name="cake_y">0.62</string>
 
+    <string name="one_third_sprite_shape">0.33</string>
+    <string name="two_thirds_sprite_shape">0.67</string>
+
+    <string name="one_third_sprite_coating">0.335</string>
+    <string name="two_thirds_sprite_coating">0.67</string>
+
+    <string name="one_third_sprite_topping">0.335</string>
+    <string name="two_thirds_sprite_topping">0.67</string>
+
+    <string name="one_third_sprite">0.33</string>
+    <string name="two_thirds_sprite">0.67</string>
+
+    <string name="cake_sprite_width">0.1108</string>
+    <string name="interval_square">0.332</string>
+    <string name="interval_circle">0.666</string>
+
+    <string name="game_over_cake_x">0.40</string>
+    <string name="game_over_cake_y">0.23</string>
+
     //+++++++++++++++++++ GAME OVER ++++++++++++++++++++++++++++++++++++++
     <string name="game_over_restart_option">1</string>
     <string name="game_over_exit_option">2</string>

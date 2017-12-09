@@ -30,8 +30,6 @@ public class Cake extends GameObject
         this.height = h;
         this.width = w;
         this.context = context;
-
-        //image = Bitmap.createScaledBitmap(res, w, h, false);
     }
 
     public Bitmap getImage()
@@ -97,10 +95,12 @@ public class Cake extends GameObject
                 changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_bases), 0);
                 break;
             case CIRCLE:
-                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_bases), 0.33);
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_bases),
+                        Double.parseDouble(getContext().getString(R.string.one_third_sprite_shape)));
                 break;
             case SQUARE:
-                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_bases), 0.67);
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_bases),
+                        Double.parseDouble(getContext().getString(R.string.two_thirds_sprite_shape)));
                 break;
         }
     }
@@ -115,10 +115,12 @@ public class Cake extends GameObject
                 changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.coatings_grid), 0);
                 break;
             case BLUE:
-                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.coatings_grid), 0.335);
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.coatings_grid),
+                        Double.parseDouble(getContext().getString(R.string.one_third_sprite_coating)));
                 break;
             case ORANGE:
-                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.coatings_grid), 0.67);
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.coatings_grid),
+                        Double.parseDouble(getContext().getString(R.string.two_thirds_sprite_coating)));
                 break;
         }
     }
@@ -133,10 +135,12 @@ public class Cake extends GameObject
                 changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet2), 0);
                 break;
             case BLUE:
-                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet2), 0.335);
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet2),
+                        Double.parseDouble(getContext().getString(R.string.one_third_sprite_topping)));
                 break;
             case ORANGE:
-                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet2), 0.67);
+                changeImage(BitmapFactory.decodeResource(context.getResources(), R.drawable.cake_spritesheet2),
+                        Double.parseDouble(getContext().getString(R.string.two_thirds_sprite_topping)));
                 break;
         }
     }
@@ -145,12 +149,18 @@ public class Cake extends GameObject
     {
         Bitmap auxBitmap;
 
+        double oneThirdSprite = Double.parseDouble(getContext().getString(R.string.one_third_sprite));
+        double twoThirdsSprite = Double.parseDouble(getContext().getString(R.string.two_thirds_sprite));
+        double cakeSpriteWidth = Double.parseDouble(getContext().getString(R.string.cake_sprite_width));
+        double intervalSquare = Double.parseDouble(getContext().getString(R.string.interval_square));
+        double intervalCircle = Double.parseDouble(getContext().getString(R.string.interval_circle));
+
         switch(lastComponentPut)
         {
             case SHAPE:
                 auxBitmap = Bitmap.createBitmap(bitmap,
                         0, (int)(bitmap.getHeight() * startingHeight),
-                        bitmap.getWidth(), (int)(bitmap.getHeight() * 0.33));
+                        bitmap.getWidth(), (int)(bitmap.getHeight() * oneThirdSprite));
 
                 image = Bitmap.createScaledBitmap(auxBitmap,
                         getWidth(),
@@ -162,7 +172,8 @@ public class Cake extends GameObject
                     case HEXAGON:
                         auxBitmap = Bitmap.createBitmap(bitmap,
                                 (bitmap.getWidth() * 0), (int)(bitmap.getHeight() * startingHeight),
-                                (int)(bitmap.getWidth() * 0.33), (int)(bitmap.getHeight() * 0.33));
+                                (int)(bitmap.getWidth() * oneThirdSprite),
+                                (int)(bitmap.getHeight() * oneThirdSprite));
 
                         image = Bitmap.createScaledBitmap(auxBitmap,
                                 getWidth(),
@@ -170,8 +181,10 @@ public class Cake extends GameObject
                         break;
                     case CIRCLE:
                         auxBitmap = Bitmap.createBitmap(bitmap,
-                                (int)(bitmap.getWidth() * 0.33), (int)(bitmap.getHeight() * startingHeight),
-                                (int)(bitmap.getWidth() * 0.33), (int)(bitmap.getHeight() * 0.33));
+                                (int)(bitmap.getWidth() * oneThirdSprite),
+                                (int)(bitmap.getHeight() * startingHeight),
+                                (int)(bitmap.getWidth() * oneThirdSprite),
+                                (int)(bitmap.getHeight() * oneThirdSprite));
 
                         image = Bitmap.createScaledBitmap(auxBitmap,
                                 getWidth(),
@@ -179,8 +192,10 @@ public class Cake extends GameObject
                         break;
                     case SQUARE:
                         auxBitmap = Bitmap.createBitmap(bitmap,
-                                (int)(bitmap.getWidth() * 0.67), (int)(bitmap.getHeight() * startingHeight),
-                                (int)(bitmap.getWidth() * 0.33), (int)(bitmap.getHeight() * 0.33));
+                                (int)(bitmap.getWidth() * twoThirdsSprite),
+                                (int)(bitmap.getHeight() * startingHeight),
+                                (int)(bitmap.getWidth() * oneThirdSprite),
+                                (int)(bitmap.getHeight() * oneThirdSprite));
 
                         image = Bitmap.createScaledBitmap(auxBitmap,
                                 getWidth(),
@@ -196,9 +211,10 @@ public class Cake extends GameObject
                         {
                             case CHERRY:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0 + 0.1108 * 0))),
+                                        (int)((bitmap.getWidth() * (0 + cakeSpriteWidth * 0))),
                                         (int)(bitmap.getHeight() * startingHeight),
-                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+                                        (int)(bitmap.getWidth() * cakeSpriteWidth), (int)(bitmap.getHeight() *
+                                                oneThirdSprite));
 
                                 image = Bitmap.createScaledBitmap(auxBitmap,
                                         getWidth(),
@@ -206,9 +222,10 @@ public class Cake extends GameObject
                                 break;
                             case CHOCOLATE:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0 + 0.1108 * 1))),
+                                        (int)((bitmap.getWidth() * (0 + cakeSpriteWidth * 1))),
                                         (int)(bitmap.getHeight() * startingHeight),
-                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+                                        (int)(bitmap.getWidth() * cakeSpriteWidth), (int)(bitmap.getHeight() *
+                                                oneThirdSprite));
 
                                 image = Bitmap.createScaledBitmap(auxBitmap,
                                         getWidth(),
@@ -216,9 +233,10 @@ public class Cake extends GameObject
                                 break;
                             case STRAWBERRY:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0 + 0.1108 * 2))),
+                                        (int)((bitmap.getWidth() * (0 + cakeSpriteWidth * 2))),
                                         (int)(bitmap.getHeight() * startingHeight),
-                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+                                        (int)(bitmap.getWidth() * cakeSpriteWidth), (int)(bitmap.getHeight() *
+                                                oneThirdSprite));
 
                                 image = Bitmap.createScaledBitmap(auxBitmap,
                                         getWidth(),
@@ -231,9 +249,10 @@ public class Cake extends GameObject
                         {
                             case CHERRY:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0.332 + 0.1108 * 0))),
+                                        (int)((bitmap.getWidth() * (intervalSquare + cakeSpriteWidth * 0))),
                                         (int)(bitmap.getHeight() * startingHeight),
-                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+                                        (int)(bitmap.getWidth() * cakeSpriteWidth), (int)(bitmap.getHeight() *
+                                                oneThirdSprite));
 
                                 image = Bitmap.createScaledBitmap(auxBitmap,
                                         getWidth(),
@@ -241,9 +260,10 @@ public class Cake extends GameObject
                                 break;
                             case CHOCOLATE:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0.332 + 0.1108 * 1))),
+                                        (int)((bitmap.getWidth() * (intervalSquare + cakeSpriteWidth * 1))),
                                         (int)(bitmap.getHeight() * startingHeight),
-                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+                                        (int)(bitmap.getWidth() * cakeSpriteWidth), (int)(bitmap.getHeight() *
+                                                oneThirdSprite));
 
                                 image = Bitmap.createScaledBitmap(auxBitmap,
                                         getWidth(),
@@ -251,9 +271,10 @@ public class Cake extends GameObject
                                 break;
                             case STRAWBERRY:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0.332 + 0.1108 * 2))),
+                                        (int)((bitmap.getWidth() * (intervalSquare + cakeSpriteWidth * 2))),
                                         (int)(bitmap.getHeight() * startingHeight),
-                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+                                        (int)(bitmap.getWidth() * cakeSpriteWidth), (int)(bitmap.getHeight() *
+                                                oneThirdSprite));
 
                                 image = Bitmap.createScaledBitmap(auxBitmap,
                                         getWidth(),
@@ -266,9 +287,10 @@ public class Cake extends GameObject
                         {
                             case CHERRY:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0.666 + 0.1108 * 0))),
+                                        (int)((bitmap.getWidth() * (intervalCircle + cakeSpriteWidth * 0))),
                                         (int)(bitmap.getHeight() * startingHeight),
-                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+                                        (int)(bitmap.getWidth() * cakeSpriteWidth), (int)(bitmap.getHeight() *
+                                                oneThirdSprite));
 
                                 image = Bitmap.createScaledBitmap(auxBitmap,
                                         getWidth(),
@@ -276,9 +298,10 @@ public class Cake extends GameObject
                                 break;
                             case CHOCOLATE:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
-                                        (int)((bitmap.getWidth() * (0.666 + 0.1108 * 1))),
+                                        (int)((bitmap.getWidth() * (intervalCircle + cakeSpriteWidth * 1))),
                                         (int)(bitmap.getHeight() * startingHeight),
-                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+                                        (int)(bitmap.getWidth() * cakeSpriteWidth), (int)(bitmap.getHeight() *
+                                                oneThirdSprite));
 
                                 image = Bitmap.createScaledBitmap(auxBitmap,
                                         getWidth(),
@@ -287,9 +310,10 @@ public class Cake extends GameObject
                             case STRAWBERRY:
                                 auxBitmap = Bitmap.createBitmap(bitmap,
                                         //if not working change to 0.668
-                                        (int)((bitmap.getWidth() * (0.666 + 0.1108 * 2))),
+                                        (int)((bitmap.getWidth() * (intervalCircle + cakeSpriteWidth * 2))),
                                         (int)(bitmap.getHeight() * startingHeight),
-                                        (int)(bitmap.getWidth() * 0.1108), (int)(bitmap.getHeight() * 0.33));
+                                        (int)(bitmap.getWidth() * cakeSpriteWidth), (int)(bitmap.getHeight() *
+                                                oneThirdSprite));
 
                                 image = Bitmap.createScaledBitmap(auxBitmap,
                                         getWidth(),
