@@ -28,7 +28,7 @@ public class PainterActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         //set to full screen
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //hide navigationBar
         getWindow().getDecorView().setSystemUiVisibility(
@@ -37,7 +37,7 @@ public class PainterActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
         mp = MediaPlayer.create(this, R.raw.painter);
         mp.setLooping(true);
@@ -48,6 +48,7 @@ public class PainterActivity extends AppCompatActivity {
         setContentView(new GamePanel(this, this));
     }
 
+    /*
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
@@ -61,7 +62,7 @@ public class PainterActivity extends AppCompatActivity {
         }
     }
 
-
+*/
     @Override
     protected void onPause() {
         mp.stop();
