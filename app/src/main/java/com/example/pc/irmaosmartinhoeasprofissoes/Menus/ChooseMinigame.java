@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
@@ -26,6 +27,7 @@ import com.example.pc.irmaosmartinhoeasprofissoes.pilot.PilotActivity;
 
 public class ChooseMinigame extends GeneralActivity implements LocationListener{
     private ImageButton firefighter, baker, teacher, painter, pilot;
+    private TextView firefighterText,bakerText,teacherText,painterText,pilotText;
     private ImageView chooseMale, chooseFemale;
     private static final int PERMISSIONS_CONSTANT = 1;
 
@@ -46,6 +48,12 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
         teacher = (ImageButton)findViewById(R.id.imgbtn_teacher);
         painter = (ImageButton)findViewById(R.id.imgbtn_painter);
         pilot = (ImageButton)findViewById(R.id.imgbtn_pilot);
+
+        firefighterText = (TextView) findViewById(R.id.btnBombeiro);
+        bakerText = (TextView) findViewById(R.id.btnPasteleiro);
+        teacherText = (TextView) findViewById(R.id.btnProfessor);
+        painterText = (TextView) findViewById(R.id.btnPintor);
+        pilotText = (TextView) findViewById(R.id.btnAviador);
 
         chooseMale = (ImageView)findViewById(R.id.img_chooseMale);
         chooseFemale = (ImageView)findViewById(R.id.img_chooseFemale);
@@ -176,6 +184,12 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
         teacher.setImageResource(R.drawable.jose_professor);
         painter.setImageResource(R.drawable.jose_pintor);
         pilot.setImageResource(R.drawable.jose_piloto);
+
+        firefighterText.setText(R.string.bombeiro);
+        bakerText.setText(R.string.pasteleiro);
+        teacherText.setText(R.string.professor);
+        painterText.setText(R.string.pintor);
+        pilotText.setText(R.string.aviador);
     }
 
     public void changeToFemale(View view){
@@ -192,6 +206,12 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
         pilot.setImageResource(R.drawable.maria_pilota);
         firefighter.setImageResource(R.drawable.maria_bombeira);
         teacher.setImageResource(R.drawable.maria_professora);
+
+        firefighterText.setText(R.string.bombeira);
+        bakerText.setText(R.string.pasteleira);
+        teacherText.setText(R.string.professora);
+        painterText.setText(R.string.pintora);
+        pilotText.setText(R.string.aviadora);
     }
 
     public void savePosition(){

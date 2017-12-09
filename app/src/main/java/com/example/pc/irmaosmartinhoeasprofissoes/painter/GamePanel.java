@@ -145,10 +145,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             int fX = (int) event.getX();
             int fY = (int) event.getY();
 
-            onTouchArrows(fX,fY);
+
 
             if(!pause.isPaused()) {
+
                 onTouchArrows(fX,fY);
+
                 pause.onTouchPauseButton(fX, fY);
                 boolean onCircle = false;
                 for (PaintingColor c : colors) {
@@ -278,7 +280,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         {
             if(currentDraw==0){
-                currentDraw = 2;
+                currentDraw = 4;
             }
             currentDraw = currentDraw -1;
         }
@@ -292,7 +294,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 + (GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.arrow_height)))))
 
         {
-            if(currentDraw==2){
+            if(currentDraw==3){
                 currentDraw=0;
             }
             currentDraw = currentDraw+1;
