@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
@@ -23,7 +24,6 @@ public class PainterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //turn title off
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 

@@ -4,6 +4,6 @@
     <translate
         android:interpolator = "@android:anim/linear_interpolator"
         android:fromYDelta="100%p"
-        android:toYDelta="-150%p"
-    ></translate>
+        android:toYDelta="-250%p">
+    </translate>
 </set>

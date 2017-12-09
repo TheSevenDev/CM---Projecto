@@ -74,7 +74,7 @@ public class Player extends GameObject {
                 images[i] = Bitmap.createBitmap(player, i * (player.getWidth() / PILOT_ANIMATION_FRAMES) + (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.045), 0, (player.getWidth() / PILOT_ANIMATION_FRAMES) - (int) ((player.getWidth() / PILOT_ANIMATION_FRAMES) * 0.045), player.getHeight());
         }
 
-        pilotAnimation = new Animation(images, 0.45f);
+        pilotAnimation = new Animation(images, Float.parseFloat(context.getResources().getString(R.string.pilot_animation_duration)));
         animationManager =  new AnimationManager(new Animation[]{pilotAnimation});
 
         resetScore();
