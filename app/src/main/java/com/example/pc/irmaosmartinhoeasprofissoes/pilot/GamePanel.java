@@ -179,13 +179,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void resetGame()
     {
-        Rect playerRect = new Rect((int)(0.125*WIDTH),(int)(0.208*HEIGHT),(int)(0.2633*WIDTH),(int)(0.3819*HEIGHT));
+        Rect playerRect = new Rect((int)(Double.parseDouble(context.getResources().getString(R.string.pilot_rect_left))*WIDTH),
+                (int)(Double.parseDouble(context.getResources().getString(R.string.pilot_rect_top))*HEIGHT),
+                (int)(Double.parseDouble(context.getResources().getString(R.string.pilot_rect_right))*WIDTH),
+                (int)(Double.parseDouble(context.getResources().getString(R.string.pilot_rect_bot))*HEIGHT));
+
         player = new Player(playerRect, context);
         player.resetScore();
         player.resetHealth();
 
 
-        playerPoint = new Point((int)(0.1421*WIDTH), HEIGHT/2);
+        playerPoint = new Point((int)(Double.parseDouble(context.getResources().getString(R.string.pilot_initial_x))*WIDTH), HEIGHT/2);
         player.update(playerPoint);
 
         obstacles = new ArrayList<>();
