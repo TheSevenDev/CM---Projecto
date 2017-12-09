@@ -179,6 +179,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                             MusicService.playSound(getContext(), R.raw.fire);
                         } else {
                             waterMeter.outOfWater();
+                            MusicService.playSound(getContext(), R.raw.error);
                         }
 
                         return true;

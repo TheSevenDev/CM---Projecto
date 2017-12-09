@@ -93,7 +93,9 @@ public class Credits extends GeneralActivity {
 
     private String creditsText2(){
         String str = "";
-        str+="\n\nMúsica de\nNicolai Heidlas - KLONKY DONKEY\nNicolai Heidlas - Cartoon\nMattia Cupelli - Action Cartoon Music\nEmanMusic - Fly Away\nKlubz Productions - Cartoon Music Curious Fun\nAudio Lounge - Happy Piano Background Music";
+        str+="\n\nMúsica de\nNicolai Heidlas - KLONKY DONKEY\nNicolai Heidlas - Cartoon\n " +
+                "Nicolai Heidlas - Back InSummer\nMattia Cupelli - Action Cartoon Music\n" +
+                "Klubz Productions - Cartoon Music Curious Fun\nAudio Lounge - Happy Piano Background Music";
 
         str+="\n\nInstituto Politécnico de Setúbal";
         str+="\n\u00A9 2018";
