@@ -139,14 +139,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         pause = new Pause(getContext());
         gameOver = new GameOver(getContext(), EnumGame.FIREFIGHTER);
 
-        for(int i = 0; i < 5; i++)
-        {
-            fires.add(new Fire(BitmapFactory.decodeResource(getResources(), R.drawable.animacao_fogo),
-                    (int) (Double.parseDouble(getResources().getString(R.string.fire_sprite_width)) * WIDTH),
-                    (int) (Double.parseDouble(getResources().getString(R.string.fire_sprite_height)) * HEIGHT),
-                    fireX.get(i), fireY.get(i), getContext(), 7));
-        }
-
         thread = new MainThread(getHolder(), this);
 
         thread.setRunning(true);
