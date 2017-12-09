@@ -34,10 +34,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
-    public final int MIN_HEIGHT_BOUND = 20;
-    public final int MAX_HEIGHT_BOUND = (HEIGHT - 150);
-    private final int GRAVITY = 7;
-    private final float MIN_DAYLIGHT = 20.0f; //VERIFICAR QUAL O VALOR ESTIMADO À LUZ DO DIA
+    public final int MIN_HEIGHT_BOUND = Integer.parseInt(getContext().getString(R.string.min_height_bound));
+    public final int MAX_HEIGHT_BOUND = (HEIGHT - Integer.parseInt(getContext().getString(R.string.max_height_bound)));
+    private final int GRAVITY = Integer.parseInt(getContext().getString(R.string.gravity));
+    private final float MIN_DAYLIGHT = Float.parseFloat(getContext().getString(R.string.min_daylight)); //VERIFICAR QUAL O VALOR ESTIMADO À LUZ DO DIA
     private MainThread thread;
     private ScrollingBackground backgroundDay;
     private ScrollingBackground backgroundNight;
@@ -177,8 +177,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     }
 
 
-    public void resetGame(){
-
+    public void resetGame()
+    {
         Rect playerRect = new Rect((int)(0.125*WIDTH),(int)(0.208*HEIGHT),(int)(0.2633*WIDTH),(int)(0.3819*HEIGHT));
         player = new Player(playerRect, context);
         player.resetScore();
@@ -298,7 +298,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
 
             player.draw(canvas);
-            canvas.drawBitmap(health[player.getHealth()], WIDTH * 0.01f, HEIGHT * 0.03f, null); //CHANGE VALUES TO SCALE
+            canvas.drawBitmap(health[player.getHealth()], WIDTH * Float.parseFloat(getContext().getString(R.string.pilot_health_x)),
+                    HEIGHT * Float.parseFloat(getContext().getString(R.string.pilot_health_y)), null); //CHANGE VALUES TO SCALE
             for (Obstacle ob : obstacles) {
                 ob.draw(canvas);
             }
@@ -340,10 +341,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         if (recordBroken) {
             paint.setColor(Color.parseColor("#FFFECF"));
-            canvas.drawText("RECORDE", 0.415f * WIDTH, 0.25f * HEIGHT, paint);
+            canvas.drawText("RECORDE", Float.parseFloat(getContext().getString(R.string.pilot_record_x)) * WIDTH,
+                    Float.parseFloat(getContext().getString(R.string.pilot_record_y)) * HEIGHT, paint);
         }
         paint.setColor(Color.BLACK);
-        canvas.drawText((player.getScore() + " metros"), 0.41f * WIDTH, 0.37f * HEIGHT, paint);
+        canvas.drawText((player.getScore() + " metros"), Float.parseFloat(getContext().getString(R.string.pilot_score_x)) * WIDTH,
+                Float.parseFloat(getContext().getString(R.string.pilot_score_y)) * HEIGHT, paint);
 
     }
 

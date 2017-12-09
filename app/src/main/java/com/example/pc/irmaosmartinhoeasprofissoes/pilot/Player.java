@@ -47,7 +47,7 @@ public class Player extends GameObject {
         images = new Bitmap[PILOT_ANIMATION_FRAMES];
 
 
-        if(sharedPref.getInt("gender",0) == 0){
+        if(sharedPref.getInt("gender",0) == Integer.parseInt(context.getString(R.string.choose_male))){
             player = BitmapFactory.decodeResource(context.getResources(), R.drawable.animacao_josepiloto);
 
         }
@@ -77,8 +77,8 @@ public class Player extends GameObject {
         pilotAnimation = new Animation(images, 0.45f);
         animationManager =  new AnimationManager(new Animation[]{pilotAnimation});
 
-        score = 0;
-        health = 3;
+        resetScore();
+        resetHealth();
         startTime = System.nanoTime();
     }
 
@@ -163,7 +163,7 @@ public class Player extends GameObject {
     }
 
     public void resetHealth(){
-        health = 3;
+        health = Integer.parseInt(context.getString(R.string.pilot_max_health));
     }
 
     public Rect getImageRectangle(){

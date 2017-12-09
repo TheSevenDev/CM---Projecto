@@ -124,6 +124,16 @@
     <string name="water_bar_left_mod">0.052</string>
     <string name="water_bar_right_mod">0.078</string>
 
+    <string name="spawner_start_time">2500</string>
+    <string name="spawner_min_time">2500</string>
+    <string name="spawner_max_time">5000</string>
+
+    <string name="water_spawner_start_time">7000</string>
+    <string name="water_spawner_min_time">6000</string>
+    <string name="water_spawner_max_time">8500</string>
+
+    <string name="cat_spawn_chance">20</string>
+
     //+++++++++++++++++++ PAINTER ++++++++++++++++++++++++++++++++++++++
     <string name="painting_width">0.742</string>
     <string name="painting_height">0.783</string>
@@ -132,6 +142,23 @@
     <string name="painting_colors_radius">0.0292</string>
     //+++++++++++++++++++ PILOT ++++++++++++++++++++++++++++++++++++++
 
+    <string name="min_height_bound">20</string>
+    <string name="max_height_bound">150</string>
+
+    <string name="gravity">7</string>
+
+    <string name="min_daylight">20.0</string>
+
+    <string name="pilot_health_x">0.01</string>
+    <string name="pilot_health_y">0.03</string>
+
+    <string name="pilot_record_x">0.415</string>
+    <string name="pilot_record_y">0.25</string>
+
+    <string name="pilot_score_x">0.41</string>
+    <string name="pilot_score_y">0.37</string>
+
+    <string name="pilot_max_health">3</string>
 
     //+++++++++++++++++++ COOK +++++++++++++++++++++++++++++++++++++++
     <string name="component_panel_x">0.65</string>

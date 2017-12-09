@@ -76,6 +76,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private long pausedTimeWater;
     private long pausedTimeTimer;
 
+    private int spawnerTime;
+    private final int MIN_SPAWNER_TIME = Integer.parseInt(getContext().getString(R.string.spawner_min_time));
+    private final int MAX_SPAWNER_TIME = Integer.parseInt(getContext().getString(R.string.spawner_max_time));
+
+    private int waterSpawnerTime;
+    private final int MIN_WATER_SPAWNER_TIME = Integer.parseInt(getContext().getString(R.string.spawner_min_time));
+    private final int MAX_WATER_SPAWNER_TIME = Integer.parseInt(getContext().getString(R.string.spawner_max_time));
+
+    private final int CAT_CHANCE = Integer.parseInt(getContext().getString(R.string.cat_spawn_chance));
+
     public GamePanel(Context context, Activity activity)
     {
         super(context);
@@ -136,6 +146,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         waterDecrease = Integer.parseInt(getResources().getString(R.string.water_decrease));
         waterGain = Integer.parseInt(getResources().getString(R.string.water_gain));
 
+        spawnerTime = Integer.parseInt(getContext().getString(R.string.spawner_start_time));
+        waterSpawnerTime = Integer.parseInt(getContext().getString(R.string.water_spawner_start_time));
+
         pause = new Pause(getContext());
         gameOver = new GameOver(getContext(), EnumGame.FIREFIGHTER);
 
@@ -157,8 +170,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             {
                 for (Fire f : fires)
                 {
-                    if (x >= f.getX() && x < (f.getX() + f.getBitmap().getWidth())
-                            && y >= f.getY() && y < (f.getY() + f.getBitmap().getHeight())) {
+                    if (x >= f.getX() && x < (f.getX() + f.getWidth())
+                            && y >= f.getY() && y < (f.getY() + f.getHeight())) {
                         if (waterMeterValue >= waterDecrease) {
                             fires.remove(f);
                             score.addScore(Integer.parseInt(getResources().getString(R.string.fire_score)));
@@ -242,12 +255,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             long timerElapsed = (System.nanoTime() - timerStart - pausedTimeTimer) / 1000000;
             long waterElapsed = (System.nanoTime() - waterStart - pausedTimeWater) / 1000000;
 
-            if (fireElapsed > 3000)
+            if (fireElapsed > spawnerTime)
             {
                 int chance = rand.nextInt(100);
                 int i;
 
-                if(chance > 25)
+                if(chance > CAT_CHANCE)
                 {
                     i = rand.nextInt(fireX.size());
 
@@ -269,7 +282,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
                 fireStart = System.nanoTime();
                 pausedTimeFire = 0;
-
+                spawnerTime = rand.nextInt(MAX_SPAWNER_TIME + 1 - MIN_SPAWNER_TIME) + MIN_SPAWNER_TIME;
             }
 
 
@@ -283,7 +296,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 pausedTimeTimer = 0;
             }
 
-            if (waterElapsed > 7000)
+            if (waterElapsed > waterSpawnerTime)
             {
                 //spawn water
                 int maxW = (int) (WIDTH * 0.9);
@@ -302,6 +315,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
                 waterStart = System.nanoTime();
                 pausedTimeWater = 0;
+
+                waterSpawnerTime = rand.nextInt(MAX_WATER_SPAWNER_TIME + 1 - MIN_WATER_SPAWNER_TIME) + MIN_WATER_SPAWNER_TIME;
             }
 
             checkDespawns();
@@ -313,10 +328,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 fires.clear();
                 cats.clear();
                 waterDrops.clear();
-                //EVENTUALMENTE VAI MUDAR
-                //gameOver.setScore(score.getScore());
                 gameOver.setGameOver(true);
-                //MusicService.playSound(getContext(), R.raw.victory);
                 musicBackground.pause();
             }
         }
