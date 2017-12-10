@@ -1,7 +1,7 @@
 package com.example.pc.irmaosmartinhoeasprofissoes;
 
 /**
- * Created by TheSeven on 25/11/2017.
+ * Enumera os diferentes jogos em que existe um "game over screen" e as imagens utilizadas nos mesmos
  */
 
 public enum EnumGame
@@ -20,7 +20,6 @@ public enum EnumGame
         this.femaleImage = femaleImage;
         this.profImage = profImage;
     }
-
 
     public int getMaleImage() {
         return maleImage;

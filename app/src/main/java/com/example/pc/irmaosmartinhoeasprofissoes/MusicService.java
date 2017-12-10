@@ -4,13 +4,8 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-
-/**
- * Created by Bruno on 17/11/2017.
- */
 
 public class MusicService extends Service {
 
@@ -44,6 +39,7 @@ public class MusicService extends Service {
         super.onDestroy();
     }
 
+    //Toca um som apenas uma vez, usado em efeitos sonoros
     public static void playSound(Context context, int uri)
     {
         MediaPlayer mp = MediaPlayer.create(context, uri);
