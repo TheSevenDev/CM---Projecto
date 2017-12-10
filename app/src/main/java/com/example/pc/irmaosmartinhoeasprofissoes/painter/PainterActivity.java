@@ -50,7 +50,7 @@ public class PainterActivity extends AppCompatActivity {
         mp.start();
     }
 
-    /*
+
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
@@ -64,7 +64,6 @@ public class PainterActivity extends AppCompatActivity {
         }
     }
 
-*/
     @Override
     protected void onPause() {
         mp.stop();
