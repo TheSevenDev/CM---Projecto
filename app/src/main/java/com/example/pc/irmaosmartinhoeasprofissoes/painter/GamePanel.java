@@ -30,7 +30,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
-    public final int NUMBER_OF_DRAWS = 4;
+    public final int NUMBER_OF_DRAWS = 5;
 
     private MainThread thread;
     private Bitmap background;
@@ -69,6 +69,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         pause = new Pause(context);
 
 
+
     }
 
 
@@ -99,7 +100,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         populateDraws();
         populateColors();
-
+        createArrows();
 
     }
 
@@ -109,6 +110,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         draws[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.pilotodraw), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_width))) * WIDTH), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_height))) * HEIGHT), false);
         draws[2] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.professordraw), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_width))) * WIDTH), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_height))) * HEIGHT), false);
         draws[3] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.carrodraw), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_width))) * WIDTH), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_height))) * HEIGHT), false);
+        draws[4] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.mariapilotodraw), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_width))) * WIDTH), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_height))) * HEIGHT), false);
 
     }
 
@@ -137,7 +139,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update() {
 
-
     }
 
     public boolean onTouchEvent(MotionEvent event) {
@@ -145,12 +146,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             int fX = (int) event.getX();
             int fY = (int) event.getY();
 
-
-
             if(!pause.isPaused()) {
-
-                onTouchArrows(fX,fY);
-
                 pause.onTouchPauseButton(fX, fY);
                 boolean onCircle = false;
                 for (PaintingColor c : colors) {
@@ -179,6 +175,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                         floodFill(draws[currentDraw], new Point(x, y), draws[currentDraw].getPixel(x, y), currentColor.getColor());
                 }
 
+                onTouchArrows(fX,fY);
             }
             else if(pause.isPaused()){
                 if(pause.onTouchPauseScreen(fX, fY))
@@ -271,47 +268,47 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public void onTouchArrows(float x, float y)
     {
         //left arrow
-        if (x >= (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.left_arrow_x)))
-                && x < ((int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.left_arrow_x)))
-                + (GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.arrow_width))))
-                && y >= (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.left_arrow_y)))
-                && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.left_arrow_y)))
+        if (x >= 0
+                && x < (GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.arrow_width)))
+                && y >= (int)(GamePanel.HEIGHT * 0.88)
+                && y < ((int)(GamePanel.HEIGHT * 0.88)
                 + (GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.arrow_height)))))
 
         {
-            if(currentDraw==0){
-                currentDraw = 4;
-            }
-            currentDraw = currentDraw -1;
+
+            if(currentDraw==0)
+                currentDraw = (NUMBER_OF_DRAWS-1);
+            else
+                currentDraw--;
+
         }
 
         //right arrow
-        if (x >= (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.right_arrow_x)))
-                && x < ((int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.right_arrow_x)))
+        if (x >= (int)(GamePanel.WIDTH * 0.16)
+                && x < ((int)(GamePanel.WIDTH * 0.16)
                 + (GamePanel.WIDTH * Double.parseDouble(context.getString(R.string.arrow_width))))
-                && y >= (int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.right_arrow_y)))
-                && y < ((int)(GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.right_arrow_y)))
-                + (GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.arrow_height)))))
+                && y >= (int)(GamePanel.HEIGHT * 0.88)
+                && y < ((int)(GamePanel.HEIGHT * 0.88 ))
+                + (GamePanel.HEIGHT * Double.parseDouble(context.getString(R.string.arrow_height))))
 
         {
-            if(currentDraw==3){
+            if(currentDraw==(NUMBER_OF_DRAWS-1))
                 currentDraw=0;
-            }
-            currentDraw = currentDraw+1;
+            else
+                currentDraw++;
         }
 
     }
 
     public void drawArrows(Canvas canvas){
 
-        createArrows();
+        canvas.drawBitmap(leftArrow,
+                0,
+                (int) (0.88* GamePanel.HEIGHT), null);
 
         canvas.drawBitmap(rightArrow,
                 (int) (0.16 * GamePanel.WIDTH),
                 (int) (0.88 * GamePanel.HEIGHT), null);
 
-        canvas.drawBitmap(leftArrow,
-                (int) (0* GamePanel.WIDTH),
-                (int) (0.88* GamePanel.HEIGHT), null);
     }
 }

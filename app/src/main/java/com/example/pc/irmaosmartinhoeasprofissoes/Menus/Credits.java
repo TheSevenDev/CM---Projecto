@@ -39,7 +39,7 @@ public class Credits extends GeneralActivity {
         creditsText2 = findViewById(R.id.creditsText2);
         creditsText2.setText(creditsText2());
 
-        creditsText2.startAnimation(animation);
+        creditsText2.startAnimation(animation2);
     }
 
     @Override
@@ -83,11 +83,6 @@ public class Credits extends GeneralActivity {
         String str = "";
         str+="Desenvolvido por\nBárbara Teixeira\nBruno Pereira\nDiogo Abreu\nMarcos Letras \nRicardo Fernandes";
         str+="\n\nCom colaboração de\nrh0 de opengameart.org\nbevoullin.com de opengameart.org\nProfessora Rossana Santos";
-        str+="\n\nMúsica de\nNicolai Heidlas - KLONKY DONKEY\nNicolai Heidlas - Cartoon\nMattia Cupelli - Action Cartoon Music\nEmanMusic - Fly Away\nKlubz Productions - Cartoon Music Curious Fun\nAudio Lounge - Happy Piano Background Music";
-
-
-        str+="\n\nInstituto Politécnico de Setúbal";
-        str+="\n\u00A9 2018";
         return str;
     }
 
