@@ -1,69 +1,55 @@
 package com.example.pc.irmaosmartinhoeasprofissoes;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseGender;
-import com.example.pc.irmaosmartinhoeasprofissoes.Menus.MainMenu;
 import com.example.pc.irmaosmartinhoeasprofissoes.Menus.Settings;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Mostra um mapa no ecrâ sendo a posição marcada o sítio onde foi iniciado um jogo da aplicação pela última vez.
+ */
 public class Tracker extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
 
 
+    /**
+     * Inicia o mapa e para a música de fundo do menu principal.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracker);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         stopService(new Intent(this, MusicService.class));
-
-
-        /*if (Build.VERSION.SDK_INT >= 23 && !isPermissionGranted()) {
-            requestPermissions(PERMISSIONS, PERMISSION_ALL);
-        } else {
-            requestLocation();
-        }*/
-
-        //if(!isLocationEnabled())
-        //    showAlert(1);
-
     }
 
 
+    /**
+     * Consulta a última posição gravada e coloca um marcador no mapa.
+     * O zoom inicial é o adequado para consultar a posição.
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -102,33 +88,9 @@ public class Tracker extends FragmentActivity implements OnMapReadyCallback, Loc
         }
     }
 
-    public void savePosition(){
-        LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-        Location lastKnownLocation;
-        SharedPreferences sharedPref = null;
-
-        try {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                lm.requestSingleUpdate(LocationManager.GPS_PROVIDER,this,null);
-                lastKnownLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-                //SAVE LAST LOCATION
-                sharedPref = this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putFloat("lastLatitude", (float)lastKnownLocation.getLatitude());
-                editor.putFloat("lastLongitude", (float)lastKnownLocation.getLongitude());
-                editor.apply();
-            }
-
-            }
-
-
-        catch (Exception e){
-
-        }
-    }
-
+    /**
+     * Inicia a atividade das configurações.
+     */
     public void backToGameSettings(View view) {
         startActivity(new Intent(getApplicationContext(), Settings.class));
     }

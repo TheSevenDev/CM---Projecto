@@ -27,7 +27,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 /**
- * Created by Bruno on 17/11/2017.
+ * Classe que representa o painel de jogo do piloto.
  */
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
@@ -37,7 +37,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public final int MIN_HEIGHT_BOUND = Integer.parseInt(getContext().getString(R.string.min_height_bound));
     public final int MAX_HEIGHT_BOUND = (HEIGHT - Integer.parseInt(getContext().getString(R.string.max_height_bound)));
     private final int GRAVITY = Integer.parseInt(getContext().getString(R.string.gravity));
-    private final float MIN_DAYLIGHT = Float.parseFloat(getContext().getString(R.string.min_daylight)); //VERIFICAR QUAL O VALOR ESTIMADO À LUZ DO DIA
+    private final float MIN_DAYLIGHT = Float.parseFloat(getContext().getString(R.string.min_daylight));
     private MainThread thread;
     private ScrollingBackground backgroundDay;
     private ScrollingBackground backgroundNight;
@@ -56,7 +56,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private OrientationData orientationData;
     private LightData lightData;
 
-    private long frameTime;//time elapsed between frames
+    private long frameTime;
     private long initTime;
 
     private Context context;
@@ -73,10 +73,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.context = context;
         this.gameActivity = activity;
 
-        //add the callback to the surfaceholder to intercept events
         getHolder().addCallback(this);
 
-        //make gamePanel focusable so it can handle events
         setFocusable(true);
 
         orientationData = new OrientationData(context);
@@ -120,6 +118,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+    /**
+     * Cria os objetos necessários ao jogo(Background, jogador) e popula a lista de obstáculos.
+     * Chama o metodo resetGame() para estabelecer os parâmetros iniciais.
+     * @param holder
+     */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         backgroundDay = new ScrollingBackground(BitmapFactory.decodeResource(getResources(), R.drawable.pilotbg_day) ,WIDTH, HEIGHT);
@@ -149,6 +152,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         thread.start();
     }
 
+    /**
+     * Leitura dos cliques no ecrâ para a interação no menu de pausa e GameOver
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
@@ -176,7 +182,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         return true;
     }
 
-
+    /**
+     * Volta a colocar o jogo num estado inicial.
+     * Score do jogador = 0.
+     * Vida do jogador = Máximo.
+     * Recoloca o jogador na posição inicial.
+     */
     public void resetGame()
     {
         Rect playerRect = new Rect((int)(Double.parseDouble(context.getResources().getString(R.string.pilot_rect_left))*WIDTH),
@@ -223,13 +234,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     }
 
 
-
+    /**
+     * Lê e atualiza  a posição do jogador consoante os valores do magnómetro e giroscópio.
+     */
     public void orientation(){
         int elapsedTime = (int) (System.currentTimeMillis() - frameTime);
         frameTime = System.currentTimeMillis();
 
         if (orientationData.getOrientation() != null && orientationData.getStartOrientation() != null) {
-            float pitch = orientationData.getOrientation()[1] - orientationData.getStartOrientation()[1];    //Y DIRECTION
             float roll = orientationData.getOrientation()[2] - orientationData.getStartOrientation()[2];     //X DIRECTION
 
             float xSpeed = 2 * roll * WIDTH / 1100f;
@@ -238,6 +250,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+    /**
+     * Não permite que o jogador saia fora da tela do ecrã de jogo.
+     */
     public void checkBounds(){
         if (playerPoint.x < 0)
             playerPoint.x = 0;
@@ -250,6 +265,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             playerPoint.y = MAX_HEIGHT_BOUND;
     }
 
+    /**
+     * Verifica se houve colisões entre o jogador e algum obstáculo da lista.
+     */
     public void checkCollision(){
         Iterator<Obstacle> it = obstacles.iterator();
         Obstacle aux;
@@ -261,7 +279,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 aux.update();
                 if (collision(aux.getRectangle(), player.getImageRectangle())) {
                     Vibrator v = (Vibrator) gameActivity.getSystemService(Context.VIBRATOR_SERVICE);
-                    // Vibrate for 500 milliseconds
                     v.vibrate(500);
                         player.takeDamage(1);
                     it.remove();
@@ -270,6 +287,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+    /**
+     * Popula a lista dos obstáculos com passáros(classe Obstacle) em posições aleatórias no ecrã.
+     */
     public void spawnObstacles(){
         long obstaclesElapsed = (System.nanoTime() - obstacleStartTime) / 1000000;
         if (obstaclesElapsed > (1000 - player.getScore()/4)) {
@@ -295,7 +315,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
 
-            if (lightData.getLightValue() >= MIN_DAYLIGHT) {
+            if (lightData.getLightValue() >= MIN_DAYLIGHT) {//Caso seja detetado luz diurna
                 backgroundDay.draw(canvas);
             } else {
                 backgroundNight.draw(canvas);
@@ -303,7 +323,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             player.draw(canvas);
             canvas.drawBitmap(health[player.getHealth()], WIDTH * Float.parseFloat(getContext().getString(R.string.pilot_health_x)),
-                    HEIGHT * Float.parseFloat(getContext().getString(R.string.pilot_health_y)), null); //CHANGE VALUES TO SCALE
+                    HEIGHT * Float.parseFloat(getContext().getString(R.string.pilot_health_y)), null);
             for (Obstacle ob : obstacles) {
                 ob.draw(canvas);
             }
@@ -321,6 +341,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     }
 
+    /**
+     * Verifica se o record de pontuação foi batido. Em caso afirmativo atualiza o record em memória.
+     */
     public boolean checkRecord(){
         SharedPreferences sharedPref = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
         if(player.getScore() > sharedPref.getInt("pilotRecord", 0)){
@@ -334,6 +357,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         return false;
     }
 
+    /**
+     * Escreve a pontuação do jogo no ecrâ de Game Over
+     */
     public void drawScore(Canvas canvas) {
         Paint paint = new Paint();
         paint.setTextSize(53);
@@ -354,7 +380,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     }
 
-
+    /**
+     * Deteta a colisão entre dois rectângulos
+     */
     public boolean collision(Rect a, Rect b){
         return Rect.intersects(a,b);
     }

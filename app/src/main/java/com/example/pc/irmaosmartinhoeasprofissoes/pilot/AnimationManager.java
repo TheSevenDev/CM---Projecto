@@ -2,7 +2,10 @@ package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-
+/**
+ * Classe que contem um conjunto de animações.
+ * Permite desenhar a animação atual no ecrâ.
+ */
 
 public class AnimationManager {
     private Animation[] animations;

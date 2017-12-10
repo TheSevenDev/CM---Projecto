@@ -3,9 +3,8 @@ package com.example.pc.irmaosmartinhoeasprofissoes;
 import android.graphics.Bitmap;
 
 /**
- * Created by Diogo on 10/11/2017.
+ * Classe que gere as animações do projecto
  */
-
 public class Animation
 {
     private Bitmap[] frames;
@@ -14,15 +13,18 @@ public class Animation
     private long delay;
     private boolean playedOnce;
 
+    //Define as frames da animação
     public void setFrames(Bitmap[] frames)
     {
         this.frames = frames;
         currentFrame = 0;
         startTime = System.nanoTime();
     }
-    public void setDelay(long d){delay = d;}
-    public void setFrame(int i){currentFrame= i;}
 
+    //Define o intervalo de tempo entre cada frame
+    public void setDelay(long d){delay = d;}
+
+    //Percorre as frames caso ja tenha passado o tempo necessario
     public void update()
     {
         long elapsed = (System.nanoTime()-startTime)/1000000;
@@ -37,10 +39,9 @@ public class Animation
             playedOnce = true;
         }
     }
+
+    //Retorna a frame no momento
     public Bitmap getImage(){
         return frames[currentFrame];
     }
-
-    public int getFrame(){return currentFrame;}
-    public boolean playedOnce(){return playedOnce;}
 }

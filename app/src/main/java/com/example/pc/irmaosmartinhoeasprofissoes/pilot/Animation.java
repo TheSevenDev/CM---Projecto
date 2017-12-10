@@ -5,10 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-/**
- * Created by Bruno on 29/10/2017.
- */
 
+/**
+ * Classe que representa uma animação. Têm um conjunto de frames(imagens) onde vai alterando a imagem a ser mostrada à medida que o tempo passa.
+ */
 public class Animation {
 
     private Bitmap[] frames; //images
@@ -58,8 +58,6 @@ public class Animation {
 
         if(!isPlaying)
             return;
-
-        //scaleRect(destination);
 
         canvas.drawBitmap(frames[frameIndex], null, destination, new Paint());
     }

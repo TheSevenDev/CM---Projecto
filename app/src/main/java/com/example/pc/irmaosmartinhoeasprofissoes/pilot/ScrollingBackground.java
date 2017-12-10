@@ -1,15 +1,15 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.Background;
 
-/**
- * Created by TheSeven on 11/11/2017.
- */
 
+/**
+ * Imagem de fundo do jogo.
+ * A coordenada x da imagem vai diminuindo ao longo do update do ecrâ.
+ */
 public class ScrollingBackground extends Background
 {
     private int dx;
@@ -24,13 +24,6 @@ public class ScrollingBackground extends Background
         x+=dx;
         if(x<-GamePanel.WIDTH)
             x=0;
-        /*if((Math.abs(storedLightValue - lightData.getLightValue())) > 50.0) {
-            if (lightData.getLightValue() >= MAX_DAYLIGHT)
-                currentImage = day;
-            else
-                currentImage = night;
-
-        }*/
     }
 
     public void draw(Canvas canvas)

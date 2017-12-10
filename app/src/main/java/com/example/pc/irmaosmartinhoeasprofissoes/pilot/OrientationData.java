@@ -7,7 +7,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 /**
- * Created by Bruno on 29/10/2017.
+ * Classe que permite a consulta dos dados do giroscópio e magnómetro.
  */
 
 public class OrientationData implements SensorEventListener {
@@ -15,7 +15,6 @@ public class OrientationData implements SensorEventListener {
     private Sensor accelerometer;
     private Sensor magnometer;
 
-    //store data
     private float[] accelOutput;
     private float[] magOutput;
 
@@ -28,12 +27,6 @@ public class OrientationData implements SensorEventListener {
     public float[] getStartOrientation(){
         return startOrientation;
     }
-
-    //Track startOrientation everytime you (re)start the game
-    public void newGame(){
-        startOrientation = null;
-    }
-
 
     public OrientationData(Context context){
         manager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);

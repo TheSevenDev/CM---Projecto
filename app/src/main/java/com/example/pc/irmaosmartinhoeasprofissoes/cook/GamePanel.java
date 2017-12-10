@@ -16,9 +16,8 @@ import com.example.pc.irmaosmartinhoeasprofissoes.Pause;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import com.example.pc.irmaosmartinhoeasprofissoes.GameOver;
 
-
 /**
- * Created by TheSeven on 19/11/2017.
+ * Classe que gere todos os componentes do jogo do pasteleiro
  */
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
@@ -90,6 +89,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         thread.start();
     }
 
+    //Gere a acçao do toque no jogo
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
@@ -126,6 +126,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         //return onTouchEvent(event);
     }
 
+    //Método corrido a cada frame
     public void update()
     {
         if(!pause.isPaused() && !gameOver.isGameOver())
@@ -142,6 +143,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+    //Desenha todos os componentes
     @Override
     public void draw(Canvas canvas)
     {
@@ -183,13 +185,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 canvas.drawBitmap(componentRotator.getTargetCake().getImage(),
                         (int)(Double.parseDouble(getResources().getString(R.string.game_over_cake_x)) * WIDTH) ,
                         (int)(Double.parseDouble(getResources().getString(R.string.game_over_cake_y)) * HEIGHT), null);
-                //score.drawScoreGameOver(canvas);
             }
 
             canvas.restoreToCount(savedState);
         }
     }
 
+    //Reinicia o jogo
     public void restartGame()
     {
         cake = new Cake((int) (Double.parseDouble(getResources().getString(R.string.cake_width)) * WIDTH),

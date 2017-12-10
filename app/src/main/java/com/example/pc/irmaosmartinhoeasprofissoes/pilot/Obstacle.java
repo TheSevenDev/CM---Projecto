@@ -1,21 +1,14 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.pilot;
-
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
-
 import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
-import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import com.example.pc.irmaosmartinhoeasprofissoes.Animation;
 
 import java.util.Random;
 
 /**
- * Created by Bruno on 19/11/2017.
+ * Obstáculo do jogo do piloto.
  */
 
 public class Obstacle extends GameObject{

@@ -13,7 +13,7 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import java.util.ArrayList;
 
 /**
- * Created by TheSeven on 24/11/2017.
+ * Gere a pontuaçao no jogo
  */
 
 public class Score
@@ -30,17 +30,14 @@ public class Score
         calculateStars();
     }
 
+    //Incrementa a pontuaçao com um determinado valor
     public void addScore(int sum)
     {
         score += sum;
         calculateStars();
     }
 
-    public int getScore()
-    {
-        return score;
-    }
-
+    //Desenha o componente
     public void draw(Canvas canvas)
     {
         for (int i = 0; i < stars.size(); i++)
@@ -51,6 +48,7 @@ public class Score
         }
     }
 
+    //Calcula o numero de estrelas dependendo da pontuaçao - 3 pontos é uma estrela etc
     private void calculateStars()
     {
         stars = new ArrayList<>();
@@ -78,6 +76,7 @@ public class Score
         }
     }
 
+    //Gere o desenho das estrela
     private Bitmap scaledStar(EnumStarType starType, boolean gameOver)
     {
         Bitmap unscaledBitmap;
@@ -98,6 +97,7 @@ public class Score
                     (int)(Double.parseDouble(context.getResources().getString(R.string.star_score_height_mod))*GamePanel.HEIGHT)*2, false);
     }
 
+    //Apresenta a pontuaçao do ecrã "game over" - uma estrela com o numero de estrelas completas no jogo
     public void drawScoreGameOver(Canvas canvas)
     {
         Bitmap bitAux = null;

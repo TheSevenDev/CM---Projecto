@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by TheSeven on 28/11/2017.
+ * Gere a maior parte da actividade do jogo Pasteleiro. Gere a apresentação e selecção do painel de componentes e setas
+ * de transiçao
  */
 
 public class ComponentRotator
@@ -30,7 +31,7 @@ public class ComponentRotator
     private Cake targetCake;
     private Random random = new Random();
     private Bitmap crossError;
-    private boolean isError, blinkingError, cakesMatch;
+    private boolean isError, blinkingError;
     private long errorStartTime;
     private GameOver gameOver;
 
@@ -42,7 +43,6 @@ public class ComponentRotator
         fillComponentList();
 
         this.activeCake = cake;
-        this.cakesMatch = false;
 
         crossError = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.cross_mark),
             (int)(0.4 * GamePanel.WIDTH),
@@ -51,10 +51,7 @@ public class ComponentRotator
         this.gameOver = gameOver;
     }
 
-    public boolean isCakesMatch() {
-        return cakesMatch;
-    }
-
+    //Introduz os itens necessario na lista de componentes
     private void fillComponentList()
     {
         this.components = new ArrayList<>();
@@ -70,6 +67,7 @@ public class ComponentRotator
         createArrows();
     }
 
+    //Cria um bolo-alvo aleatorio
     private void randomizeTargetCake()
     {
         targetCake = new Cake((int)(Double.parseDouble(context.getResources().getString(R.string.cake_width)) * GamePanel.WIDTH),
@@ -88,18 +86,21 @@ public class ComponentRotator
         return targetCake;
     }
 
+    //Roda o painel de componentes para a esquerda
     public void rotateLeft()
     {
         selectedComponent = components.get(components.indexOf(selectedComponent)-1);
         changeComponentPanel();
     }
 
+    //Roda o painel de componentes para a direita
     public void rotateRight()
     {
         selectedComponent = components.get(components.indexOf(selectedComponent)+1);
         changeComponentPanel();
     }
 
+    //Parametriza o desenho das setas do spritesheet
     public void createArrows()
     {
         Bitmap auxBitmap;
@@ -122,6 +123,7 @@ public class ComponentRotator
                 (int)(Double.parseDouble(context.getResources().getString(R.string.arrow_height))*GamePanel.HEIGHT), false);
     }
 
+    //Gere o toque nas setas
     public void onTouchArrows(float x, float y)
     {
         //left arrow
@@ -151,6 +153,7 @@ public class ComponentRotator
 
     }
 
+    //Gere o toque no painel de componentes
     public void onTouchComponentPanel(float x, float y)
     {
         if (x >= (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.component_panel_x)))
@@ -170,6 +173,7 @@ public class ComponentRotator
         }
     }
 
+    //Muda um determinado componente no bolo actual
     public void changeCakeComponent(float y)
     {
         if(y >= (GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.component_panel_y)))
@@ -228,6 +232,7 @@ public class ComponentRotator
             matchCakes();
     }
 
+    //Muda os componentes do painel
     private void changeComponentPanel()
     {
         componentPanel = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), selectedComponent.getBitmapId()),
@@ -235,6 +240,7 @@ public class ComponentRotator
                 (int)(Double.parseDouble(context.getResources().getString(R.string.component_panel_height))* GamePanel.HEIGHT), false);
     }
 
+    //Desenha os objectos referidos
     public void draw(Canvas canvas, boolean paused)
     {
         if(paused)
@@ -281,6 +287,7 @@ public class ComponentRotator
         }
     }
 
+    //Verifica se o bolo-alvo e actual coincidem, apresentando erro ou fim de jogo
     public void matchCakes()
     {
         if(activeCake.getShape().equals(targetCake.getShape()) &&
@@ -297,6 +304,7 @@ public class ComponentRotator
         }
     }
 
+    //Usado para piscar aviso de erro
     public void update()
     {
         long timeElapsed = (System.nanoTime() - errorStartTime)/1000000;
