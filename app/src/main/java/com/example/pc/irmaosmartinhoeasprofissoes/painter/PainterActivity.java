@@ -24,6 +24,7 @@ public class PainterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //turn title off
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -39,16 +40,17 @@ public class PainterActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
+        stopService(new Intent(this, MusicService.class));
+
+        setContentView(new GamePanel(this, this));
+
         mp = MediaPlayer.create(this, R.raw.painter);
         mp.setLooping(true);
         mp.setVolume(100, 100);
         mp.start();
-
-        stopService(new Intent(this, MusicService.class));
-        setContentView(new GamePanel(this, this));
     }
 
-    /*
+
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
@@ -62,7 +64,6 @@ public class PainterActivity extends AppCompatActivity {
         }
     }
 
-*/
     @Override
     protected void onPause() {
         mp.stop();

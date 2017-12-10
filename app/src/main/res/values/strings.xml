@@ -140,6 +140,12 @@
     <string name="painting_x">0.23</string>
     <string name="painting_y">0.105</string>
     <string name="painting_colors_radius">0.0292</string>
+
+    <string name="left_paint_arrow_x">0.1</string>
+    <string name="left_paint_arrow_y">0.83</string>
+    <string name="right_paint_arrow_x">0.3</string>
+    <string name="right_paint_arrow_y">0.83</string>
+
     //+++++++++++++++++++ PILOT ++++++++++++++++++++++++++++++++++++++
 
     <string name="min_height_bound">20</string>
