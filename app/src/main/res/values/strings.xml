@@ -46,14 +46,14 @@
     <string name="fire_sprite_width">0.072</string>
     <string name="fire_sprite_height">0.1</string>
     <string name="waterdrop_sprite_width">0.040</string>
-    <string name="waterdrop_sprite_height">0.12</string>
+    <string name="waterdrop_sprite_height">0.10</string>
     <string name="cat_sprite_width">0.072</string>
     <string name="cat_sprite_height">0.1</string>
 
     <string name="waterdrop_frame1_x">0</string>
-    <string name="waterdrop_frame2_x">0.5367</string>
+    <string name="waterdrop_frame2_x">0.5</string>
 
-    <string name="waterdrop_frame_width">0.4632</string>
+    <string name="waterdrop_frame_width">0.50</string>
 
     <string name="cat_frame1_x">0</string>
     <string name="cat_frame2_x">0.3321</string>
@@ -169,7 +169,7 @@
     <string name="pilot_initial_x">0.1421</string>
 
     //+++++++++++++++++++ COOK +++++++++++++++++++++++++++++++++++++++
-    <string name="component_panel_x">0.65</string>
+    <string name="component_panel_x">0.67</string>
     <string name="component_panel_y">0.15</string>
     <string name="component_panel_width">0.2</string>
     <string name="component_panel_height">0.7</string>

@@ -309,7 +309,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 int x = rand.nextInt(maxW - minW + 1) + minW;
                 int y = rand.nextInt(maxH - minH + 1) + minH;
 
-                waterDrops.add(new Waterdrop(BitmapFactory.decodeResource(getResources(), R.drawable.animacao_gota),
+                waterDrops.add(new Waterdrop(BitmapFactory.decodeResource(getResources(), R.drawable.waterdrop),
                         (int) (Double.parseDouble(getResources().getString(R.string.waterdrop_sprite_width)) * WIDTH),
                         (int) (Double.parseDouble(getResources().getString(R.string.waterdrop_sprite_height)) * HEIGHT),
                         x, y, getContext(), 2));
