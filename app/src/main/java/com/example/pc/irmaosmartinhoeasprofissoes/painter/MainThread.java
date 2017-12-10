@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
 /**
+ * Thread principal do jogo.
  * Created by Marcos on 24/11/2017.
  */
 public class MainThread extends Thread

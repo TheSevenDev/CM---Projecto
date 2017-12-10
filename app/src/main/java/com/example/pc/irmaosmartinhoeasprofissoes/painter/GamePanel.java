@@ -23,6 +23,7 @@ import java.util.Queue;
 import java.util.Random;
 
 /**
+ * Classe que gere todos os componentes do jogo do pintor, incluindo Bitmap para background, Pause menu, arrows, draws, cores, etc.
  * Created by Marcos on 24/11/2017.
  */
 
@@ -104,6 +105,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+    /**
+     * Método utilizado para acrescentar ao array de desenhos os desenhos previamente criados.
+     */
     public void populateDraws() {
 
         draws[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.pintordraw), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_width))) * WIDTH), (int) ((Double.parseDouble(context.getResources().getString(R.string.painting_height))) * HEIGHT), false);
@@ -114,6 +118,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+    /**
+     * Método utilizado para acrescentar à lista de cores os círculos coloridos(cada um com a cor respetiva).
+     */
     @TargetApi(Build.VERSION_CODES.M)
     public void populateColors() {
         int radius = (int)((Double.parseDouble(context.getResources().getString(R.string.painting_colors_radius))) * WIDTH);
@@ -141,6 +148,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+    /**
+     * Método que torna o jogo jogável. É guardada a posição (X,Y) do ponto onde o utilizador clicou, e, caso seja dentro do desenho pinta-o, caso seja no botão para pause pausa-o, caso seja num circulo colorido então seleciona a cor.
+     */
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             int fX = (int) event.getX();
@@ -204,6 +214,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+    /**
+     * Método utilizado para implementar o algoritmo que torna possível colorir o desenho.
+     */
     private void floodFill(Bitmap image, Point node, int targetColor, int replacementColor) {
         int width = image.getWidth();
         int height = image.getHeight();
@@ -243,6 +256,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
+    /**
+     * Método utilizado para criar as setas utilizadas para alterar de desenho a meio do jogo.
+     */
     public void createArrows()
     {
         Bitmap auxBitmap;
@@ -265,6 +281,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 (int)(Double.parseDouble(context.getResources().getString(R.string.arrow_height))*GamePanel.HEIGHT), false);
     }
 
+    /**
+     * Método utilizado para mudar de desenho consoante a seta que foi pressionada.
+     */
     public void onTouchArrows(float x, float y)
     {
         //left arrow
@@ -300,6 +319,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+    /**
+     * Método utilizado para desenhar as setas no ecrã.
+     */
     public void drawArrows(Canvas canvas){
 
         canvas.drawBitmap(leftArrow,

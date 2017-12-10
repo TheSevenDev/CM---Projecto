@@ -4,15 +4,12 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.os.Build;
-import android.view.MotionEvent;
-
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 /**
+ * Classe criada para gerir os círculos com as diferentes cores usados para selecionar a cor e posteriomente pintar.
  * Created by Marcos on 27/11/2017.
  */
 
@@ -33,24 +30,39 @@ public class PaintingColor{
         this.context = context;
     }
 
+    /**
+     * Método utilizado para retornar a coordenada X do círculo criado.
+     */
     public int getCx(){
         return cx;
     }
 
+    /**
+     * Método utilizado para retornar a coordenada Y do círculo.
+     */
     public int getCy(){
         return cy;
     }
 
+    /**
+     * Método utilizado para retornar a cor que o círculo representará.
+     */
     public int getColor(){
         return color;
     }
 
 
-
+    /**
+     * Método que retorna se o círculo está selecionado ou não
+     */
     public boolean isSelected() {
         return selected;
     }
 
+
+    /**
+     * Método utilizado selecionar o círculo.
+     */
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
