@@ -12,10 +12,18 @@ import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.*;
 
+/**
+ * Atividade do jogo do piloto.
+ */
 public class PilotActivity extends AppCompatActivity {
 
     MediaPlayer mp;
 
+    /**
+     * Ao criar a atividade é posto o dispositivo no modo de ecrâ completo e é colocada a view do Painel de Jogo.
+     * Para além disso é parado o serviço da música de fundo do menu principal e posta a tocar a
+     * música temática do jogo do piloto.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +53,9 @@ public class PilotActivity extends AppCompatActivity {
         mp.start();
     }
 
+    /**
+     * Ao mudar o foco do ecrâ, não perder a característica de ecrâ inteiro.
+     */
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -60,12 +71,19 @@ public class PilotActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Para a música
+     */
     @Override
     protected void onPause() {
         mp.stop();
         super.onPause();
     }
 
+
+    /**
+     * Recomeça a música
+     */
     @Override
     protected void onResume() {
         mp.start();

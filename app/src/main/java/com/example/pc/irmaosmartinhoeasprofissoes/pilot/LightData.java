@@ -7,7 +7,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 /**
- * Created by Bruno on 18/11/2017.
+ * Classe que permite a leitura do sensor de luz do dispositivo.
  */
 
 public class LightData implements SensorEventListener {
