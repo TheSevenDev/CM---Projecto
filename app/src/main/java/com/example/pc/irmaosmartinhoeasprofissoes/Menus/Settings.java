@@ -1,21 +1,18 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.Menus;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.AudioManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
-import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import com.example.pc.irmaosmartinhoeasprofissoes.Tracker;
 
-import java.util.Set;
+/**
+ * Gere as definições da aplicaçao
+ */
 
 public class Settings extends GeneralActivity {
     private ImageView audioIcon;
@@ -28,18 +25,22 @@ public class Settings extends GeneralActivity {
 
     }
 
+    //Regressa ao menu principal
     public void backToMainMenu(View view){
         startActivity(new Intent(getApplicationContext(), MainMenu.class));
     }
 
+    //Inicia a actividade de tracker gps
     public void tracker(View view){
         startActivity(new Intent(getApplicationContext(),  Tracker.class));
     }
 
+    //Apresenta os creditos da aplicaçao
     public void credits(View view){
         startActivity(new Intent(getApplicationContext(), Credits.class));
     }
 
+    //Retorna o estado do audio
     private void getAudioState(){
         if(MainMenu.muted){
             audioIcon.setImageResource(R.drawable.volume_down);
@@ -48,6 +49,7 @@ public class Settings extends GeneralActivity {
         }
     }
 
+    //Gere o audio da aplicaçao - activa/desactiva
     public void manageAudio(View view){
         if(MainMenu.muted){
             MainMenu.mp.setVolume(1,1);
@@ -61,14 +63,10 @@ public class Settings extends GeneralActivity {
 
     }
 
-
-
     @Override
     protected void onResume() {
         super.onResume();
-        //if(!isServiceRunning(MusicService.class)){
-        //    startService(new Intent(this, MusicService.class));
-        //}
+
         getAudioState();
         if(!MainMenu.mp.isPlaying()) {
             MainMenu.mp.seekTo(MainMenu.mp.getCurrentPosition() - 100);

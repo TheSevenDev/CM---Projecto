@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Rect;
 
 /**
- * Created by Diogo on 10/11/2017.
+ * Classe que simula um GameObject num jogo, algo interágivel ou simplesmente uma imagem sem ser o fundo que seja necessário mostrar
  */
 
 public class GameObject
