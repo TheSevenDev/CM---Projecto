@@ -5,18 +5,11 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-
-import com.example.pc.irmaosmartinhoeasprofissoes.EnumGame;
-import com.example.pc.irmaosmartinhoeasprofissoes.Menus.ChooseMinigame;
-import com.example.pc.irmaosmartinhoeasprofissoes.MusicService;
-import com.example.pc.irmaosmartinhoeasprofissoes.R;
 import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GamePanel;
 
 /**
- * Created by TheSeven on 19/11/2017.
+ * Simula um ecrã de "game over" no final de um certo jogo, apresenta a personagem da profissão, uma infirmação ilustrativa
+ * do jogo e um item da profissão
  */
 
 public class GameOver
@@ -52,11 +45,13 @@ public class GameOver
 
     }
 
+    //Verifica se o jogo terminou
     public boolean isGameOver()
     {
         return gameOver;
     }
 
+    //Define o estado actual do jogo
     public void setGameOver(boolean b)
     {
         gameOver = b;
@@ -65,6 +60,7 @@ public class GameOver
             MusicService.playSound(context, R.raw.victory);
     }
 
+    //Desenha os bitmaps constituintes
     public void draw(Canvas canvas)
     {
         if(gameOver)
@@ -88,15 +84,10 @@ public class GameOver
             canvas.drawBitmap(professionItem,
                     (int) (GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.game_over_profession_x_mod))),
                     (int) (GamePanel.HEIGHT * Double.parseDouble(context.getResources().getString(R.string.game_over_profession_y_mod))), null);
-
-            /*
-            canvas.drawBitmap(scoreImage,
-                    (int) (GamePanel.WIDTH * xScore),
-                    (int) (GamePanel.HEIGHT * yScore), null);*/
-
         }
     }
 
+    //Gere as acções feitas quando o utilizador toca no ecrã, ou recomeça ou sai do jogo
     public int onTouchPauseScreen(int x, int y)
     {
         //resume

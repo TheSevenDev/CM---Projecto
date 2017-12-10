@@ -16,7 +16,7 @@ import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 /**
- * Created by Bruno on 18/11/2017.
+ * Classe que representa o jogador do piloto. Tem uma animação associada ao avião.
  */
 
 public class Player extends GameObject {
@@ -26,6 +26,7 @@ public class Player extends GameObject {
     private Bitmap player;
     private Bitmap images[];
     private Rect rectangle;
+
     //Animations
     private Animation pilotAnimation;
     private AnimationManager animationManager;
@@ -89,6 +90,10 @@ public class Player extends GameObject {
             animationManager.draw(canvas, rectangle);
     }
 
+    /**
+     * A posição do piloto é atualizada para o ponto pasasdo por parâmetro.
+     * A cada segundo o score do jogador é incrementado.
+     */
     public void update(Point point) {
         long elapsed = (System.nanoTime() - startTime) / 1000000;
         if(elapsed > 100) {
@@ -105,6 +110,10 @@ public class Player extends GameObject {
             animationBlink();
     }
 
+
+    /**
+     * A imagem do piloto produz um blinking effect
+     */
     public void animationBlink()
     {
         long timeElapsed = (System.nanoTime() - startDamageTime)/1000000;
@@ -143,14 +152,24 @@ public class Player extends GameObject {
         }
     }
 
+    /**
+     * @return score do player
+     */
     public int getScore(){
         return score;
     }
 
+    /**
+     * Coloca o score do jogador a 0
+     */
     public void resetScore(){
         score = 0;
     }
 
+    /**
+     *  Decrementa a vida do jogador em d
+     * @param d dano a descontar
+     */
     public void takeDamage(int d){
         health-=d;
 
@@ -158,10 +177,16 @@ public class Player extends GameObject {
         damaged = true;
     }
 
+    /**
+     * @return a vida do jogador
+     */
     public int getHealth(){
         return health;
     }
 
+    /**
+     * Coloca a vida do jogador ao máximo
+     */
     public void resetHealth(){
         health = Integer.parseInt(context.getString(R.string.pilot_max_health));
     }

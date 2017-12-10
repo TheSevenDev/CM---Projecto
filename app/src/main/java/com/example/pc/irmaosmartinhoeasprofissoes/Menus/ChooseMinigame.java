@@ -1,7 +1,6 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.Menus;
 
 import android.Manifest;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +24,9 @@ import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.FirefighterActivit
 import com.example.pc.irmaosmartinhoeasprofissoes.painter.PainterActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.pilot.PilotActivity;
 
+/**
+ * Atividade de escolha do mini-jogo.
+ */
 public class ChooseMinigame extends GeneralActivity implements LocationListener{
     private ImageButton firefighter, baker, teacher, painter, pilot;
     private TextView firefighterText,bakerText,teacherText,painterText,pilotText;
@@ -32,7 +34,9 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
     private static final int PERMISSIONS_CONSTANT = 1;
 
 
-
+    /**
+     * São sincronizados os objetos com os componentes da vista
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,27 +73,14 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-
-
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_COARSE_LOCATION)) {
 
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
             } else  {
-                // No explanation needed, we can request the permission.
-
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
                         PERMISSIONS_CONSTANT);
 
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
             }
         }
 
@@ -99,29 +90,30 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
             changeToFemale(v);
     }
 
+    /**
+     * Recomeça a música de fundo
+     */
     @Override
     protected void onResume() {
         super.onResume();
-        //if(!isServiceRunning(MusicService.class)){
-        //    startService(new Intent(this, MusicService.class));
-        //}
         if(!MainMenu.mp.isPlaying()) {
             MainMenu.mp.seekTo(MainMenu.mp.getCurrentPosition() - 100);
             MainMenu.mp.start();
         }
     }
+
+    /**
+     * Pausa a música de fundo
+     */
     @Override
     protected  void onPause(){
         super.onPause();
         MainMenu.mp.pause();
     }
 
-    @Override
-    protected void onStop(){
-        super.onStop();
-
-    }
-
+    /**
+     * Destrói o MediaPlayer da música de fundo
+     */
     @Override
     protected  void onDestroy(){
         super.onDestroy();
@@ -131,45 +123,54 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
         }
     }
 
-    private boolean isServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    /**
+     * Inicia a atividade do menu principal
+     */
     public void backToMainMenu(View view){
         startActivity(new Intent(getApplicationContext(), MainMenu.class));
         savePosition();
     }
 
+    /**
+     * Inicia a atividade do jogo do bombeiro
+     */
     public void fireFighterGame(View view)
     {
         startActivity(new Intent(getApplicationContext(), FirefighterActivity.class));
         savePosition();
     }
 
+    /**
+     * Inicia a atividade do jogo do pasteleiro
+     */
     public void cookGame(View view)
     {
         startActivity(new Intent(getApplicationContext(), CookActivity.class));
         savePosition();
     }
 
+    /**
+     * Inicia a atividade do jogo do pintor
+     */
     public void painterGame(View view)
     {
         startActivity(new Intent(getApplicationContext(), PainterActivity.class));
         savePosition();
     }
 
+    /**
+     * Inicia a atividade do jogo do piloto
+     */
     public void pilotGame(View view)
     {
         startActivity(new Intent(getApplicationContext(), PilotActivity.class));
         savePosition();
     }
 
+    /**
+     * Muda as imagens mostradas para a o género masculino.
+     * Atualiza o valor em memória para masculino.
+     */
     public void changeToMale(View view){
         SharedPreferences sharedPref = ChooseMinigame.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -192,6 +193,10 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
         pilotText.setText(R.string.aviador);
     }
 
+    /**
+     * Muda as imagens mostradas para a o género feminino.
+     * Atualiza o valor em memória para feminino.
+     */
     public void changeToFemale(View view){
         SharedPreferences sharedPref = ChooseMinigame.this.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -214,6 +219,9 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
         pilotText.setText(R.string.aviadora);
     }
 
+    /**
+     * Guarda, em memória, a posição GPS (latitude, longitude) onde foi iniciado o jogo.
+     */
     public void savePosition(){
         LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
         Location lastKnownLocation;
@@ -224,9 +232,6 @@ public class ChooseMinigame extends GeneralActivity implements LocationListener{
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED &&
                     ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-                // Should we show an explanation?
-
             }
                 lm.requestSingleUpdate(LocationManager.GPS_PROVIDER,this,null);
                 lastKnownLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);

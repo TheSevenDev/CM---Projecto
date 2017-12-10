@@ -12,7 +12,7 @@ import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 /**
- * Created by TheSeven on 19/11/2017.
+ * Simula um bolo na aplicação, quer seja o bolo-alvo ou o bolo actual do utilizador
  */
 
 public class Cake extends GameObject
@@ -32,11 +32,13 @@ public class Cake extends GameObject
         this.context = context;
     }
 
+    //Retorna a imagem actual
     public Bitmap getImage()
     {
         return image;
     }
 
+    //Desenha o objecto
     public void draw(Canvas canvas, boolean paused)
     {
         Paint paint = new Paint();
@@ -53,21 +55,19 @@ public class Cake extends GameObject
         canvas.drawBitmap(image, x, y, paint);
     }
 
+    //Define a cobertura actual
     public void setCoating(EnumCakeCoating coating)
     {
         this.coating = coating;
     }
 
+    //Define a forma actual
     public void setShape(EnumCakeShape shape)
     {
         this.shape = shape;
     }
 
-    public void setTopping(EnumCakeTopping topping)
-    {
-        this.topping = topping;
-    }
-
+    //Define qual o ultimo componente a ser colocado
     public void setLastComponentPut(EnumComponentType componentType)
     {
         this.lastComponentPut = componentType;
@@ -85,6 +85,7 @@ public class Cake extends GameObject
         return topping;
     }
 
+    //Substitui a forma do bolo, exibindo apenas a mesma
     public void switchShape(EnumCakeShape shape)
     {
         this.shape = shape;
@@ -105,6 +106,7 @@ public class Cake extends GameObject
         }
     }
 
+    //Substitui a cobertura do bolo, apresentando so a forma e a cobertura
     public void switchCoating(EnumCakeCoating coating)
     {
         this.coating = coating;
@@ -125,6 +127,7 @@ public class Cake extends GameObject
         }
     }
 
+    //Substitui o topping do bolo
     public void switchTopping(EnumCakeTopping topping)
     {
         this.topping = topping;
@@ -145,6 +148,7 @@ public class Cake extends GameObject
         }
     }
 
+    //Muda a imagem do bolo, dependendo dos componentes ja existentes
     public void changeImage(Bitmap bitmap, double startingHeight)
     {
         Bitmap auxBitmap;
@@ -324,12 +328,10 @@ public class Cake extends GameObject
                 }
                 break;
         }
-
     }
 
     public EnumComponentType getLastComponentPut()
     {
         return lastComponentPut;
     }
-
 }

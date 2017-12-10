@@ -4,12 +4,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GamePanel;
 
 /**
- * Created by TheSeven on 17/11/2017.
+ * Simula um ecrã de pausa
  */
 
 public class Pause
@@ -45,16 +44,13 @@ public class Pause
 
     }
 
+    //Verifica se o jogo se encontra ou não em pausa
     public boolean isPaused()
     {
         return paused;
     }
 
-    public void setPaused(boolean b)
-    {
-        paused = b;
-    }
-
+    //Desenha os componentes constituintes
     public void draw(Canvas canvas)
     {
         if(paused)
@@ -79,6 +75,7 @@ public class Pause
         }
     }
 
+    //Gere as accoes de toque no ecrã de pausa, ou retoma o jogo ou abandona
     public boolean onTouchPauseScreen(int x, int y)
     {
         //resume
@@ -107,6 +104,7 @@ public class Pause
         return false;
     }
 
+    //Gere as accoes de toque no botao de pausa
     public void onTouchPauseButton(int x, int y)
     {
         if (x >= (int)(GamePanel.WIDTH * Double.parseDouble(context.getResources().getString(R.string.pause_button_x_mod)))

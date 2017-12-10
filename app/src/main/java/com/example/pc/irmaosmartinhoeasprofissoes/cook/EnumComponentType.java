@@ -3,9 +3,8 @@ package com.example.pc.irmaosmartinhoeasprofissoes.cook;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 /**
- * Created by TheSeven on 28/11/2017.
+ * Enumera os tipos de componentes
  */
-
 public enum EnumComponentType
 {
     SHAPE(R.drawable.cake_shapes),

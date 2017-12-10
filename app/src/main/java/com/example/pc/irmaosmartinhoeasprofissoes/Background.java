@@ -7,7 +7,7 @@ import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 
 /**
- * Created by TheSeven on 11/11/2017.
+ * Classe que gere o fundo de ecrã de um jogo
  */
 
 public class Background
@@ -22,10 +22,7 @@ public class Background
         height = h;
     }
 
-    public void update()
-    {
-    }
-
+    //Desenha a imagem
     public void draw(Canvas canvas, boolean paused)
     {
         if(!paused)
