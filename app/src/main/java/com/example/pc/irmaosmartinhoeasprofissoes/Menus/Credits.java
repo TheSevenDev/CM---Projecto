@@ -1,7 +1,6 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.Menus;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -11,12 +10,15 @@ import android.widget.TextView;
 import com.example.pc.irmaosmartinhoeasprofissoes.GeneralActivity;
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
+/**
+ * Apresenta os creditos da aplicação, que aparecerao de baixo para cima como normalmente visto na cultura pop
+ */
+
 public class Credits extends GeneralActivity {
     private final int ANIMATION_DURATION = 25000;
 
     private TextView creditsText , creditsText2;
     private Animation animation, animation2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,7 @@ public class Credits extends GeneralActivity {
         startActivity(new Intent(getApplicationContext(), Settings.class));
     }
 
+    //Apresenta a primeira parte do texto dos crétidos
     private String creditsText(){
 
         String str = "";
@@ -86,6 +89,7 @@ public class Credits extends GeneralActivity {
         return str;
     }
 
+    //Apresenta a segunda parte do texto dos crétidos
     private String creditsText2(){
         String str = "";
         str+="\n\nMúsica de\nNicolai Heidlas - KLONKY DONKEY\nNicolai Heidlas - Cartoon\n " +
