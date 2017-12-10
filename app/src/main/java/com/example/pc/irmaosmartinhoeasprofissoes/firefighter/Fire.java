@@ -3,7 +3,6 @@ package com.example.pc.irmaosmartinhoeasprofissoes.firefighter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.view.MotionEvent;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.Animation;
 import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
@@ -14,17 +13,19 @@ import java.util.Random;
 
 /**
  * Created by TheSeven on 11/11/2017.
+ * Esta classe representa o fogo
  */
 
 public class Fire extends GameObject
 {
     private Bitmap spritesheet;
-    private long fireSpawnTime;
-    private boolean despawn;
+    private long fireSpawnTime;  //tempo de vida do fogo
+    private boolean despawn; //atributo de controlo de retirada do fogo
 
-    private Animation animation = new Animation();
-    private Double[] fireFramesX, fireFramesWidth;
+    private Animation animation = new Animation(); // animação
+    private Double[] fireFramesX, fireFramesWidth; //array de posições para retirar as imagens do sprite
 
+    //Construtor
     public Fire(Bitmap res, int w, int h, int x, int y, Context context, int numFrames)
     {
         this.x = x;
@@ -50,11 +51,13 @@ public class Fire extends GameObject
         return animation.getImage();
     }
 
+    //Este método desenha a animação
     public void draw(Canvas canvas)
     {
         canvas.drawBitmap(animation.getImage(),x,y,null);
     }
 
+    //Este método serve para refrescar a animação e retirar o fogo caso o seu tempo tenha expirado
     public void update(long pausedTime)
     {
         animation.update();
@@ -67,11 +70,13 @@ public class Fire extends GameObject
         }
     }
 
+    //Método get do atributo despawn
     public boolean isDespawn()
     {
         return despawn;
     }
 
+    //Método que constrói a animação
     public Bitmap[] constructAnimation(int numFrames)
     {
         Bitmap[] image = new Bitmap[numFrames];
@@ -92,6 +97,7 @@ public class Fire extends GameObject
         return image;
     }
 
+    //Este método retira as imagens do sprite para o array
     public Double[] fireFrameX()
     {
         Double[] array = new Double[7];
@@ -107,6 +113,7 @@ public class Fire extends GameObject
         return array;
     }
 
+    //Este método retira as imagens do sprite para o array
     public Double[] fireFrameWidth()
     {
         Double[] array = new Double[7];

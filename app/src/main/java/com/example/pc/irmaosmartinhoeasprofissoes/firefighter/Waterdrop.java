@@ -10,17 +10,19 @@ import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 /**
  * Created by TheSeven on 12/11/2017.
+ * Esta classe representa a gota de água
  */
 
 public class Waterdrop extends GameObject
 {
     private Bitmap spritesheet;
-    private long waterSpawnTime;
-    private boolean despawn;
+    private long waterSpawnTime; //tempo de vida da gota
+    private boolean despawn; //atributo de controlo de retirada da gota
 
-    private Animation animation = new Animation();
-    private Double[] waterFramesX;
+    private Animation animation = new Animation(); // animação
+    private Double[] waterFramesX; //array de posições para retirar as imagens do sprite
 
+    //construtor
     public Waterdrop(Bitmap res, int w, int h, int x, int y, Context context, int numFrames)
     {
         this.x = x;
@@ -39,11 +41,13 @@ public class Waterdrop extends GameObject
         animation.setDelay(500);
     }
 
+    //Este método desenha a animação
     public void draw(Canvas canvas)
     {
         canvas.drawBitmap(animation.getImage(),x,y,null);
     }
 
+    //Este método serve para refrescar a animação e retirar a gota caso o seu tempo tenha expirado
     public void update(long pausedTime)
     {
         animation.update();
@@ -56,11 +60,13 @@ public class Waterdrop extends GameObject
         }
     }
 
+    //Método get do atributo despawn
     public boolean isDespawn()
     {
         return despawn;
     }
 
+    //Método que constrói a animação
     public Bitmap[] constructAnimation(int numFrames)
     {
         Bitmap[] image = new Bitmap[numFrames];
@@ -82,6 +88,7 @@ public class Waterdrop extends GameObject
         return image;
     }
 
+    //Este método retira as imagens do sprite para o array
     public Double[] waterFrameX()
     {
         Double[] array = new Double[2];

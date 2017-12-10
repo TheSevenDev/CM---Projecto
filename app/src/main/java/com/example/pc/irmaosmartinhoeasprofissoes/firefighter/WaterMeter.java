@@ -1,29 +1,30 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.firefighter;
 
-import android.content.Context;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+
 
 import com.example.pc.irmaosmartinhoeasprofissoes.GameObject;
-import com.example.pc.irmaosmartinhoeasprofissoes.R;
+
 
 /**
  * Created by TheSeven on 13/11/2017.
+ * Esta classe representa um contador de água
  */
 
 public class WaterMeter extends GameObject
 {
     private Bitmap spritesheet;
-    private boolean noWater;
-    private boolean noWaterWarning;
+    private boolean noWater; //atributo de controlo
+    private boolean noWaterWarning; //atributo de controlo
     private long warningStart;
     private Paint transparentPaint;
 
+    //Costrutor
     public WaterMeter(Bitmap res, int w, int h, int x, int y)
     {
         this.x = x;
@@ -38,6 +39,7 @@ public class WaterMeter extends GameObject
         spritesheet.setHasAlpha(true);
     }
 
+    //Este método desenha a animação
     public void draw(Canvas canvas, boolean paused)
     {
         if(noWaterWarning)
@@ -52,6 +54,7 @@ public class WaterMeter extends GameObject
             canvas.drawBitmap(spritesheet, x, y, null);
     }
 
+    //Este método serve para indicar ao jogador que não tem água
     public void outOfWater()
     {
         warningStart = System.nanoTime();
@@ -59,6 +62,7 @@ public class WaterMeter extends GameObject
         noWaterWarning = true;
     }
 
+    //Este método serve para refrescar a barra da água
     public void update()
     {
         long timeElapsed = (System.nanoTime() - warningStart)/1000000;
@@ -108,6 +112,7 @@ public class WaterMeter extends GameObject
         }
     }
 
+    //Método get do atributo noWaterWarning
     public boolean isNoWaterWarning()
     {
         return noWaterWarning;

@@ -1,11 +1,11 @@
 package com.example.pc.irmaosmartinhoeasprofissoes.firefighter;
 
-import android.graphics.Bitmap;
 
 import com.example.pc.irmaosmartinhoeasprofissoes.R;
 
 /**
  * Created by TheSeven on 24/11/2017.
+ * Enumerado com dos vários estados de uma estrela
  */
 
 public enum EnumStarType

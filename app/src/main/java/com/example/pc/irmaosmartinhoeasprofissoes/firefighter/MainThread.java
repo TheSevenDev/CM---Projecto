@@ -7,6 +7,7 @@ import com.example.pc.irmaosmartinhoeasprofissoes.firefighter.GamePanel;
 
 /**
  * Created by Diogo on 10/11/2017.
+ * Esta classe representa a Thread principal do jogo
  */
 
 public class MainThread extends Thread

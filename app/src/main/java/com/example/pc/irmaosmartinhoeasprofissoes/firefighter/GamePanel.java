@@ -27,19 +27,16 @@ import java.util.Random;
 
 /**
  * Created by Diogo on 10/11/2017.
+ * Esta classe representa o Painel de Jogo
  */
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
-    //PROCURAR MELHOR SOLUÇAO, NET DIZ QUE TEM CONFLITOS SE A NAV BAR ESTIVER VISIVEL
+
     public static final int WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
 
     private final int TIMEOUT = 60;
-    //PODE SER MELHOR
-    //DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-    //int a = displayMetrics.widthPixels;
-    //int b = displayMetrics.heightPixels;
 
     private MainThread thread;
     private Background background;
@@ -86,6 +83,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     private final int CAT_CHANCE = Integer.parseInt(getContext().getString(R.string.cat_spawn_chance));
 
+    //Construtor
     public GamePanel(Context context, Activity activity)
     {
         super(context);
@@ -98,6 +96,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         //make gamePanel focusable so it can handle events
         setFocusable(true);
     }
+
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height){}
@@ -158,6 +157,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         thread.start();
     }
 
+    //Este método verifica se o toque do utilizador
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
@@ -232,9 +232,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
 
         return true;
-        //return onTouchEvent(event);
     }
 
+    //Este método resfresca os elementos que estão presentes no jogo
     public void update()
     {
         if(!pause.isPaused() && !gameOver.isGameOver())
@@ -343,6 +343,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+    //Este método desenha todos os elementos aptos para este estado
     @Override
     public void draw(Canvas canvas)
     {
@@ -408,6 +409,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+    //Este método popula o array com as coordenadas
     public void populateFireCoords()
     {
         for(int i = 0; i < 4; i++)
@@ -426,6 +428,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+    //Este método popula o array com as coordenadas
     public void populateCatCoords()
     {
         catX.add((int)(Double.parseDouble(getResources().getString(R.string.cat_spawn_x1))*WIDTH));
@@ -437,6 +440,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         catY.add((int)(Double.parseDouble(getResources().getString(R.string.cat_spawn_y3))*HEIGHT));
     }
 
+    //Este método desenha o texto do tempo no ecrã
     public void drawText(Canvas canvas)
     {
         Paint paint = new Paint();
@@ -446,11 +450,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         canvas.drawText("" + timeRemaining, 0.05f*WIDTH, 0.145f*HEIGHT, paint);
     }
 
+    //Este método decrementa a água na barra
     public void decreaseWater()
     {
         waterMeterValue -= waterDecrease;
     }
 
+    //Este método incrementa a água na barra
     public void increaseWater()
     {
         waterMeterValue += waterGain;
@@ -459,6 +465,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             waterMeterValue = 100;
     }
 
+    //Este método remove os elementos aptos para remoção
     public void checkDespawns()
     {
         for(Waterdrop w : waterDrops)
@@ -484,6 +491,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     }
 
+    //Este método desenha a barra de água
     public void drawWaterLevel(Canvas canvas)
     {
         int barHeight = (int)(Double.parseDouble(getResources().getString(R.string.water_bar_height_mod))*HEIGHT);
@@ -505,6 +513,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         canvas.drawRect(r, paint);
     }
 
+    //Este método reinicia o jogo
     public void restartGame()
     {
         fires = new ArrayList<>();
